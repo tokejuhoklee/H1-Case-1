@@ -1,9 +1,9 @@
 {
   "canvas": {
-    "width": 2000,
-    "height": 2000,
-    "scrollTop": 0,
-    "scrollLeft": 0,
+    "width": 2970,
+    "height": 2100,
+    "scrollTop": 957.3333129882812,
+    "scrollLeft": 930.6666870117188,
     "show": {
       "tableComment": true,
       "columnComment": true,
@@ -17,7 +17,7 @@
     },
     "database": "MSSQL",
     "databaseName": "Sydvest-Bo Vacation Rental",
-    "canvasType": "GeneratorCode",
+    "canvasType": "ERD",
     "language": "cs",
     "tableCase": "pascalCase",
     "columnCase": "camelCase"
@@ -333,16 +333,39 @@
               "widthDataType": 60,
               "widthDefault": 60
             }
+          },
+          {
+            "name": "Customer consultant id",
+            "comment": "",
+            "dataType": "",
+            "default": "",
+            "id": "df113cf9-0d35-45e4-9958-daeb2d0de9c8",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": true,
+              "pfk": false,
+              "widthName": 135,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            }
           }
         ],
         "id": "38d41237-58bb-478f-becd-6c5974deb0dd",
         "ui": {
-          "active": false,
-          "top": 1255.6000244140619,
-          "left": 442.79999999999944,
+          "active": true,
+          "top": 1359.600024414061,
+          "left": 1425.4666666666662,
           "widthName": 60,
           "widthComment": 60,
-          "zIndex": 549
+          "zIndex": 757
         }
       },
       {
@@ -376,11 +399,11 @@
         "id": "d7fb520e-d7a5-4aee-adc7-8367fbc1a093",
         "ui": {
           "active": false,
-          "top": 1167.2000244140581,
-          "left": 733.5999999999998,
+          "top": 1220.5333577473914,
+          "left": 1170.2666666666662,
           "widthName": 121,
           "widthComment": 60,
-          "zIndex": 550
+          "zIndex": 756
         }
       },
       {
@@ -1141,7 +1164,106 @@
         }
       }
     ],
-    "tableFocus": null,
+    "tableFocus": {
+      "focusName": true,
+      "focusComment": false,
+      "focusColumns": [
+        {
+          "selected": false,
+          "focusName": false,
+          "focusDataType": false,
+          "focusNotNull": false,
+          "focusDefault": false,
+          "focusComment": false,
+          "column": {
+            "name": "Customer id",
+            "comment": "",
+            "dataType": "",
+            "default": "",
+            "id": "b712115c-9960-41a5-91fa-3018ad52e5cb",
+            "option": {
+              "autoIncrement": true,
+              "primaryKey": true,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": true,
+              "fk": false,
+              "pfk": false,
+              "widthName": 72,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            }
+          }
+        }
+      ],
+      "currentFocusTable": true,
+      "currentColumn": null,
+      "table": {
+        "name": "Customer",
+        "comment": "",
+        "columns": [
+          {
+            "name": "Customer id",
+            "comment": "",
+            "dataType": "",
+            "default": "",
+            "id": "b712115c-9960-41a5-91fa-3018ad52e5cb",
+            "option": {
+              "autoIncrement": true,
+              "primaryKey": true,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": true,
+              "fk": false,
+              "pfk": false,
+              "widthName": 72,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            }
+          },
+          {
+            "name": "Customer consultant id",
+            "comment": "",
+            "dataType": "",
+            "default": "",
+            "id": "df113cf9-0d35-45e4-9958-daeb2d0de9c8",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": true,
+              "pfk": false,
+              "widthName": 135,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            }
+          }
+        ],
+        "id": "38d41237-58bb-478f-becd-6c5974deb0dd",
+        "ui": {
+          "active": true,
+          "top": 1359.600024414061,
+          "left": 1425.4666666666662,
+          "widthName": 60,
+          "widthComment": 60,
+          "zIndex": 757
+        }
+      }
+    },
     "edit": null,
     "copyColumns": [
       {
@@ -1403,6 +1525,29 @@
           "x": 723.9999999999999,
           "y": 887.550024414063,
           "direction": "left"
+        }
+      },
+      {
+        "identification": false,
+        "id": "a0805f9d-d825-4c47-b91d-6a21e5f54c36",
+        "relationshipType": "ZeroOneN",
+        "start": {
+          "tableId": "d7fb520e-d7a5-4aee-adc7-8367fbc1a093",
+          "columnIds": [
+            "bb915dfe-70f8-4bb8-bf2c-2df881a68328"
+          ],
+          "x": 1589.2666666666662,
+          "y": 1265.2833577473914,
+          "direction": "right"
+        },
+        "end": {
+          "tableId": "38d41237-58bb-478f-becd-6c5974deb0dd",
+          "columnIds": [
+            "df113cf9-0d35-45e4-9958-daeb2d0de9c8"
+          ],
+          "x": 1634.9666666666662,
+          "y": 1359.600024414061,
+          "direction": "top"
         }
       }
     ],
