@@ -1,0 +1,172 @@
+{
+  "canvas": {
+    "width": 2000,
+    "height": 2000,
+    "scrollTop": 818.4000244140625,
+    "scrollLeft": 17.600000381469727,
+    "show": {
+      "tableComment": true,
+      "columnComment": true,
+      "columnDataType": true,
+      "columnDefault": true,
+      "columnAutoIncrement": true,
+      "columnPrimaryKey": true,
+      "columnUnique": true,
+      "columnNotNull": true,
+      "relationship": true
+    },
+    "database": "MySQL",
+    "databaseName": "",
+    "canvasType": "ERD",
+    "language": "graphql",
+    "tableCase": "pascalCase",
+    "columnCase": "camelCase"
+  },
+  "table": {
+    "tables": [
+      {
+        "name": "Summerhouses",
+        "comment": "",
+        "columns": [],
+        "id": "207a3154-4a04-4e64-8b03-7becc17d760f",
+        "ui": {
+          "active": false,
+          "top": 1096.0000244140629,
+          "left": 68.80000000000001,
+          "widthName": 93,
+          "widthComment": 60,
+          "zIndex": 91
+        }
+      },
+      {
+        "name": "Rental consultant",
+        "comment": "",
+        "columns": [],
+        "id": "6ec5e29e-1f67-4e5b-bd57-8885bf0cd7b8",
+        "ui": {
+          "active": false,
+          "top": 1210.8000244140628,
+          "left": 18.800000000000022,
+          "widthName": 103,
+          "widthComment": 60,
+          "zIndex": 92
+        }
+      },
+      {
+        "name": "Customer",
+        "comment": "",
+        "columns": [],
+        "id": "38d41237-58bb-478f-becd-6c5974deb0dd",
+        "ui": {
+          "active": false,
+          "top": 1469.2000244140631,
+          "left": 270.79999999999956,
+          "widthName": 60,
+          "widthComment": 60,
+          "zIndex": 78
+        }
+      },
+      {
+        "name": "Apartments",
+        "comment": "",
+        "columns": [],
+        "id": "013d06ec-8799-4707-9ebf-41c5597a28ad",
+        "ui": {
+          "active": false,
+          "top": 932.000024414063,
+          "left": 455.20000000000005,
+          "widthName": 68,
+          "widthComment": 60,
+          "zIndex": 66
+        }
+      },
+      {
+        "name": "Independant overseer",
+        "comment": "Keeps track of used electricity, and for changes made to the buildings",
+        "columns": [],
+        "id": "d9e7f118-b92e-41a5-86d8-a4c9aa55dce5",
+        "ui": {
+          "active": false,
+          "top": 1383.2000244140634,
+          "left": 224.8,
+          "widthName": 128,
+          "widthComment": 401,
+          "zIndex": 80
+        }
+      },
+      {
+        "name": "Custommer consultant",
+        "comment": "",
+        "columns": [],
+        "id": "d7fb520e-d7a5-4aee-adc7-8367fbc1a093",
+        "ui": {
+          "active": false,
+          "top": 1299.2000244140613,
+          "left": 252.79999999999987,
+          "widthName": 132,
+          "widthComment": 60,
+          "zIndex": 77
+        }
+      },
+      {
+        "name": "Apartment superintendants",
+        "comment": "Shares traits with the independant overseer, but also represents owner for individual apartments",
+        "columns": [],
+        "id": "0b536178-9412-4e64-9dc8-bdc92b39b3ef",
+        "ui": {
+          "active": false,
+          "top": 1004.8000244140641,
+          "left": 452.80000000000047,
+          "widthName": 158,
+          "widthComment": 554,
+          "zIndex": 72
+        }
+      },
+      {
+        "name": "District",
+        "comment": "Add regions to this field later",
+        "columns": [],
+        "id": "77f79c27-82d7-494b-9488-181d8de54e6c",
+        "ui": {
+          "active": false,
+          "top": 867.2000244140626,
+          "left": 222.40000000000006,
+          "widthName": 60,
+          "widthComment": 166,
+          "zIndex": 104
+        }
+      }
+    ],
+    "tableFocus": {
+      "focusName": true,
+      "focusComment": false,
+      "focusColumns": [],
+      "currentFocusTable": true,
+      "currentColumn": null,
+      "table": {
+        "name": "sdjnao",
+        "comment": "",
+        "columns": [],
+        "id": "bb107539-f963-439b-aff0-f0069ccd821c",
+        "ui": {
+          "active": true,
+          "top": 1009.6000244140621,
+          "left": 119.20000038146969,
+          "widthName": 60,
+          "widthComment": 60,
+          "zIndex": 111
+        }
+      }
+    },
+    "edit": null,
+    "copyColumns": [],
+    "columnDraggable": null
+  },
+  "memo": {
+    "memos": []
+  },
+  "relationship": {
+    "relationships": [],
+    "draw": null
+  }
+}
