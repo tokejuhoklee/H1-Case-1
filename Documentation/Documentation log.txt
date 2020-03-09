@@ -1,0 +1,16 @@
+9-3
+Udarbejdning af ER-Diagram, via ERD-editor. De grundlæggende tabeler er blevet lavet, 
+og vi arbejder med at finde uf af hvilket relationer der referrerer til hvad.ERD editor har også 
+givet os variabler til C# objekterne der skal oprettes, så i consol applikationen mangler der umiddelbart
+brugerinterface, og andre en hel masse andre ting
+
+10-3
+11-3
+12-3
+13-3weekend
+14-3weekend
+15-3weekend
+16-3
+17-3
+18-3
+19-3
