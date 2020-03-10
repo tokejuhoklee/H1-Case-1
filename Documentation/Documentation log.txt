@@ -4,7 +4,15 @@ og vi arbejder med at finde uf af hvilket relationer der referrerer til hvad.ERD
 givet os variabler til C# objekterne der skal oprettes, så i consol applikationen mangler der umiddelbart
 brugerinterface, og andre en hel masse andre ting
 
+MS SQL server er oprette som en extern virtuel maskine.
+    Se filen i dette bibliotek:
+    User MS SQL connect w2k19sql.hq.gollomotors.dk.txt
+    Obs: Der skal fortsat rættes lidt i rettignederne for denne bruger!!
+
 10-3
+ER - diagram redigering redigeres fortsat:
+    specificering af relationer
+    specificering ad datatyper
 11-3
 12-3
 13-3weekend
