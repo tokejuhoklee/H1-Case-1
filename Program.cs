@@ -21,6 +21,7 @@ namespace H1_Case1
     {
         static void Main(string[] args)
         {
+            DBConnectionTest connectTest = new DBConnectionTest();
         }
     }
 }

@@ -50,6 +50,7 @@
     <Compile Include="Customer.cs" />
     <Compile Include="CustomerConsultant.cs" />
     <Compile Include="CustomerRentalContractRelation.cs" />
+    <Compile Include="DBConnectionTest.cs" />
     <Compile Include="District.cs" />
     <Compile Include="IndependantOverseer.cs" />
     <Compile Include="OwnerRentalContract.cs" />
