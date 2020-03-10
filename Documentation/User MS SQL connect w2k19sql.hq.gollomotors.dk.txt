@@ -1,0 +1,7 @@
+
+Hostname:  W2K19SQL.hq.gollomotors.dk
+
+
+Sql Server Authentication:
+User:      tec
+Password:  3Dinteraktiv00ifN0Tnize
