@@ -13,6 +13,20 @@ MS SQL server er oprette som en extern virtuel maskine.
 ER - diagram redigering redigeres fortsat:
     specificering af relationer
     specificering ad datatyper
+Ting gjort for dagen:
+-Database er oprettet, med et udkast af de forskellige elementer der skal bruges
+-lavet tomme klasser
+
+Ting der skal laves
+-en application der kan vise forskellige elementer af databasen, altefter hvilket rettigheder de enkelte brugere skal have
+-index
+-udarbejde de forskellige slags kontrakter
+-potentielt lave et kalenderprogram så de enkelte datetime værdier ikke modstrider hindanden
+-Udarbejde algoritme for prissætning af udlejning og diverse betalinger. og oprette pris i databasen
+-Et modul til at oprette queries
+
+
+
 11-3
 12-3
 13-3weekend
