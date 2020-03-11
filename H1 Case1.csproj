@@ -61,6 +61,7 @@
     <Compile Include="SummerhouseOwner.cs" />
     <Compile Include="SummerhouseOwnerContractRelation.cs" />
     <Compile Include="Summerhouses.cs" />
+    <Compile Include="UI.cs" />
     <Compile Include="ZipTown.cs" />
   </ItemGroup>
   <ItemGroup>
