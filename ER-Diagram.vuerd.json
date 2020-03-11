@@ -2,8 +2,13 @@
   "canvas": {
     "width": 2970,
     "height": 2100,
+<<<<<<< HEAD
     "scrollTop": 0,
     "scrollLeft": 0,
+=======
+    "scrollTop": 666,
+    "scrollLeft": 471,
+>>>>>>> 29279072ec2bef4be8d13580b3cdfc0602aadfbc
     "show": {
       "tableComment": true,
       "columnComment": true,
@@ -52,11 +57,19 @@
             }
           },
           {
+<<<<<<< HEAD
             "name": "Address",
             "comment": "",
             "dataType": "nvarchar(50)",
             "default": "''''",
             "id": "35c8999c-6993-43c1-a8fc-4db45cfeeab7",
+=======
+            "name": "Etc",
+            "comment": "",
+            "dataType": "nvarchar(4095)",
+            "default": "''''",
+            "id": "bf474b09-7b42-4eb9-ae1d-27e1dad82d97",
+>>>>>>> 29279072ec2bef4be8d13580b3cdfc0602aadfbc
             "option": {
               "autoIncrement": false,
               "primaryKey": false,
@@ -70,16 +83,28 @@
               "pfk": false,
               "widthName": 60,
               "widthComment": 60,
+<<<<<<< HEAD
               "widthDataType": 76,
+=======
+              "widthDataType": 90,
+>>>>>>> 29279072ec2bef4be8d13580b3cdfc0602aadfbc
               "widthDefault": 60
             }
           },
           {
+<<<<<<< HEAD
             "name": "ZipCode id",
             "comment": "",
             "dataType": "int",
             "default": "",
             "id": "7e23959c-015b-452a-a157-a2847cb97eea",
+=======
+            "name": "Person id",
+            "comment": "",
+            "dataType": "int identity",
+            "default": "",
+            "id": "316193d2-10d9-4c60-ae25-5cb824040bf2",
+>>>>>>> 29279072ec2bef4be8d13580b3cdfc0602aadfbc
             "option": {
               "autoIncrement": false,
               "primaryKey": false,
@@ -93,7 +118,11 @@
               "pfk": false,
               "widthName": 65,
               "widthComment": 60,
+<<<<<<< HEAD
               "widthDataType": 60,
+=======
+              "widthDataType": 61,
+>>>>>>> 29279072ec2bef4be8d13580b3cdfc0602aadfbc
               "widthDefault": 60
             }
           }
@@ -101,11 +130,19 @@
         "id": "bbf9cbc6-d79e-40e8-8fdd-91a78e13f03a",
         "ui": {
           "active": false,
+<<<<<<< HEAD
           "top": 1495.3333740234316,
           "left": 857.3333333333359,
           "widthName": 60,
           "widthComment": 60,
           "zIndex": 1288
+=======
+          "top": 884.1333577473911,
+          "left": 2367.5999999999976,
+          "widthName": 157,
+          "widthComment": 248,
+          "zIndex": 1638
+>>>>>>> 29279072ec2bef4be8d13580b3cdfc0602aadfbc
         }
       },
       {
@@ -1696,11 +1733,19 @@
             }
           },
           {
+<<<<<<< HEAD
             "name": "Summerhouse Owner Contract id",
             "comment": "",
             "dataType": "int",
             "default": "",
             "id": "426453e3-b691-4f5c-be53-e0c82adf3892",
+=======
+            "name": "ZipCode id",
+            "comment": "",
+            "dataType": "int identity",
+            "default": "",
+            "id": "7e23959c-015b-452a-a157-a2847cb97eea",
+>>>>>>> 29279072ec2bef4be8d13580b3cdfc0602aadfbc
             "option": {
               "autoIncrement": false,
               "primaryKey": false,
@@ -1712,18 +1757,32 @@
               "pk": false,
               "fk": true,
               "pfk": false,
+<<<<<<< HEAD
               "widthName": 195,
               "widthComment": 60,
               "widthDataType": 60,
+=======
+              "widthName": 65,
+              "widthComment": 60,
+              "widthDataType": 61,
+>>>>>>> 29279072ec2bef4be8d13580b3cdfc0602aadfbc
               "widthDefault": 60
             }
           },
           {
+<<<<<<< HEAD
             "name": "Independant overseer id",
             "comment": "",
             "dataType": "int",
             "default": "",
             "id": "ebce19e2-c9ca-4655-b651-4da0cbca1323",
+=======
+            "name": "Adresse",
+            "comment": "",
+            "dataType": "nvarchar(50)",
+            "default": "''''",
+            "id": "35c8999c-6993-43c1-a8fc-4db45cfeeab7",
+>>>>>>> 29279072ec2bef4be8d13580b3cdfc0602aadfbc
             "option": {
               "autoIncrement": false,
               "primaryKey": false,
@@ -1733,14 +1792,38 @@
             "ui": {
               "active": false,
               "pk": false,
-              "fk": true,
+              "fk": false,
               "pfk": false,
+<<<<<<< HEAD
               "widthName": 142,
               "widthComment": 60,
               "widthDataType": 60,
               "widthDefault": 60
             }
           },
+=======
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 76,
+              "widthDefault": 60
+            }
+          }
+        ],
+        "id": "bbf9cbc6-d79e-40e8-8fdd-91a78e13f03a",
+        "ui": {
+          "active": false,
+          "top": 1507.3333740234316,
+          "left": 809.3333333333359,
+          "widthName": 60,
+          "widthComment": 60,
+          "zIndex": 1641
+        }
+      },
+      {
+        "name": "Apartment Superindendant Contract Relation",
+        "comment": "",
+        "columns": [
+>>>>>>> 29279072ec2bef4be8d13580b3cdfc0602aadfbc
           {
             "name": "Address id",
             "comment": "",
@@ -1996,9 +2079,43 @@
           "widthComment": 60,
           "zIndex": 1590
         }
+      },
+      {
+        "name": "Vacancy",
+        "comment": "",
+        "columns": [],
+        "id": "d2a1ae9b-36f7-4c18-b7c6-13cc729737e2",
+        "ui": {
+          "active": true,
+          "top": 811,
+          "left": 1109,
+          "widthName": 60,
+          "widthComment": 60,
+          "zIndex": 1648
+        }
       }
     ],
-    "tableFocus": null,
+    "tableFocus": {
+      "focusName": true,
+      "focusComment": false,
+      "focusColumns": [],
+      "currentFocusTable": true,
+      "currentColumn": null,
+      "table": {
+        "name": "Vacancy",
+        "comment": "",
+        "columns": [],
+        "id": "d2a1ae9b-36f7-4c18-b7c6-13cc729737e2",
+        "ui": {
+          "active": true,
+          "top": 811,
+          "left": 1109,
+          "widthName": 60,
+          "widthComment": 60,
+          "zIndex": 1648
+        }
+      }
+    },
     "edit": null,
     "copyColumns": [],
     "columnDraggable": null
@@ -2316,8 +2433,8 @@
           "columnIds": [
             "fe94e6af-512d-4dfd-81db-d60d1945a235"
           ],
-          "x": 1222.3333333333358,
-          "y": 1528.9583740234316,
+          "x": 1174.3333333333358,
+          "y": 1540.9583740234316,
           "direction": "right"
         },
         "end": {
@@ -2348,8 +2465,8 @@
           "columnIds": [
             "7e23959c-015b-452a-a157-a2847cb97eea"
           ],
-          "x": 1039.8333333333358,
-          "y": 1629.8333740234316,
+          "x": 991.8333333333359,
+          "y": 1641.8333740234316,
           "direction": "bottom"
         }
       },
@@ -2385,8 +2502,8 @@
           "columnIds": [
             "fe94e6af-512d-4dfd-81db-d60d1945a235"
           ],
-          "x": 857.3333333333359,
-          "y": 1562.5833740234316,
+          "x": 809.3333333333359,
+          "y": 1574.5833740234316,
           "direction": "left"
         },
         "end": {
@@ -2408,8 +2525,8 @@
           "columnIds": [
             "fe94e6af-512d-4dfd-81db-d60d1945a235"
           ],
-          "x": 1222.3333333333358,
-          "y": 1596.2083740234316,
+          "x": 1174.3333333333358,
+          "y": 1608.2083740234316,
           "direction": "right"
         },
         "end": {

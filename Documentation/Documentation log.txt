@@ -1,4 +1,4 @@
-9-3
+9/3
 Udarbejdning af ER-Diagram, via ERD-editor. De grundlæggende tabeler er blevet lavet, 
 og vi arbejder med at finde uf af hvilket relationer der referrerer til hvad.ERD editor har også 
 givet os variabler til C# objekterne der skal oprettes, så i consol applikationen mangler der umiddelbart
@@ -9,7 +9,7 @@ MS SQL server er oprette som en extern virtuel maskine.
     User MS SQL connect w2k19sql.hq.gollomotors.dk.txt
     Obs: Der skal fortsat rættes lidt i rettignederne for denne bruger!!
 
-10-3
+10/3
 ER - diagram redigering redigeres fortsat:
     specificering af relationer
     specificering ad datatyper
@@ -24,15 +24,64 @@ Ting der skal laves
 -potentielt lave et kalenderprogram så de enkelte datetime værdier ikke modstrider hindanden
 -Udarbejde algoritme for prissætning af udlejning og diverse betalinger. og oprette pris i databasen
 -Et modul til at oprette queries
+-Implementering af hvorvidt en konkret feriebolig er udlejet eller ej, sker i 2 tempi:
+ I objektet der repræsentere en feriebolig haves et multidimensionelt array med x = årstal, y = 52 uger og z = en int der 
+ er 0 hvis kahytten er ledig, og ellers har et udlejnings kontrakt id.
+ I databasen repræsenteres det samme, men det skal vikles ind og ud til objekterne til og fra databasen for at kan bruge
+ eller gemme ændringer…….
+ Basalt gemmes hvilke uge nr og årstal der er udlejet  for en given ferieboligs id. Der gemmes også et udlejnings 
+ kontrakt nr. (selvom det er redundant) og hele møllen skal sorteres før det fyldes ind i et objekt.
+ Når det skal indsættes i denne tabel fyldes de samme data blot ind i røven af tabellen
+ Dvs. at de konkret udlejningsdata skal graves ud via et udlejnings kontrakt id.
 
+ Denne analyse er konkluderet fordi det er sært gemme lister i en database, men det er ret nemt at navigere i og repræsentere
+ multidimensionelt arrays
 
+ Efter ER-diagrammet er nogen lunde på plads, ligner det at de to udlejningsformer kan repræsenteres i en database, men med en 
+ divergerende OOP-struktur der dog bygger på noget arv eller indlejring eller genetisk: en feriebolig, sommerhus eller lejlig-
+ hed, er nogenlunde ens. Den store forskel er at en lejlighed ligger inde it et lejlighedskompleks. Lejlighedskomplekset kan 
+ derfor godt have en anden og overordnet type administrator ( 1 til mange) end en feriebolig. Begge typer administrator er 
+ iforvejen en til mange…
+ Tænke tænke….
 
-11-3
-12-3
-13-3weekend
-14-3weekend
-15-3weekend
-16-3
-17-3
-18-3
-19-3
+11/3
+Todo:
+
+ - Lave views og indexes til DB:
+   programmet og vi skal vide hvilke opslag der skal skal optimeres i databasen, hvad der spørges på.
+ - OoP synk:
+   Vi skal have et overblik over hvad hvile klasser skal gøre og hvorfor.
+   En forståelse over hvordan databasen virker o gderigennem:
+ - Kortlægning af hvad programmet skal kunde:
+   - Hvad kan databasen gøre for os, svarrer på direkte
+   - Klasser der kan håndter programmet på; Måder vi vil have det til at virke på. f.eks.:
+     - for at kunne udskrive en kontrakt.
+     - Se hvilke huse der er ledige i et givent distrikt i en given uge.
+  - Gui
+    - kortlægning af eneller anden fornuftig grænse flade
+  - Krav der står i opgaven:
+    - fjern unødige wonder kalsser fra ovenstående design, i første omgang:
+
+12/3
+  - Pokumentation !
+  - koden klasser der kan æde og fodre database kød og har metoder til en eller anden fornuftig grænse flade.
+13/3 Fredag
+  - En eller anden opgave fordeling til weekenden.
+14/3weekend
+15/3weekend
+16/3
+  - Pokumentation !
+17/3
+  - Pokumentation !
+  - Lir:
+    - Gendindførsel af hidtidige unødige og fjernede wonder klasser, der tidligere blev fjernet fra ovenstående design,:
+  - DokuWiki
+18/3
+  - Aflevering af opgave kl :
+  - øve fremlæg.
+19-20/3
+  - Fremlæg
+
+Ønsker:
+DokuWiki - Det hedder faget jo
+email afsending - Skal programmet virke eller ej
