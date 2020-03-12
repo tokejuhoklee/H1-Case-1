@@ -1,24 +1,24 @@
-if exists (select * from sys.databases where name = '[Sydvest-Bo2]')
+if exists (select * from sys.databases where name = '[Sydvest-Bo]')
 begin
-  print '           Da databasen ''[Sydvest-Bo2]'' eksistere i forvejen slettes den' + char(13) + char(10)
+  print '           Da databasen ''[Sydvest-Bo]'' eksistere i forvejen slettes den' + char(13) + char(10)
   -- smid alle andre brugere af
-  alter database [Sydvest-Bo2] set single_user
-  print '             alter database [Sydvest-Bo2] set single_user ... done!'
-  drop database [Sydvest-Bo2]
-  print '             drop database [Sydvest-Bo2] ... done!' + char(13) + char(10)
+  alter database [Sydvest-Bo] set single_user
+  print '             alter database [Sydvest-Bo] set single_user ... done!'
+  drop database [Sydvest-Bo]
+  print '             drop database [Sydvest-Bo] ... done!' + char(13) + char(10)
 end
 else
 begin
-  print '           Databasen ''[Sydvest-Bo2]'' eksistere ikke i forvejen!' + char(13) + char(10)
+  print '           Databasen ''[Sydvest-Bo]'' eksistere ikke i forvejen!' + char(13) + char(10)
 end;
 go
 
 print char(13) + char(10) + '             *************************************************'
-print '             **  Databasen ''[Sydvest-Bo2]'' oprettes på ny  **'
-create database [Sydvest-Bo2];
+print '             **  Databasen ''[Sydvest-Bo]'' oprettes på ny  **'
+create database [Sydvest-Bo];
 go
 print '             **                                             **'
-use [Sydvest-Bo2];
+use [Sydvest-Bo];
 go
 print '             **  og er taget i bruge..                      **'
 print '             *************************************************' + char(13) + char(10)
