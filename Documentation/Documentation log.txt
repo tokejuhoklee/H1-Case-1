@@ -63,20 +63,26 @@ Todo:
     - fjern unødige wonder kalsser fra ovenstående design, i første omgang:
 
 12/3
-  - Pokumentation !
+  - Domumentation
   - koden klasser der kan æde og fodre database kød og har metoder til en eller anden fornuftig grænse flade.
 13/3 Fredag
   - En eller anden opgave fordeling til weekenden.
 14/3weekend
 15/3weekend
 16/3
-  - Pokumentation !
+  - Domumentation
+  - program opfølgning
+  - konstiens check
+  - gui
 17/3
-  - Pokumentation !
+  - gui
+  - Domumentation
   - Lir:
     - Gendindførsel af hidtidige unødige og fjernede wonder klasser, der tidligere blev fjernet fra ovenstående design,:
   - DokuWiki
 18/3
+  - Lir
+  - Gui
   - Aflevering af opgave kl :
   - øve fremlæg.
 19-20/3
