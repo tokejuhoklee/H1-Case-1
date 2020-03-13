@@ -145,8 +145,8 @@ GO
 
 CREATE TABLE "ZipCode Town"
 (
-  "ZipCode id" int  check ("ZipCode id" > 999 and "ZipCode id" < 10000) NOT NULL,
-  "Town"       nvarchar(79)                                             NOT NULL DEFAULT '''',
+  "ZipCode id" int  check ("ZipCode id" > 99 and "ZipCode id" < 10000) NOT NULL,
+  "Town"       nvarchar(79)                                            NOT NULL DEFAULT '''',
   CONSTRAINT "PK_ZipCode Town" PRIMARY KEY ("ZipCode id")
 )
 GO
@@ -268,3 +268,47 @@ ALTER TABLE "Residence Owner Contract"
     FOREIGN KEY ("Residence Owner id")
     REFERENCES "Residence Owner" ("Residence Owner id")
 GO
+
+------ USER controle
+USE "Sydvest-Bo"
+GO
+
+ALTER ROLE db_datareader ADD MEMBER tec
+GO
+
+ALTER ROLE db_datawriter ADD MEMBER tec
+GO
+
+ALTER ROLE db_ddladmin ADD MEMBER tec
+go
+
+---- Insert from Resources
+/*
+BULK INSERT "ZipCode Town"
+FROM 'd:\TEC.Datatekniker\H1\Versionering og Dokumentation\H1-Case-1\Resources\postnumre.csv'
+WITH
+(
+    FORMAT = 'CSV', 
+    FIELDQUOTE = '"',
+    FIRSTROW = 2,
+    FIELDTERMINATOR = ';',  --CSV field delimiter
+    ROWTERMINATOR = '\n',   --Use to shift the control to next row
+    TABLOCK
+)
+GO
+*/
+
+/*
+-- BULK INSERT "ZipCode Town"
+BULK INSERT [dbo].[ZipCode Town]
+FROM 'd:\TEC.Datatekniker\H1\Versionering og Dokumentation\H1-Case-1\Resources\postnumre.csv'
+with (
+    FIRSTROW = 2,
+    FIELDTERMINATOR = ';',
+    ROWTERMINATOR = '\n',
+    BATCHSIZE = 250000,
+    MAXERRORS = 2,
+    CODEPAGE = 65001
+);
+GO
+*/

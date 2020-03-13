@@ -44,6 +44,7 @@ Ting der skal laves
  iforvejen en til mange…
  Tænke tænke….
 
+
 11/3
 Todo:
 
@@ -65,8 +66,22 @@ Todo:
 12/3
   - Domumentation
   - koden klasser der kan æde og fodre database kød og har metoder til en eller anden fornuftig grænse flade.
+  ✓ Dokumentation er klargjort til at blive taget i brug på:
+        http://wiki.w2k19sql.hq.gollomotors.dk/
+  ✓ Databasen er etableret i en reduceret form vha script.
+        sydvest-bo_Create_DB_export_from_ERD_Editor.sql
+        Scriptet sletter databasen og genopretter den, samt giver vores tec bruger sine rettigheder tilbage igen efter slætning.
+
 13/3 Fredag
   - En eller anden opgave fordeling til weekenden.
+  ½ er i gang med at lave et script der kan initialisere databasen med nogle default værdier via et c# projekt der ligger i mappen:
+    _init_empty_database
+    programmet vil have database passwordet som argument:
+        Højreklik på _init_empty_database i højre side -> propperties -> debug -> arguments
+        OBS: Husk at slette disse inden der synkes med github.
+    ½ Projektet har også de aktuelle klasser der matcher databasen i en classe file. men der mangler stadig constructorer.
+    ✓ programmet afprøver også en metode til at maximere consolvinduet
+     
 14/3weekend
 15/3weekend
 16/3
