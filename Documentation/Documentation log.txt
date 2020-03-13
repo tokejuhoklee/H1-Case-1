@@ -55,7 +55,8 @@ Todo:
    En forståelse over hvordan databasen virker o gderigennem:
  - Kortlægning af hvad programmet skal kunde:
    - Hvad kan databasen gøre for os, svarrer på direkte
-   - Klasser der kan håndter programmet på; Måder vi vil have det til at virke på. f.eks.:
+   - Klasser der kan håndter programmet på; Måder vi vil have det til at virke
+     på. f.eks.:
      - for at kunne udskrive en kontrakt.
      - Se hvilke huse der er ledige i et givent distrikt i en given uge.
   - Gui
@@ -65,23 +66,31 @@ Todo:
 
 12/3
   - Domumentation
-  - koden klasser der kan æde og fodre database kød og har metoder til en eller anden fornuftig grænse flade.
+  - koden klasser der kan æde og fodre database kød og har metoder til en eller
+    anden fornuftig grænse flade.
   ✓ Dokumentation er klargjort til at blive taget i brug på:
         http://wiki.w2k19sql.hq.gollomotors.dk/
   ✓ Databasen er etableret i en reduceret form vha script.
         sydvest-bo_Create_DB_export_from_ERD_Editor.sql
-        Scriptet sletter databasen og genopretter den, samt giver vores tec bruger sine rettigheder tilbage igen efter slætning.
+        Scriptet sletter databasen og genopretter den, samt giver vores tec 
+        bruger sine rettigheder tilbage igen efter slætning.
 
 13/3 Fredag
   - En eller anden opgave fordeling til weekenden.
-  ½ er i gang med at lave et script der kan initialisere databasen med nogle default værdier via et c# projekt der ligger i mappen:
+  ½ er i gang med at lave et script der kan initialisere databasen med nogle 
+    default værdier via et c# projekt der ligger i mappen:
     _init_empty_database
     programmet vil have database passwordet som argument:
-        Højreklik på _init_empty_database i højre side -> propperties -> debug -> arguments
+        Højreklik på _init_empty_database i højre side
+        -> propperties -> debug -> arguments
         OBS: Husk at slette disse inden der synkes med github.
-    ½ Projektet har også de aktuelle klasser der matcher databasen i en classe file. men der mangler stadig constructorer.
+    ½ Projektet har også de aktuelle klasser der matcher databasen i en classe 
+      file. men der mangler stadig constructorer.
     ✓ programmet afprøver også en metode til at maximere consolvinduet
-     
+  ✓ Der er lavet et test projekt til at finde max console windows size og som 
+    har en scrolle feature der anvender screenbuffer så man kan få vist mere 
+    en skærmen kan trække:
+    Console_Screen_max_test2_bufferscrole
 14/3weekend
 15/3weekend
 16/3
@@ -93,7 +102,8 @@ Todo:
   - gui
   - Domumentation
   - Lir:
-    - Gendindførsel af hidtidige unødige og fjernede wonder klasser, der tidligere blev fjernet fra ovenstående design,:
+    - Gendindførsel af hidtidige unødige og fjernede wonder klasser, der 
+      tidligere blev fjernet fra ovenstående design,:
   - DokuWiki
 18/3
   - Lir
