@@ -18,6 +18,7 @@ namespace H1_Case1
         public UI(){
             selectionObject=new object[2];
             actionName = new string[3];
+            selection=0;
             actionName[0]="Log ind";actionName[1]="test ind";actionName[2]="fuck af";
             Console.SetCursorPosition(0, 0);
             Console.ForegroundColor = ConsoleColor.Red;//den røde farve indikerer det valgte emne
