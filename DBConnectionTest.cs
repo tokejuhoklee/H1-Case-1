@@ -10,7 +10,7 @@ namespace H1_Case1
     public class DBConnectionTest
     {
 
-        string connectionString { get; set; }
+        public string connectionString { get; set; }
         string username { get; set; }
         string password { get; set; }
 
@@ -29,29 +29,29 @@ namespace H1_Case1
                 password += key.KeyChar;
                 Console.Write("*");
             }
-            connectionStringUse(username, password);
+            //connectionStringUse(username, password);
 
-            
+
         }
 
-        public static void connectionStringUse(string userName,string userPass)
+        public static void connectionStringUse(string userName, string userPass)
         {
             string connectionString = null;
             SqlConnection connect;
-            connectionString = "Data Source = W2K19SQL.hq.gollomotors.dk; Initial Catalog = Sydvest-Bo; User ID = "+userName +"; Password ="+userPass;
+            connectionString = "Data Source = W2K19SQL.hq.gollomotors.dk; Initial Catalog = Sydvest-Bo; User ID = " + userName + "; Password =" + userPass;
             connect = new SqlConnection(connectionString);
             string query1;
             Console.WriteLine("\nIndtast Sql Statement: ");
             query1 = Console.ReadLine();
             string query2 = "Select* from [Address]";
-            
+
 
             try
             {
                 SqlCommand command1;
                 SqlCommand command2;
-                SqlDataReader sqlReader =null;
-                    
+                SqlDataReader sqlReader = null;
+
 
 
                 connect.Open();
@@ -68,7 +68,7 @@ namespace H1_Case1
                     {
                         Console.WriteLine("{0}\t{1}", sqlReader.GetInt32(0),
                             sqlReader.GetString(1));
-                        Console.WriteLine(sqlReader.GetValue(0)+" - "+sqlReader.GetValue(1) + " - " + sqlReader.GetValue(0));
+                        Console.WriteLine(sqlReader.GetValue(0) + " - " + sqlReader.GetValue(1) + " - " + sqlReader.GetValue(0));
 
                     }
                 }
@@ -76,12 +76,12 @@ namespace H1_Case1
                 {
                     Console.WriteLine("No rows found.");
                 }
-                        sqlReader.Close();
+                sqlReader.Close();
 
 
-    
 
-               
+
+
                 connect.Close();
                 Console.Read();
             }
@@ -96,11 +96,10 @@ namespace H1_Case1
             }
             connect.Close();
 
-            }
-
+        }
         
-
-
-
     }
-}
+
+
+   
+    }
