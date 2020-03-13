@@ -90,7 +90,9 @@ Todo:
   ✓ Der er lavet et test projekt til at finde max console windows size og som 
     har en scrolle feature der anvender screenbuffer så man kan få vist mere 
     en skærmen kan trække:
-    Console_Screen_max_test2_bufferscrole
+    Console_Screen_max_test2_bufferscrole 
+  ✓ Logfilen her er overgået til og på wiki... 
+  [EOF] #instaDead_without_corona
 14/3weekend
 15/3weekend
 16/3
