@@ -36,27 +36,24 @@ namespace sydvest_bo
 
             Console.WriteLine();
             string m00 = $"Console_Screen_max_test2\n www.c-sharpcorner.com/code/448/code-to-auto-maximize-console-application-according-to-screen-width-in-c-sharp.aspx";
-            string m0 = $"The current window width is {Console.WindowWidth}, and \n" +
-                $"the current window height is {Console.WindowHeight}.";
+            string m0 = $"The current window width is {Console.WindowWidth}, and\nthe current window height is {Console.WindowHeight}.";
             var wzx = Console.WindowWidth;
             var wzy = Console.WindowHeight;
 
             Frame box0 = new Frame(5, 16, 145, 10, 0, ConsoleColor.White, ConsoleColor.Green, ConsoleColor.Black, true);
-            Frame box1 = new Frame(30, 14, 40, 10, 0, ConsoleColor.White, ConsoleColor.Red, ConsoleColor.Black, true);
-            Frame box2 = new Frame(16, 6, 50, 14, 0, ConsoleColor.White, ConsoleColor.Blue, ConsoleColor.Black, true);
+            Window box1 = new Window(30, 10, 40, 10, 0, ConsoleColor.White, ConsoleColor.Red, ConsoleColor.Black, true, "Box1");
+            Window box2 = new Window(16, 2, 50, 14, 0, ConsoleColor.White, ConsoleColor.Blue, ConsoleColor.Black, true, "Box2");
+            box1.Draw();
             box1.Print("");
             box0.Print(m00);
+            box2.Draw();
             box2.Print(m0);
-            
-
 
             string loremIpsum = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tellus velit, aliquam quis eros vel, malesuada bibendum mi. Mauris non ultricies mauris, at accumsan tellus. Etiam tincidunt venenatis nisl in molestie.Nunc quis.";
 
             Console.ReadKey(true);
             // Srolle setup
-            string m1 = "1) Press the cursor keys to move the console window.\n" +
-                "2) Press any key to begin. When you're finished...\n" +
-                "3) Press the Escape key to quit.";
+            string m1 = "1) Press the cursor keys to move the console window.\n2) Press any key to begin. When you're finished...\n3) Press the Escape key to quit.";
             string g1 = "+---------";
             string g2 = "|         ";
             //          "| uge: 52 "
@@ -80,7 +77,9 @@ namespace sydvest_bo
                 //
                 Console.Clear();
                 //Console.WriteLine(m1);
+                box1.Draw();
                 box1.Print(loremIpsum);
+                box2.Draw();
                 box2.Print(m1);
                 Console.ReadKey(true);
 
@@ -120,7 +119,9 @@ namespace sydvest_bo
                 box1.Y += wzy / 2;
                 box2.X += wzx / 2;
                 box2.Y += wzy / 2;
+                box1.Draw();
                 box1.Print(loremIpsum);
+                box2.Draw();
                 box2.Print(loremIpsum);
                 Console.SetWindowPosition(0, 0);
                 do

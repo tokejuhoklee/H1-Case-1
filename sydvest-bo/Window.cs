@@ -8,7 +8,9 @@ namespace sydvest_bo
 {
     public class Frame
     {
-        public const string _solid = " ";
+        protected const int _sLX = 2; // _shadowLengthX
+        protected const int _sLY = 1; // _shadowLengthY
+        protected const string _solid = " ";
         public int X { get; set; }
         public int Y { get; set; }
         public int W { get; set; } // Width
@@ -57,7 +59,7 @@ namespace sydvest_bo
             Console.ForegroundColor = TxtColor;
             Console.BackgroundColor = BgColor;
             // lineWidth defineds as how many chars there should be in a line.
-            int lineWidth = W - (2 * Margin);
+            int lineWidth = W - ((2 * Margin) + _sLX);
             /* emptyLine, a string with length lineWidth full of spaces. Out-
              * put this line whit a background color draws the frame content
              * of a null string we get, when we split on \n. */
@@ -113,7 +115,7 @@ namespace sydvest_bo
                     if ( i < lineWidth) // file this line with spaces
                     {
                         newLine.Append(' ', lineWidth - i);
-                        if (linecounter < H)
+                        if (linecounter < (H - ((2 * Margin) + _sLY)))
                         {
                             linecounter++;
                             newLine.AppendLine(); // and a new line
@@ -122,7 +124,7 @@ namespace sydvest_bo
                     }
                 }
             }// end of paragraphs
-            while (linecounter < H)
+            while (linecounter < (H - ((2 * Margin) + _sLY)))
             {
                 newLine.AppendLine(emptyLine);
                 linecounter++;
@@ -135,7 +137,7 @@ namespace sydvest_bo
 
             // Generate a horizontal line the size of width of the frame 
 
-            for (int n = 0; n <= H - (2 * Margin); n++)
+            for (int n = 0; n < (H - ((2 * Margin) + _sLY)) ; n++)
             {
                 Console.SetCursorPosition(X + Margin, (Y + Margin + n));
 
@@ -163,57 +165,146 @@ namespace sydvest_bo
         protected const string _linjeXminus1 = "╠";
         protected const string _linjeY = "║";
         protected const string _shadow = " ";
-        // protected const string _shadowCornerX2Y1 = " ";
-        // protected const string _shadowCornerX1Y2 = " ";
 
-        private string _header;
+        public string Title { get; set; }
 
-        public string Header
+        public Window(int x, int y, int w, int h, int z, ConsoleColor txtColor, ConsoleColor bgColor, ConsoleColor shadowColor, bool visible, string title) : base(x, y, w, h, z, txtColor, bgColor, shadowColor, visible)
         {
-            get { return _header; }
-            set { _header = value; }
+            Title = title;
         }
 
         //public override void Draw()
         public void Draw()
         {
+            // Draws the the inside of the regtangle - the margins
+
+            // Store the current condition of the cursor: location and colors
+            ConsoleColor _storedForegroundColor = Console.ForegroundColor;
+            ConsoleColor _storedBackgroundColor = Console.BackgroundColor;
+            int _storedCursorX = Console.CursorLeft;
+            int _storedCursorY = Console.CursorTop;
+
+            //
+            Console.ForegroundColor = TxtColor;
+            Console.BackgroundColor = BgColor;
+            
+            for (int y = Y; y <= Y + H - (Margin + _sLY); y++)
+            {
+                if (y == Y | y == Y + H - (Margin + _sLY))
+                {
+                    for (int x = X; x <= X + W - (Margin + _sLX); x++)
+                    {
+                        Console.ForegroundColor = TxtColor;
+                        Console.BackgroundColor = BgColor;
+                        Console.SetCursorPosition(x, y);
+
+                        if (x == X & y == Y) { Console.Write(_cornerX1Y1); }
+                        else if (x == X + W - (Margin + _sLX) & y == Y)
+                        {
+                            Console.Write(_cornerX2Y1);
+                            // Shadow
+                            Console.BackgroundColor = ShadowColor;
+                            for (Byte ShadowDept = 1; ShadowDept <= _sLX; ShadowDept++)
+                            {
+                                Console.SetCursorPosition(x + ShadowDept, y + ShadowDept);
+                                Console.Write(_shadow);
+                            }
+                        }
+                        else if (x == X & y == Y + H - (Margin + _sLY))
+                        {
+                            Console.Write(_cornerX1Y2);
+                            // Shadow
+                            Console.BackgroundColor = ShadowColor;
+                            for (Byte ShadowDept = 1; ShadowDept <= _sLY; ShadowDept++)
+                            {
+                                Console.SetCursorPosition(x + ShadowDept, y + ShadowDept);
+                                Console.Write(_shadow);
+                            }
+                        }
+                        else if (x == X + W - (Margin + _sLX)& y == Y)
+                        {
+                            Console.Write(_cornerX2Y1);
+                            // Shadow
+                            Console.BackgroundColor = ShadowColor;
+                            for (Byte ShadowDept = 1; ShadowDept <= _sLX; ShadowDept++)
+                            {
+                                Console.SetCursorPosition(x + ShadowDept, y + ShadowDept);
+                                Console.Write(_shadow);
+                            }
+                        }
+                        else if (x == (X + W - (2 + Margin + _sLX)) & y == Y)
+                        {
+                            Console.Write(_linjeXminus2);
+                        }
+                        else if (x == X + W - (Margin + _sLX)& y == Y + H - (Margin + _sLY))
+                        {
+                            Console.Write(_cornerX2Y2);
+                            // Shadow
+                            Console.BackgroundColor = ShadowColor;
+                            for (Byte ShadowDept = 1; ShadowDept <= _sLY; ShadowDept++)
+                            {
+                                Console.SetCursorPosition(x + ShadowDept, y + ShadowDept);
+                                Console.Write(_shadow);
+                            }
+                        }
+                        else if (y == Y) { Console.Write(_linjeX); }
+                        else if (y == Y + H - (Margin + _sLY))
+                        { // (y == Y2)
+                            Console.Write(_linjeX);
+                            // Shadow
+                            Console.BackgroundColor = ShadowColor;
+                            for (Byte ShadowDept = 1; ShadowDept <= _sLY; ShadowDept++)
+                            {
+                                Console.SetCursorPosition(x + ShadowDept, y + ShadowDept);
+                                Console.Write(_shadow);
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    Console.ForegroundColor = TxtColor;
+                    Console.BackgroundColor = BgColor;
+                    Console.SetCursorPosition(X, y);
+                    Console.Write(_linjeY);
+                    Console.SetCursorPosition(X + W - (Margin + _sLX), y);
+                    Console.Write(_linjeY);
+                    // Shadow
+                    Console.BackgroundColor = ShadowColor;
+                    for (Byte ShadowDept = 1; ShadowDept <= _sLX; ShadowDept++)
+                    {
+                        Console.SetCursorPosition(X + W - (Margin + _sLX) + ShadowDept, y + ShadowDept);
+                        Console.Write(_shadow);
+                    }
+                }
+            }
+            // Title
+            this.DrawTitle();
+            // return cursor to its posistion
+            Console.ForegroundColor = _storedForegroundColor;
+            Console.BackgroundColor = _storedBackgroundColor;
+            Console.CursorLeft = _storedCursorX;
+            Console.CursorTop = _storedCursorY;
+        }//END public void Draw()
+
+        public void DrawTitle()
+        {
+            string _txt = Title;
+            // Store the current condition of the cursor: location and colors
             ConsoleColor _storedForegroundColor = Console.ForegroundColor;
             ConsoleColor _storedBackgroundColor = Console.BackgroundColor;
             int _storedCursorX = Console.CursorLeft;
             int _storedCursorY = Console.CursorTop;
             Console.ForegroundColor = TxtColor;
             Console.BackgroundColor = BgColor;
-            string line;
-            for (int n = Y; n < (Y + H); n++)
-            {
-                line = "";
-                Console.SetCursorPosition(X, n);
-                for (int m = X; m < (X + W - 2); m++)
-                {
-                    line += _solid;
-                }
-                Console.Write(line);
-                if (n > Y) // shadow vertical
-                {
-                    Console.BackgroundColor = ShadowColor;
-                    Console.Write(_solid);
-                    Console.Write(_solid);
-                    Console.BackgroundColor = BgColor;
-                }
-            }
-            Console.SetCursorPosition(X + 2, Y + H);
-            line = "";
-            Console.BackgroundColor = ShadowColor;
-            for (int m = X + 2; m < (X + W); m++)
-            {
-                line += _solid;
-            }
-            Console.Write(line);
-            // return cursor to its posistion
+            _txt = "- " + _txt + " -";
+            Console.SetCursorPosition(X + ((((W) / 2) - _sLX) - ((_txt.Length / 2) + (_txt.Length % 2))), Y);
+            Console.Write(_txt);
             Console.ForegroundColor = _storedForegroundColor;
             Console.BackgroundColor = _storedBackgroundColor;
-            Console.SetCursorPosition(_storedCursorX, _storedCursorY);
-        }
+            Console.CursorLeft = _storedCursorX;
+            Console.CursorTop = _storedCursorY;
+        }// public void DrawTitle(string txt)
 
     }//END public class Window
 }
