@@ -24,7 +24,7 @@ GO
 CREATE TABLE "Customer"
 (
   "Customer id" int      NOT NULL IDENTITY(1,1),
-  "Person id"   int      NOT NULL IDENTITY(1,1),
+  "Person id"   int      NOT NULL,
   "Notes"       nvarchar NOT NULL DEFAULT '',
   CONSTRAINT "PK_Customer" PRIMARY KEY ("Customer id")
 )
