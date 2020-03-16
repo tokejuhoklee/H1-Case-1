@@ -269,3 +269,16 @@ ALTER TABLE "Residence Owner Contract"
     FOREIGN KEY ("Residence Owner id")
     REFERENCES "Residence Owner" ("Residence Owner id")
 GO
+
+------ USER controle
+USE "Sydvest-Bo"
+GO
+
+ALTER ROLE db_datareader ADD MEMBER tec
+GO
+
+ALTER ROLE db_datawriter ADD MEMBER tec
+GO
+
+ALTER ROLE db_ddladmin ADD MEMBER tec
+go
