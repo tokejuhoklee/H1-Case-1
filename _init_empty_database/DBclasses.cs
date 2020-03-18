@@ -117,16 +117,16 @@ namespace _init_empty_database
         public int ResidenceOwnerContractId { get; set; }
     }
 
-    public class ZipCodeTown
+    public class PostnrBy
     {
-        public int ZipCodeId { get; set; }
-        public string Town { get; set; }
+        public int Postnr { get; set; }
+        public string Bynavn { get; set; }
 
         // Constructor to insert 2 string into: int, string object
-        public ZipCodeTown(string ZipCodeId,string Town)
+        public PostnrBy(string Postnr,string Bynavn)
         {
-            this.ZipCodeId = int.Parse(ZipCodeId);
-            this.Town = Town;
+            this.Postnr = int.Parse(Postnr);
+            this.Bynavn = Bynavn;
         }
     }
 }

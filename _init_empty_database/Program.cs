@@ -46,8 +46,8 @@ namespace _init_empty_database
             string dbHostName = "W2K19SQL.hq.gollomotors.dk";
             string dbNavn = "Sydvest-Bo";
             string dbUsername = "tec";
-            //string dbUsername = "sa";
-            string dbTable = "ZipCode Town";
+            // string dbUsername = "sa";
+            string dbTable = "PostnrBy";
 
             // test if we have a password as an argument
             string dbPassword = "";
@@ -70,10 +70,10 @@ namespace _init_empty_database
             }
 
             string connetionString = string.Format("Data Source={0};Initial Catalog={1};User ID={2};Password={3}", dbHostName, dbNavn, dbUsername, dbPassword);
-            // Init ZipCodeTown Table from File
-            List<ZipCodeTown> ZipCodeTownList = new List<ZipCodeTown>() { };
+            // Init PostnrBy Table from File
+            List<PostnrBy> PostnrByList = new List<PostnrBy>() { };
             // Læs fra en fil
-            string path = @"..\..\..\Resources\postnumre.csv";
+            string path = @"..\..\..\Resources\PostnrBy.csv";
             Console.Write($"Reading from file: {path}\n");
             int i = 0;
             using (StreamReader sr = File.OpenText(path))
@@ -99,15 +99,15 @@ namespace _init_empty_database
                         {
                             if (String.IsNullOrEmpty(tempTextLine[j])) tempTextLine[j] = "";
                         }
-                        ZipCodeTownList.Add(new ZipCodeTown(tempTextLine[0], tempTextLine[1]));
+                        PostnrByList.Add(new PostnrBy(tempTextLine[0], tempTextLine[1]));
                         Console.Write(".");
                     }
                     i++;
                 }
             } // end read from file
 
-            // DB tupel: ZipCodeId,Town
-            dbTable = "ZipCode Town";
+            // DB tupel: Postnr,Bynavn
+            dbTable = "PostnrBy";
 
             SqlConnection SydvestBoDb = new SqlConnection(connetionString);
             SydvestBoDb.Open();
@@ -115,7 +115,7 @@ namespace _init_empty_database
             SqlDataAdapter adapter = new SqlDataAdapter(); // The DataAdapter object is used to perform specific SQL operations such as insert, delete and update commands.
             string sql = ""; //         Hold our SQL command string.
 
-            // DELETE FROM [ZipCode Town]
+            // DELETE FROM [PostnrBy]
 
             Console.WriteLine($"Remove tupels form Table {dbNavn}[{dbTable}]");
             sql = $"DELETE FROM [{dbTable}]";
@@ -125,15 +125,15 @@ namespace _init_empty_database
             //SydvestBoDb.Close();
             //SydvestBoDb.Open();
 
-            // INSERT INTO [ZipCode Town]
+            // INSERT INTO [Postnr]
 
             Console.Write($"Insert tupels into Table {dbNavn}[{dbTable}]\n");
             // Define sql insert statement
             i = 0;
-            foreach (ZipCodeTown tupel in ZipCodeTownList)
+            foreach (PostnrBy tupel in PostnrByList)
             {
-                sql = $"INSERT INTO [{dbTable}]([ZipCode id],[Town])" + 
-                    $"values('{tupel.ZipCodeId}','{tupel.Town}')";
+                sql = $"INSERT INTO [{dbTable}]([Postnr],[Bynavn])" + 
+                    $"values('{tupel.Postnr}','{tupel.Bynavn}')";
                 command = new SqlCommand(sql, SydvestBoDb);
                 adapter.InsertCommand = new SqlCommand(sql, SydvestBoDb);
                 adapter.InsertCommand.ExecuteNonQuery();
