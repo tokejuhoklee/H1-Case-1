@@ -12,273 +12,283 @@ print '             **  og er taget i bruge..                      **'
 print '             *************************************************' + char(13) + char(10)
 go
 
-CREATE TABLE "Address"
+CREATE TABLE Adresse
 (
-  "Address id" int                                                      NOT NULL IDENTITY(1,1),
-  "ZipCode id" int  check ("ZipCode id" > 999 and "ZipCode id" < 10000) NOT NULL,
-  "Address"    nvarchar(127)                                            NOT NULL DEFAULT '',
-  CONSTRAINT "PK_Address" PRIMARY KEY ("Address id")
+  "Adresseid" int           NOT NULL IDENTITY(1,1),
+  "Adresse"   nvarchar(127) NOT NULL DEFAULT '',
+  "Postnr"    int           NOT NULL,
+  CONSTRAINT PK_Adresse PRIMARY KEY (Adresseid)
 )
 GO
 
-CREATE TABLE "Customer"
+CREATE TABLE Distrikt
 (
-  "Customer id" int      NOT NULL IDENTITY(1,1),
-  "Person id"   int      NOT NULL,
-  "Notes"       nvarchar NOT NULL DEFAULT '',
-  CONSTRAINT "PK_Customer" PRIMARY KEY ("Customer id")
+  "Distriktid" int           NOT NULL IDENTITY(1,1),
+  "Omraade"    nvarchar(200) NOT NULL,
+  CONSTRAINT PK_Distrikt PRIMARY KEY (Distriktid)
 )
 GO
 
-CREATE TABLE "Customer Consultant"
+CREATE TABLE Ejer
 (
-  "Customer Consultant id" int      NOT NULL IDENTITY(1,1),
-  "Person id"              int      NOT NULL,
-  "Etc"                    nvarchar NOT NULL DEFAULT '',
-  CONSTRAINT "PK_Customer Consultant" PRIMARY KEY ("Customer Consultant id")
+  "Ejerid"   int          NOT NULL IDENTITY(1,1),
+  "Ejertype" nvarchar(25) NOT NULL DEFAULT 'Sommerhusejer',
+  "Noter"    nvarchar     NOT NULL DEFAULT 'Noter',
+  "Personid" int          NOT NULL,
+  CONSTRAINT PK_Ejer PRIMARY KEY (Ejerid)
 )
 GO
 
-CREATE TABLE "Customer Rental Contract"
+CREATE TABLE Feriebolig
 (
-  "Customer id"                   int      NOT NULL,
-  "Customer Consultant id"        int      NOT NULL,
-  "Rental Consultant id"          int      NOT NULL,
-  "Date of contract"              date     NOT NULL DEFAULT GETDATE(),
-  "Date Start Rent"               date     NOT NULL DEFAULT GETDATE(),
-  "Date End Rent"                 date     NOT NULL DEFAULT GETDATE(),
-  "Price"                         money    NOT NULL DEFAULT 0.0,
-  "Price modifyer"                float    NOT NULL DEFAULT 1.0,
-  "Customer Rental Contract Text" nvarchar NOT NULL DEFAULT ''
+  "Ferieboligid"  int          NOT NULL IDENTITY(1,1),
+  "Distriktid"    int          NOT NULL,
+  "Adresseid"     int          NOT NULL,
+  "Ejerid"        int          NOT NULL,
+  "Opsynsmandid"  int          NOT NULL,
+  "Stoerrelse"    int          NOT NULL DEFAULT 0,
+  "Rum"           int          NOT NULL DEFAULT 0,
+  "Senge"         int          NOT NULL DEFAULT 0,
+  "Kvalitet"      nvarchar(47) NOT NULL DEFAULT '',
+  "Pris"          money        NOT NULL DEFAULT 0.0,
+  "FeriboligType" nvarchar(31) NOT NULL DEFAULT 'Sommerhus',
+  "Noter"         nvarchar     NOT NULL DEFAULT 'Noter',
+  CONSTRAINT PK_Feriebolig PRIMARY KEY (Ferieboligid)
 )
 GO
 
-CREATE TABLE "District"
+CREATE TABLE Kunde
 (
-  "Area id"              int           NOT NULL IDENTITY(1,1),
-  "Area name"            nvarchar(200) NOT NULL,
-  "Rental consultant id" int           NOT NULL,
-  CONSTRAINT "PK_District" PRIMARY KEY ("Area id")
+  "Kundeid"  int      NOT NULL IDENTITY(1,1),
+  "Personid" int      NOT NULL,
+  "noter"    nvarchar NOT NULL DEFAULT 'Noter',
+  CONSTRAINT PK_Kunde PRIMARY KEY (Kundeid)
 )
 GO
 
-CREATE TABLE "Independant Overseer"
+CREATE TABLE Kundekonsulent
 (
-  "Independant overseer id" int      NOT NULL IDENTITY(1,1),
-  "Person id"               int      NOT NULL,
-  "Etc"                     nvarchar NOT NULL DEFAULT '',
-  CONSTRAINT "PK_Independant Overseer" PRIMARY KEY ("Independant overseer id")
+  "Kundekonsulentid" int      NOT NULL IDENTITY(1,1),
+  "Personid"         int      NOT NULL,
+  "Noter"            nvarchar NOT NULL DEFAULT 'Noter',
+  CONSTRAINT PK_Kundekonsulent PRIMARY KEY (Kundekonsulentid)
 )
 GO
 
-CREATE TABLE "Person"
+CREATE TABLE Lejekontrakt
 (
-  "Person id"  int           NOT NULL IDENTITY(1,1),
-  "Address id" int           NOT NULL,
-  "Name"       nvarchar(47)  NOT NULL DEFAULT '',
-  "Last Name"  nvarchar(79)  NOT NULL DEFAULT '',
-  "Email"      nvarchar(127) NOT NULL DEFAULT '',
-  "PhoneNo"    nvarchar(20)  NOT NULL DEFAULT '',
-  "Password"   nvarchar(31)  NOT NULL DEFAULT 'Spassw0rd',
-  CONSTRAINT "PK_Person" PRIMARY KEY ("Person id")
+  "Lejekontrakid"           int      NOT NULL,
+  "Ferieboligid"            int      NOT NULL,
+  "Kundeid"                 int      NOT NULL,
+  "Kundekonsulentid"        int      NOT NULL,
+  "Udlejningskonsulentid"   int      NOT NULL,
+  "KontraktDato"            date     NOT NULL DEFAULT GETDATE(),
+  "Aar"                     int      NOT NULL DEFAULT 2020,
+  "Uge"                     int      NOT NULL DEFAULT 1,
+  "KundePris"               money    NOT NULL DEFAULT 0.0,
+  "UdlejningsKontraktTekst" nvarchar NOT NULL DEFAULT '',
+  "ElForbrug"               real     NOT NULL DEFAULT 0.0,
+  CONSTRAINT PK_Lejekontrakt PRIMARY KEY (Lejekontrakid)
 )
 GO
 
-CREATE TABLE "Rental Consultant"
+CREATE TABLE Opsynsmand
 (
-  "Rental Consultant id" int NOT NULL IDENTITY(1,1),
-  "Person id"            int NOT NULL,
-  CONSTRAINT "PK_Rental Consultant" PRIMARY KEY ("Rental Consultant id")
+  "Opsynsmandid" int      NOT NULL IDENTITY(1,1),
+  "Personid"     int      NOT NULL,
+  "Distriktid"   int      NOT NULL,
+  "Noter"        nvarchar NOT NULL DEFAULT 'Noter',
+  CONSTRAINT PK_Opsynsmand PRIMARY KEY (Opsynsmandid)
 )
 GO
 
-CREATE TABLE "Residence"
+CREATE TABLE Person
 (
-  "Residence id"                int          NOT NULL IDENTITY(1,1),
-  "Residence Owner Contract id" int          NOT NULL,
-  "Independant overseer id"     int          NOT NULL,
-  "Address id"                  int          NOT NULL,
-  "Area"                        int          NOT NULL,
-  "Size"                        int          NOT NULL DEFAULT 0,
-  "Rooms"                       int          NOT NULL DEFAULT 0,
-  "Number of beds"              int          NOT NULL DEFAULT 0,
-  "Rental quality"              nvarchar(47) NOT NULL DEFAULT '',
-  "Etc"                         nvarchar     NOT NULL DEFAULT '',
-  "Base Price"                  money        NOT NULL DEFAULT 0.0,
-  "Residence Type"              nvarchar(31) NOT NULL DEFAULT 'Sommerhouse',
-  CONSTRAINT "PK_Residence" PRIMARY KEY ("Residence id")
+  "Personid"  int           NOT NULL IDENTITY(1,1),
+  "Adresseid" int           NOT NULL,
+  "Fornavn"   nvarchar(47)  NOT NULL DEFAULT '',
+  "Efternavn" nvarchar(79)  NOT NULL DEFAULT '',
+  "Email"     nvarchar(127) NOT NULL DEFAULT '',
+  "Tlf"       nvarchar(20)  NOT NULL DEFAULT '',
+  "Password"  nvarchar(31)  NOT NULL DEFAULT 'Spassw0rd',
+  CONSTRAINT PK_Person PRIMARY KEY (Personid)
 )
 GO
 
-CREATE TABLE "Residence Owner"
+CREATE TABLE PostnrBy
 (
-  "Residence Owner id" int      NOT NULL IDENTITY(1,1),
-  "Person id"          int      NOT NULL,
-  "Etc"                nvarchar NOT NULL DEFAULT '',
-  CONSTRAINT "PK_Residence Owner" PRIMARY KEY ("Residence Owner id")
+  "Postnr" int          NOT NULL,
+  "Bynavn" nvarchar(79) NOT NULL DEFAULT '''',
+  CONSTRAINT PK_PostnrBy PRIMARY KEY (Postnr)
 )
 GO
 
-CREATE TABLE "Residence Owner Contract"
+ALTER TABLE PostnrBy
+  ADD CONSTRAINT UQ_Postnr UNIQUE (Postnr)
+GO
+
+CREATE TABLE Saesonkategori
 (
-  "Residence Owner Contract id"   int      NOT NULL IDENTITY(1,1),
-  "Residence Owner id"            int      NOT NULL,
-  "Rental consultant id"          int      NOT NULL,
-  "Date of contract"              date     NOT NULL DEFAULT GETDATE(),
-  "Date Start Rent"               date     NOT NULL DEFAULT GETDATE(),
-  "Date End Rent"                 date     NOT NULL DEFAULT GETDATE(),
-  "Price"                         money    NOT NULL DEFAULT 0.0,
-  "Residence Owner Contract Text" nvarchar NOT NULL DEFAULT '',
-  CONSTRAINT "PK_Residence Owner Contract" PRIMARY KEY ("Residence Owner Contract id")
+  "Ugeid"           int  check ("Ugeid" > 0 and "Ugeid" < 53) NOT NULL,
+  "Kategori"        int                                       NOT NULL,
+  "Kategroi navn"   nvarchar(20)                              NOT NULL DEFAULT 'Mellem',
+  "Prismodifikator" money                                     NOT NULL DEFAULT 1.0,
+  CONSTRAINT PK_Saesonkategori PRIMARY KEY (Ugeid)
 )
 GO
 
-CREATE TABLE "Vacancy"
+ALTER TABLE Saesonkategori
+  ADD CONSTRAINT UQ_Ugeid UNIQUE (Ugeid)
+GO
+
+CREATE TABLE Udlejningskonsulent
 (
-  "year"                        date  NOT NULL,
-  "week"                        date  NOT NULL,
-  "Residence id"                int   NOT NULL,
-  "Udlejnings pris"             money NOT NULL DEFAULT 0.0,
-  "Residence Owner Contract id" int   NOT NULL DEFAULT 0,
-  CONSTRAINT "PK_Vacancy" PRIMARY KEY (year, week, "Residence id")
+  "Udlejningskonsulentid" int NOT NULL IDENTITY(1,1),
+  "Personid"              int NOT NULL,
+  "Distriktid"            int NOT NULL,
+  CONSTRAINT PK_Udlejningskonsulent PRIMARY KEY (Udlejningskonsulentid)
 )
 GO
 
-CREATE TABLE "ZipCode Town"
+CREATE TABLE Udlejningskontrakt
 (
-  "ZipCode id" int  check ("ZipCode id" > 999 and "ZipCode id" < 10000) NOT NULL,
-  "Town"       nvarchar(79)                                             NOT NULL DEFAULT '''',
-  CONSTRAINT "PK_ZipCode Town" PRIMARY KEY ("ZipCode id")
+  "Udlejningskontraktid"    int      NOT NULL IDENTITY(1,1),
+  "Ferieboligid"            int      NOT NULL,
+  "Udlejningskonsulentid"   int      NOT NULL,
+  "KontraktDato"            date     NOT NULL DEFAULT GETDATE(),
+  "Aar"                     int      NOT NULL DEFAULT 0,
+  "Uge"                     int      NOT NULL DEFAULT 0,
+  "PrisEjer"                money    NOT NULL DEFAULT 0.0,
+  "UdlejningsKontraktTekst" nvarchar NOT NULL DEFAULT '',
+  CONSTRAINT PK_Udlejningskontrakt PRIMARY KEY (Udlejningskontraktid)
 )
 GO
 
-ALTER TABLE "ZipCode Town"
-  ADD CONSTRAINT "UQ_ZipCode id" UNIQUE ("ZipCode id")
+ALTER TABLE Kunde
+  ADD CONSTRAINT FK_Person_TO_Kunde
+    FOREIGN KEY (Personid)
+    REFERENCES Person (Personid)
 GO
 
-ALTER TABLE "Residence"
-  ADD CONSTRAINT "FK_District_TO_Residence"
-    FOREIGN KEY ("Area")
-    REFERENCES "District" ("Area id")
+ALTER TABLE Person
+  ADD CONSTRAINT FK_Adresse_TO_Person
+    FOREIGN KEY (Adresseid)
+    REFERENCES Adresse (Adresseid)
 GO
 
-ALTER TABLE "Residence Owner"
-  ADD CONSTRAINT "FK_Person_TO_Residence Owner"
-    FOREIGN KEY ("Person id")
-    REFERENCES "Person" ("Person id")
+ALTER TABLE Kundekonsulent
+  ADD CONSTRAINT FK_Person_TO_Kundekonsulent
+    FOREIGN KEY (Personid)
+    REFERENCES Person (Personid)
 GO
 
-ALTER TABLE "Customer Consultant"
-  ADD CONSTRAINT "FK_Person_TO_Customer Consultant"
-    FOREIGN KEY ("Person id")
-    REFERENCES "Person" ("Person id")
+ALTER TABLE Udlejningskontrakt
+  ADD CONSTRAINT FK_Udlejningskonsulent_TO_Udlejningskontrakt
+    FOREIGN KEY (Udlejningskonsulentid)
+    REFERENCES Udlejningskonsulent (Udlejningskonsulentid)
 GO
 
-ALTER TABLE "Rental Consultant"
-  ADD CONSTRAINT "FK_Person_TO_Rental Consultant"
-    FOREIGN KEY ("Person id")
-    REFERENCES "Person" ("Person id")
+ALTER TABLE Opsynsmand
+  ADD CONSTRAINT FK_Person_TO_Opsynsmand
+    FOREIGN KEY (Personid)
+    REFERENCES Person (Personid)
 GO
 
-ALTER TABLE "District"
-  ADD CONSTRAINT "FK_Rental Consultant_TO_District"
-    FOREIGN KEY ("Rental consultant id")
-    REFERENCES "Rental Consultant" ("Rental Consultant id")
+ALTER TABLE Feriebolig
+  ADD CONSTRAINT FK_Opsynsmand_TO_Feriebolig
+    FOREIGN KEY (Opsynsmandid)
+    REFERENCES Opsynsmand (Opsynsmandid)
 GO
 
-ALTER TABLE "Customer Rental Contract"
-  ADD CONSTRAINT "FK_Customer_TO_Customer Rental Contract"
-    FOREIGN KEY ("Customer id")
-    REFERENCES "Customer" ("Customer id")
+ALTER TABLE Udlejningskonsulent
+  ADD CONSTRAINT FK_Person_TO_Udlejningskonsulent
+    FOREIGN KEY (Personid)
+    REFERENCES Person (Personid)
 GO
 
-ALTER TABLE "Customer"
-  ADD CONSTRAINT "FK_Person_TO_Customer"
-    FOREIGN KEY ("Person id")
-    REFERENCES "Person" ("Person id")
+ALTER TABLE Feriebolig
+  ADD CONSTRAINT FK_Distrikt_TO_Feriebolig
+    FOREIGN KEY (Distriktid)
+    REFERENCES Distrikt (Distriktid)
 GO
 
-ALTER TABLE "Independant Overseer"
-  ADD CONSTRAINT "FK_Person_TO_Independant Overseer"
-    FOREIGN KEY ("Person id")
-    REFERENCES "Person" ("Person id")
+ALTER TABLE Opsynsmand
+  ADD CONSTRAINT FK_Distrikt_TO_Opsynsmand
+    FOREIGN KEY (Distriktid)
+    REFERENCES Distrikt (Distriktid)
 GO
 
-ALTER TABLE "Person"
-  ADD CONSTRAINT "FK_Address_TO_Person"
-    FOREIGN KEY ("Address id")
-    REFERENCES "Address" ("Address id")
+ALTER TABLE Udlejningskontrakt
+  ADD CONSTRAINT FK_Feriebolig_TO_Udlejningskontrakt
+    FOREIGN KEY (Ferieboligid)
+    REFERENCES Feriebolig (Ferieboligid)
 GO
 
-ALTER TABLE "Address"
-  ADD CONSTRAINT "FK_ZipCode Town_TO_Address"
-    FOREIGN KEY ("ZipCode id")
-    REFERENCES "ZipCode Town" ("ZipCode id")
+ALTER TABLE Udlejningskonsulent
+  ADD CONSTRAINT FK_Distrikt_TO_Udlejningskonsulent
+    FOREIGN KEY (Distriktid)
+    REFERENCES Distrikt (Distriktid)
 GO
 
-ALTER TABLE "Residence"
-  ADD CONSTRAINT "FK_Residence Owner Contract_TO_Residence"
-    FOREIGN KEY ("Residence Owner Contract id")
-    REFERENCES "Residence Owner Contract" ("Residence Owner Contract id")
+ALTER TABLE Feriebolig
+  ADD CONSTRAINT FK_Adresse_TO_Feriebolig
+    FOREIGN KEY (Adresseid)
+    REFERENCES Adresse (Adresseid)
 GO
 
-ALTER TABLE "Residence"
-  ADD CONSTRAINT "FK_Address_TO_Residence"
-    FOREIGN KEY ("Address id")
-    REFERENCES "Address" ("Address id")
+ALTER TABLE Lejekontrakt
+  ADD CONSTRAINT FK_Kunde_TO_Lejekontrakt
+    FOREIGN KEY (Kundeid)
+    REFERENCES Kunde (Kundeid)
 GO
 
-ALTER TABLE "Residence"
-  ADD CONSTRAINT "FK_Independant Overseer_TO_Residence"
-    FOREIGN KEY ("Independant overseer id")
-    REFERENCES "Independant Overseer" ("Independant overseer id")
+ALTER TABLE Lejekontrakt
+  ADD CONSTRAINT FK_Kundekonsulent_TO_Lejekontrakt
+    FOREIGN KEY (Kundekonsulentid)
+    REFERENCES Kundekonsulent (Kundekonsulentid)
 GO
 
-ALTER TABLE "Residence Owner Contract"
-  ADD CONSTRAINT "FK_Rental Consultant_TO_Residence Owner Contract"
-    FOREIGN KEY ("Rental consultant id")
-    REFERENCES "Rental Consultant" ("Rental Consultant id")
+ALTER TABLE Lejekontrakt
+  ADD CONSTRAINT FK_Udlejningskonsulent_TO_Lejekontrakt
+    FOREIGN KEY (Udlejningskonsulentid)
+    REFERENCES Udlejningskonsulent (Udlejningskonsulentid)
 GO
 
-ALTER TABLE "Vacancy"
-  ADD CONSTRAINT "FK_Residence_TO_Vacancy"
-    FOREIGN KEY ("Residence id")
-    REFERENCES "Residence" ("Residence id")
+ALTER TABLE Feriebolig
+  ADD CONSTRAINT FK_Ejer_TO_Feriebolig
+    FOREIGN KEY (Ejerid)
+    REFERENCES Ejer (Ejerid)
 GO
 
-ALTER TABLE "Vacancy"
-  ADD CONSTRAINT "FK_Residence Owner Contract_TO_Vacancy"
-    FOREIGN KEY ("Residence Owner Contract id")
-    REFERENCES "Residence Owner Contract" ("Residence Owner Contract id")
+ALTER TABLE Lejekontrakt
+  ADD CONSTRAINT FK_Feriebolig_TO_Lejekontrakt
+    FOREIGN KEY (Ferieboligid)
+    REFERENCES Feriebolig (Ferieboligid)
 GO
 
-ALTER TABLE "Customer Rental Contract"
-  ADD CONSTRAINT "FK_Rental Consultant_TO_Customer Rental Contract"
-    FOREIGN KEY ("Rental Consultant id")
-    REFERENCES "Rental Consultant" ("Rental Consultant id")
+ALTER TABLE Ejer
+  ADD CONSTRAINT FK_Person_TO_Ejer
+    FOREIGN KEY (Personid)
+    REFERENCES Person (Personid)
 GO
 
-ALTER TABLE "Customer Rental Contract"
-  ADD CONSTRAINT "FK_Customer Consultant_TO_Customer Rental Contract"
-    FOREIGN KEY ("Customer Consultant id")
-    REFERENCES "Customer Consultant" ("Customer Consultant id")
+ALTER TABLE Adresse
+  ADD CONSTRAINT FK_PostnrBy_TO_Adresse
+    FOREIGN KEY (Postnr)
+    REFERENCES PostnrBy (Postnr)
 GO
 
-ALTER TABLE "Residence Owner Contract"
-  ADD CONSTRAINT "FK_Residence Owner_TO_Residence Owner Contract"
-    FOREIGN KEY ("Residence Owner id")
-    REFERENCES "Residence Owner" ("Residence Owner id")
-GO
-
+/*
 ------ USER controle
+GRANT SELECT, INSERT, UPDATE, DELETE ON "Sydvest-Bo" TO tec;
 USE "Sydvest-Bo"
 GO
 
-ALTER ROLE db_datareader ADD MEMBER tec
-GO
+EXEC sp_addrolemember 'db_datareader', 'tec'
 
-ALTER ROLE db_datawriter ADD MEMBER tec
-GO
+EXEC sp_addrolemember 'db_datawriter', 'tec'
 
-ALTER ROLE db_ddladmin ADD MEMBER tec
+EXEC sp_addrolemember 'db_ddladmin', 'tec'
+
 go
+*/

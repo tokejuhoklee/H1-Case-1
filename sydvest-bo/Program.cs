@@ -35,23 +35,27 @@ namespace sydvest_bo
             ShowWindow(ThisConsole, MAXIMIZE);
 
             Console.WriteLine();
-            string m00 = $"Console_Screen_max_test2\n www.c-sharpcorner.com/code/448/code-to-auto-maximize-console-application-according-to-screen-width-in-c-sharp.aspx";
-            string m0 = $"The current window width is {Console.WindowWidth}, and\nthe current window height is {Console.WindowHeight}.";
+            string link1 = String.Format($"Console_Screen_max_test2\n www.c-sharpcorner.com/code/448/code-to-auto-maximize-console-application-according-to-screen-width-in-c-sharp.aspx");
+            string m0 = String.Format($"The current window width is {Console.WindowWidth}, and\nthe current window height is {Console.WindowHeight}.");
             var wzx = Console.WindowWidth;
             var wzy = Console.WindowHeight;
 
-            Frame box0 = new Frame(5, 16, 145, 10, 0, ConsoleColor.White, ConsoleColor.Green, ConsoleColor.Black, true);
-            Window box1 = new Window(30, 10, 40, 10, 0, ConsoleColor.White, ConsoleColor.Red, ConsoleColor.Black, true, "Box1");
-            Window box2 = new Window(16, 2, 50, 14, 0, ConsoleColor.White, ConsoleColor.Blue, ConsoleColor.Black, true, "Box2");
+            Frame box0 = new Frame(5, 16, 148, 10, 0, ConsoleColor.White, ConsoleColor.Green, ConsoleColor.Black, false);
+            Window box1 = new Window(30, 10, 40, 10, 0, ConsoleColor.White, ConsoleColor.Red, ConsoleColor.Black, false, "Box1");
+            Window box2 = new Window(16, 2, 50, 14, 0, ConsoleColor.White, ConsoleColor.Blue, ConsoleColor.Black, false, "Box2");
+            box0.Visible = true;
+            box1.Visible = true;
+            box2.Visible = true;
             box1.Draw();
             box1.Print("");
-            box0.Print(m00);
+            box0.Print(link1);
             box2.Draw();
             box2.Print(m0);
 
             string loremIpsum = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tellus velit, aliquam quis eros vel, malesuada bibendum mi. Mauris non ultricies mauris, at accumsan tellus. Etiam tincidunt venenatis nisl in molestie.Nunc quis.";
 
             Console.ReadKey(true);
+            
             // Srolle setup
             string m1 = "1) Press the cursor keys to move the console window.\n2) Press any key to begin. When you're finished...\n3) Press the Escape key to quit.";
             string g1 = "+---------";

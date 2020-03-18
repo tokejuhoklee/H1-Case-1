@@ -16,7 +16,21 @@ namespace sydvest_bo
         public int W { get; set; } // Width
         public int H { get; set; } // Heigth
         public int Z { get; set; } // Z index
-        public int Margin { get; set; } = 2; // margin default
+        protected int _marginX;
+        protected int _marginY;
+
+        public int Margin
+        {
+            get { return _marginY; }
+            set
+            { 
+                _marginY = value;
+                _marginX = 2 * value;
+            }
+        }
+
+        //public int _marginY { get; set; } = 1; // margin default
+        //public int _marginX { get; set; } = 2; // margin default
         public ConsoleColor TxtColor { get; set; }
         public ConsoleColor BgColor { get; set; }
         public ConsoleColor ShadowColor { get; set; }
@@ -42,113 +56,140 @@ namespace sydvest_bo
             BgColor = bgColor;
             ShadowColor = shadowColor;
             Visible = visible;
-            if (Visible) this.Print("");
+            Margin = 2;
+            // if (Visible) this.Print("");
         }
 
         public virtual void Print(string textblob)
         {
-            // Draws the the inside of the regtangle - the margins
+            /* Print the inside of a regtangular frame together with some
+             * text content if pressent ther also will be formatet to fit it */
 
-            // Store the current condition of the cursor: location and colors
-            ConsoleColor _storedForegroundColor = Console.ForegroundColor;
-            ConsoleColor _storedBackgroundColor = Console.BackgroundColor;
-            int _storedCursorX = Console.CursorLeft;
-            int _storedCursorY = Console.CursorTop;
-            
-            //
-            Console.ForegroundColor = TxtColor;
-            Console.BackgroundColor = BgColor;
-            // lineWidth defineds as how many chars there should be in a line.
-            int lineWidth = W - ((2 * Margin) + _sLX);
-            /* emptyLine, a string with length lineWidth full of spaces. Out-
-             * put this line whit a background color draws the frame content
-             * of a null string we get, when we split on \n. */
-            string emptyLine = "";
-            for (int m = 0; m < lineWidth; m++)
-                emptyLine += _solid;
-            /* break up the textblob at newline chars. This gives us the
-             * paragraphs of the textblob. If thise are Null we replace null
-             * with the emptyLine */
-            StringBuilder newLine = new StringBuilder();
-            string[] paragraphs = textblob.Split('\n');
-            string[] words;
-            int i, j;
-            int linecounter = 0;
-            foreach (string paragraph in paragraphs)
+            // if the frame is Visible draw it, else dont
+            if (Visible)
             {
-                i =  0; // reset counter
-                if (paragraph == null) //empty line
+                // Store the current condition of the cursor: location and colors
+                ConsoleColor _storedForegroundColor = Console.ForegroundColor;
+                ConsoleColor _storedBackgroundColor = Console.BackgroundColor;
+                int _storedCursorX = Console.CursorLeft;
+                int _storedCursorY = Console.CursorTop;
+
+                //
+                Console.ForegroundColor = TxtColor;
+                Console.BackgroundColor = BgColor;
+                // lineWidth defineds as how many chars there should be in a line.
+                // Wide of the frame W - (2_margin + _shadowLengthX + 2vertical_lines)
+                int lineWidth = W - ((2 * _marginX) + _sLX - 2);
+                /* emptyLine, a string with length lineWidth full of spaces. Out-
+                 * put this line whit a background color draws the frame content
+                 * of a null string we get, when we split on \n. */
+                string emptyLine = "";
+                for (int m = 0; m < lineWidth; m++)
+                    emptyLine += _solid;
+                /* break up the textblob at newline chars. This gives us the
+                 * paragraphs of the textblob. If thise are Null we replace null
+                 * with the emptyLine */
+                StringBuilder newBlob = new StringBuilder();
+                string[] paragraphs = textblob.Split('\n');
+                for (int t = 0; t < paragraphs.Length; t++)
                 {
-                    newLine.AppendLine(emptyLine);
+                    paragraphs[t] = paragraphs[t].Replace("\n", "").Replace("\r", "").Replace("\r\n", "");
+                }
+                //for (int t = 0; t < paragraphs.Length; t++)
+                //{
+                //    paragraphs[t] = paragraphs[t].Replace("\t", "    ");
+                //}
+                string[] words = { };
+                int i, j = 0;
+                int linecounter = 0;
+                foreach (string paragraph in paragraphs)
+                {
+                    
+                    if (paragraph == null) //empty line
+                    {
+                        newBlob.AppendLine(emptyLine);
+                        i = lineWidth;
+                        linecounter++;
+                    }
+                    else // there is some text in this paragraph
+                    {
+                        i = 0; // reset counter
+                        words = textblob.Split(' ');
+                        foreach (string word in words)
+                        {
+                            //if (!String.IsNullOrEmpty(word)) // this is something
+                            //{
+                                j = word.Length;
+                                if (i + j + 1 <= lineWidth) // ther is room for it
+                                {
+                                    if (i == 0) // beginning of the line, no space
+                                    {
+                                        newBlob.Append(word);
+                                        i += j;
+                                    }
+                                    else // insert a space char and count it too
+                                    {
+                                        newBlob.Append(String.Format($" {word}"));
+                                        i += j + 1;
+                                    }
+                                }
+                                // No room for it, fill the line with spaces and
+                                // newline
+                                else
+                                {
+                                    newBlob.Append(' ', (lineWidth - i));
+                                    i = 0; // reset counter
+                                    linecounter++;
+                                    newBlob.AppendLine(); // and a new line
+                                    newBlob.Append(word);
+                                    i = j;
+                                }
+                            //}
+                        }// End of words in this paragraph.
+
+                        if (i <= lineWidth) // file this line with spaces
+                        {
+                            newBlob.Append(' ', lineWidth - i);
+                            i = 0;
+                            if (linecounter < (H - ((2 * _marginY) + _sLY)))
+                            {
+                                linecounter++;
+                                newBlob.AppendLine(); // and a new line
+                            }
+                        }
+                    }
+                }// end of paragraphs
+                 // Add extra line to fill the frame;
+                while (linecounter < (H - ((2 * _marginY) + _sLY)))
+                {
+                    newBlob.AppendLine(emptyLine);
                     linecounter++;
                 }
-                else // ther is some text in this paragraph
+                // End the StringBuilder blob w/o a newline char
+                newBlob.Append(emptyLine);
+
+                // convert the stringbuilder object to string
+                textblob = newBlob.ToString();
+
+                // convert the stringbuilder object to string
+                string[] formatedLines = textblob.Split('\n');
+
+                // Print horizontal lines the size of width of the frame 
+                for (int n = 0; n < (H - ((2 * _marginY) + _sLY)); n++)
                 {
-                    words = textblob.Split(' ');
-                    foreach (string word in words)
-                    {
-                        if (!String.IsNullOrEmpty(word)) // this is something
-                        {
-                            j = word.Length;
-                            if (i + j + 1 <= lineWidth) // ther is room for it
-                            {
-                                if (i == 0) // beginning of the line, no space
-                                {
-                                    newLine.Append(word);
-                                    i += j;
-                                }
-                                else // insert a space char and count it too
-                                {
-                                    newLine.Append($" {word}");
-                                    i += j + 1;
-                                }
-                            }
-                            else // No room for it, fill the line with spaces
-                            {
-                                newLine.Append(' ', lineWidth - i);
-                                i = 0; // reset counter
-                                linecounter++;
-                                newLine.AppendLine(); // and a new line
-                            }
-                        }
-                    }// End of words in this paragraph.
-                    if ( i < lineWidth) // file this line with spaces
-                    {
-                        newLine.Append(' ', lineWidth - i);
-                        if (linecounter < (H - ((2 * Margin) + _sLY)))
-                        {
-                            linecounter++;
-                            newLine.AppendLine(); // and a new line
-                        }
-                        
-                    }
+                    // removes extra auto implanted occurense of newlines reminisenses
+                    formatedLines[n] = formatedLines[n].Replace("\r", "").Replace("\r\n", "");
+                    Console.SetCursorPosition(X + _marginX, (Y + _marginY + n));
+                    Console.Write(formatedLines[n]);
                 }
-            }// end of paragraphs
-            while (linecounter < (H - ((2 * Margin) + _sLY)))
-            {
-                newLine.AppendLine(emptyLine);
-                linecounter++;
-            }
-            newLine.Append(emptyLine); // End the StringBuilder blob w/o a
-            // newline char
 
-            textblob = newLine.ToString(); // convert to string
-            paragraphs = textblob.Split('\n');
-
-            // Generate a horizontal line the size of width of the frame 
-
-            for (int n = 0; n < (H - ((2 * Margin) + _sLY)) ; n++)
-            {
-                Console.SetCursorPosition(X + Margin, (Y + Margin + n));
-
-                Console.Write(paragraphs[n]);
-            }
-            // return cursor to its posistion
-            Console.ForegroundColor = _storedForegroundColor;
-            Console.BackgroundColor = _storedBackgroundColor;
-            Console.CursorLeft = _storedCursorX;
-            Console.CursorTop = _storedCursorY;
-        }
+                // return cursor to its posistion
+                Console.ForegroundColor = _storedForegroundColor;
+                Console.BackgroundColor = _storedBackgroundColor;
+                Console.CursorLeft = _storedCursorX;
+                Console.CursorTop = _storedCursorY;
+            }// END if (Visible)
+        }// END method: public virtual void Print(string textblob)
 
     } // public class Frame
 
@@ -176,7 +217,8 @@ namespace sydvest_bo
         //public override void Draw()
         public void Draw()
         {
-            // Draws the the inside of the regtangle - the margins
+            /* Draw the outer frame and marginins of a regtangular windowframe
+             * together with a header. */
 
             // Store the current condition of the cursor: location and colors
             ConsoleColor _storedForegroundColor = Console.ForegroundColor;
@@ -184,22 +226,28 @@ namespace sydvest_bo
             int _storedCursorX = Console.CursorLeft;
             int _storedCursorY = Console.CursorTop;
 
-            //
-            Console.ForegroundColor = TxtColor;
-            Console.BackgroundColor = BgColor;
             
-            for (int y = Y; y <= Y + H - (Margin + _sLY); y++)
+            // Console.ForegroundColor = TxtColor;
+            // Console.BackgroundColor = BgColor;
+            
+            // Loop vertical distance from top Y to bottom y+H - vertical shadow distance.
+            for (int y = Y; y <= Y + H - _sLY; y++)
             {
-                if (y == Y | y == Y + H - (Margin + _sLY))
+                // Check if its the 2 topmost or bottommoste lines, then we draw a horizontal frame
+                if (y == Y | y == Y + H - _sLY)
                 {
-                    for (int x = X; x <= X + W - (Margin + _sLX); x++)
+                    // Loop horisontal distance from top X to bottom X+W - horizontal shadow distance.
+                    for (int x = X; x <= X + W - _sLX; x++)
                     {
+                        // color change
                         Console.ForegroundColor = TxtColor;
                         Console.BackgroundColor = BgColor;
                         Console.SetCursorPosition(x, y);
 
+                        // Left Top corner 1, print constant for that (face inside = no shadow)
                         if (x == X & y == Y) { Console.Write(_cornerX1Y1); }
-                        else if (x == X + W - (Margin + _sLX) & y == Y)
+                        // Right Top corner 2, print constant for that and draw shadow
+                        else if (x == X + W - _sLX & y == Y)
                         {
                             Console.Write(_cornerX2Y1);
                             // Shadow
@@ -210,7 +258,8 @@ namespace sydvest_bo
                                 Console.Write(_shadow);
                             }
                         }
-                        else if (x == X & y == Y + H - (Margin + _sLY))
+                        // Left lower corner 3, print constant for that and draw shadow
+                        else if (x == X & y == Y + H - _sLY)
                         {
                             Console.Write(_cornerX1Y2);
                             // Shadow
@@ -221,22 +270,21 @@ namespace sydvest_bo
                                 Console.Write(_shadow);
                             }
                         }
-                        else if (x == X + W - (Margin + _sLX)& y == Y)
-                        {
-                            Console.Write(_cornerX2Y1);
-                            // Shadow
-                            Console.BackgroundColor = ShadowColor;
-                            for (Byte ShadowDept = 1; ShadowDept <= _sLX; ShadowDept++)
-                            {
-                                Console.SetCursorPosition(x + ShadowDept, y + ShadowDept);
-                                Console.Write(_shadow);
-                            }
-                        }
-                        else if (x == (X + W - (2 + Margin + _sLX)) & y == Y)
-                        {
-                            Console.Write(_linjeXminus2);
-                        }
-                        else if (x == X + W - (Margin + _sLX)& y == Y + H - (Margin + _sLY))
+                        // Right Top corner 2, print constant for that and draw shadow
+                        //else if (x == X + W - (Margin + _sLX)& y == Y)
+                        //{
+                        //    Console.Write(_cornerX2Y1);
+                        //    // Shadow
+                        //    Console.BackgroundColor = ShadowColor;
+                        //    for (Byte ShadowDept = 1; ShadowDept <= _sLX; ShadowDept++)
+                        //    {
+                        //        Console.SetCursorPosition(x + ShadowDept, y + ShadowDept);
+                        //        Console.Write(_shadow);
+                        //    }
+                        //}
+
+                        // Right Lower corner 4, print constant for that and draw shadow
+                        else if (x == X + W - _sLX & y == Y + H - _sLY)
                         {
                             Console.Write(_cornerX2Y2);
                             // Shadow
@@ -247,10 +295,31 @@ namespace sydvest_bo
                                 Console.Write(_shadow);
                             }
                         }
-                        else if (y == Y) { Console.Write(_linjeX); }
-                        else if (y == Y + H - (Margin + _sLY))
+                        // top horizontal line
+                        else if (y == Y)
+                        {
+                            // print a mark on the window frame near top right corner
+                            if (x == X + W - ( 3 + _sLX))
+                                Console.Write(_linjeXminus2);
+                            else // draw horizontal line
+                                Console.Write(_linjeX);
+                            // Margin
+                            for (Byte MarginDept = 1; MarginDept <= _marginY; MarginDept++)
+                            {
+                                Console.SetCursorPosition(x, y + MarginDept);
+                                Console.Write(_solid);
+                            }
+                        }
+                        // Lower horizontal line
+                        else if (y == Y + H - _sLY)
                         { // (y == Y2)
                             Console.Write(_linjeX);
+                            // Margin
+                            for (Byte MarginDept = 1; MarginDept <= _marginY; MarginDept++)
+                            {
+                                Console.SetCursorPosition(x, y - MarginDept);
+                                Console.Write(_solid);
+                            }
                             // Shadow
                             Console.BackgroundColor = ShadowColor;
                             for (Byte ShadowDept = 1; ShadowDept <= _sLY; ShadowDept++)
@@ -260,26 +329,37 @@ namespace sydvest_bo
                             }
                         }
                     }
-                }
+                }// END Check if its the 2 topmost or bottommoste lines, then we draw a horisontal frame
                 else
-                {
+                { // Vertical line S
                     Console.ForegroundColor = TxtColor;
                     Console.BackgroundColor = BgColor;
                     Console.SetCursorPosition(X, y);
                     Console.Write(_linjeY);
-                    Console.SetCursorPosition(X + W - (Margin + _sLX), y);
+                    // Margin
+                    for (Byte MarginDept = 1; MarginDept <= _marginX; MarginDept++)
+                    {
+                        Console.SetCursorPosition(X + MarginDept, y);
+                        Console.Write(_solid);
+                    }
+                    Console.SetCursorPosition(X + W - _sLX, y);
                     Console.Write(_linjeY);
+                    for (Byte MarginDept = 1; MarginDept <= _marginX; MarginDept++)
+                    {
+                        Console.SetCursorPosition(X + W - (_sLX + MarginDept), y);
+                        Console.Write(_solid);
+                    }
                     // Shadow
                     Console.BackgroundColor = ShadowColor;
                     for (Byte ShadowDept = 1; ShadowDept <= _sLX; ShadowDept++)
                     {
-                        Console.SetCursorPosition(X + W - (Margin + _sLX) + ShadowDept, y + ShadowDept);
+                        Console.SetCursorPosition(X + W - _sLX + ShadowDept, y + ShadowDept);
                         Console.Write(_shadow);
                     }
                 }
             }
             // Title
-            this.DrawTitle();
+            this.PrintTitle();
             // return cursor to its posistion
             Console.ForegroundColor = _storedForegroundColor;
             Console.BackgroundColor = _storedBackgroundColor;
@@ -287,23 +367,27 @@ namespace sydvest_bo
             Console.CursorTop = _storedCursorY;
         }//END public void Draw()
 
-        public void DrawTitle()
+        public void PrintTitle()
         {
-            string _txt = Title;
-            // Store the current condition of the cursor: location and colors
-            ConsoleColor _storedForegroundColor = Console.ForegroundColor;
-            ConsoleColor _storedBackgroundColor = Console.BackgroundColor;
-            int _storedCursorX = Console.CursorLeft;
-            int _storedCursorY = Console.CursorTop;
-            Console.ForegroundColor = TxtColor;
-            Console.BackgroundColor = BgColor;
-            _txt = "- " + _txt + " -";
-            Console.SetCursorPosition(X + ((((W) / 2) - _sLX) - ((_txt.Length / 2) + (_txt.Length % 2))), Y);
-            Console.Write(_txt);
-            Console.ForegroundColor = _storedForegroundColor;
-            Console.BackgroundColor = _storedBackgroundColor;
-            Console.CursorLeft = _storedCursorX;
-            Console.CursorTop = _storedCursorY;
+            /* Print a windowframe title if pressent. */
+            if (!String.IsNullOrEmpty(Title))
+            {
+                string _txt = Title;
+                // Store the current condition of the cursor: location and colors
+                ConsoleColor _storedForegroundColor = Console.ForegroundColor;
+                ConsoleColor _storedBackgroundColor = Console.BackgroundColor;
+                int _storedCursorX = Console.CursorLeft;
+                int _storedCursorY = Console.CursorTop;
+                Console.ForegroundColor = TxtColor;
+                Console.BackgroundColor = BgColor;
+                _txt = "- " + _txt + " -";
+                Console.SetCursorPosition(X + ((((W) / 2) - _sLX) - ((_txt.Length / 2) + (_txt.Length % 2))), Y);
+                Console.Write(_txt);
+                Console.ForegroundColor = _storedForegroundColor;
+                Console.BackgroundColor = _storedBackgroundColor;
+                Console.CursorLeft = _storedCursorX;
+                Console.CursorTop = _storedCursorY;
+            }
         }// public void DrawTitle(string txt)
 
     }//END public class Window
