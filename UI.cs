@@ -12,8 +12,10 @@ namespace H1_Case1
         string[] actionName {get;set;}
         object[] selectionObject{get;set;}
         int selection{get;set;}
-        int cursorCoordinateY {get;set;}
-        
+        public int cursorCoordinateY {get;set;}
+        public int cursorCoordinateX { get; set; }
+
+
 
         public UI(){
             selectionObject=new object[2];
@@ -95,6 +97,8 @@ namespace H1_Case1
 
                 }
             } while (key != ConsoleKey.Enter);//loopet kommer ud ved at taste enter, og selection værdien er så sat til det felt man er på. Det vil så sige at når man kommer ud af loopet fortsætter den til menu der så er valgt, hvorefter denne menu konstruktion gentager sig i en af de andre klasser. 
+            cursorCoordinateX = cursorCoordinateX + 15;
+            Console.SetCursorPosition(cursorCoordinateX, 0);
             selectionObject[selection]=new DBConnectionTest();
 
         }

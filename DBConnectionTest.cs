@@ -16,6 +16,7 @@ namespace H1_Case1
 
         public DBConnectionTest()
         {
+
             Console.WriteLine("Write username");
             username = Console.ReadLine();
             Console.WriteLine("Write password");

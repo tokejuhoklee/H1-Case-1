@@ -137,65 +137,65 @@ namespace sydvest_bo
                             if (Console.WindowLeft > 0)
                             {
                                 Console.SetWindowPosition( Console.WindowLeft - 1, Console.WindowTop);
-                                //if ((box1.X + box1.W + 2) < (Console.BufferWidth - Console.WindowWidth))
-                                //{
-                                //    box1.X++;
-                                //}
-                                //if ((box2.X + box2.W + 2) < (Console.BufferWidth - Console.WindowWidth))
-                                //{
-                                //    box2.X++;
-                                //}
-                                //box1.Print(loremIpsum);
-                                //box2.Print(loremIpsum);
+                                if ((box1.X + box1.W + 2) < (Console.BufferWidth - Console.WindowWidth))
+                                {
+                                    box1.X++;
+                                }
+                                if ((box2.X + box2.W + 2) < (Console.BufferWidth - Console.WindowWidth))
+                                {
+                                    box2.X++;
+                                }
+                                box1.Print(loremIpsum);
+                                box2.Print(loremIpsum);
                             }
                             break;
                         case ConsoleKey.UpArrow:
                             if (Console.WindowTop > 0)
                             {
                                 Console.SetWindowPosition(Console.WindowLeft, Console.WindowTop - 1);
-                                //if ((box1.Y + box1.H + 2) < (Console.BufferHeight - Console.WindowHeight))
-                                //{
-                                //    box1.Y++;
-                                //}
-                                //if ((box2.Y + box2.H + 2) < (Console.BufferHeight - Console.WindowHeight))
-                                //{
-                                //    box2.Y++;
-                                //}
-                                //box1.Print(loremIpsum);
-                                //box2.Print(loremIpsum);
+                                if ((box1.Y + box1.H + 2) < (Console.BufferHeight - Console.WindowHeight))
+                                {
+                                    box1.Y++;
+                                }
+                                if ((box2.Y + box2.H + 2) < (Console.BufferHeight - Console.WindowHeight))
+                                {
+                                    box2.Y++;
+                                }
+                                box1.Print(loremIpsum);
+                                box2.Print(loremIpsum);
                             }
                             break;
                         case ConsoleKey.RightArrow:
                             if (Console.WindowLeft < (Console.BufferWidth - Console.WindowWidth))
                             {
                                 Console.SetWindowPosition(Console.WindowLeft + 1, Console.WindowTop);
-                                //if (box1.X > 0)
-                                //{
-                                //    box1.X--;
-                                //}
-                                    
-                                //if (box2.X > 0)
-                                //{
-                                //    box2.X--;
-                                //}
-                                //box1.Print(loremIpsum);
-                                //box2.Print(loremIpsum);
+                                if (box1.X > 0)
+                                {
+                                    box1.X--;
+                                }
+
+                                if (box2.X > 0)
+                                {
+                                    box2.X--;
+                                }
+                                box1.Print(loremIpsum);
+                                box2.Print(loremIpsum);
                             } 
                             break;
                         case ConsoleKey.DownArrow:
                             if (Console.WindowTop < (Console.BufferHeight - Console.WindowHeight))
                             {
                                 Console.SetWindowPosition(Console.WindowLeft, Console.WindowTop + 1);
-                                //if ( box1.Y > 0)
-                                //{
-                                //    box1.Y--;
-                                //}
-                                //if (box2.Y > 0)
-                                //{
-                                //    box2.Y--;
-                                //}
-                                //box1.Print(loremIpsum);
-                                //box2.Print(loremIpsum);
+                                if (box1.Y > 0)
+                                {
+                                    box1.Y--;
+                                }
+                                if (box2.Y > 0)
+                                {
+                                    box2.Y--;
+                                }
+                                box1.Print(loremIpsum);
+                                box2.Print(loremIpsum);
                             }
                             break;
                     }
