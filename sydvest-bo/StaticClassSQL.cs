@@ -60,25 +60,25 @@ namespace sydvest_bo
                 sqlReader = command2.ExecuteReader();
 
 
-                if (sqlReader.HasRows)
-                {
-                    while (sqlReader.HasRows)
-                    {
-                        Console.WriteLine("\t{0}\t{1}", sqlReader.GetName(0),
-                            sqlReader.GetName(1));
+                 if (sqlReader.HasRows)
+            {
+                 while (sqlReader.HasRows)
+                 {
+                    Console.WriteLine("\t{0}\t{1}\t{2}\t{3}", sqlReader.GetName(0),
+                        sqlReader.GetName(1), sqlReader.GetName(2), sqlReader.GetName(3));
 
-                        while (sqlReader.Read())
-                        {
-                            Console.WriteLine("\t{0}\t{1}", sqlReader.GetInt32(0),
-                                sqlReader.GetString(1));
-                        }
-                        sqlReader.NextResult();
+                    while (sqlReader.Read())
+                    {
+                        Console.WriteLine("\t{0}\t{1}\t{2}\t{3}", sqlReader.GetInt32(0),
+                            sqlReader.GetValue(1), sqlReader.GetValue(2),sqlReader.GetValue(3));
                     }
-                }
-                else
-                {
-                    Console.WriteLine("No rows found.");
-                }
+                    sqlReader.NextResult();
+                 }
+            }
+            else
+            {
+                Console.WriteLine("No rows found.");
+            }
 
 
 
