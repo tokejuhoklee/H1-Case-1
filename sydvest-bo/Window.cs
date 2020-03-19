@@ -95,6 +95,7 @@ namespace sydvest_bo
                 {
                     paragraphs[t] = paragraphs[t].Replace("\n", "").Replace("\r", "").Replace("\r\n", "");
                 }
+                /* to handle tab \t - not jet fontional */
                 //for (int t = 0; t < paragraphs.Length; t++)
                 //{
                 //    paragraphs[t] = paragraphs[t].Replace("\t", "    ");
@@ -104,7 +105,7 @@ namespace sydvest_bo
                 int linecounter = 0;
                 foreach (string paragraph in paragraphs)
                 {
-                    
+
                     if (paragraph == null) //empty line
                     {
                         newBlob.AppendLine(emptyLine);
@@ -114,36 +115,36 @@ namespace sydvest_bo
                     else // there is some text in this paragraph
                     {
                         i = 0; // reset counter
-                        words = textblob.Split(' ');
+                        words = paragraph.Split(' ');
                         foreach (string word in words)
                         {
                             //if (!String.IsNullOrEmpty(word)) // this is something
                             //{
-                                j = word.Length;
-                                if (i + j + 1 <= lineWidth) // ther is room for it
+                            j = word.Length;
+                            if (i + j + 1 <= lineWidth) // ther is room for it
+                            {
+                                if (i == 0) // beginning of the line, no space
                                 {
-                                    if (i == 0) // beginning of the line, no space
-                                    {
-                                        newBlob.Append(word);
-                                        i += j;
-                                    }
-                                    else // insert a space char and count it too
-                                    {
-                                        newBlob.Append(String.Format($" {word}"));
-                                        i += j + 1;
-                                    }
-                                }
-                                // No room for it, fill the line with spaces and
-                                // newline
-                                else
-                                {
-                                    newBlob.Append(' ', (lineWidth - i));
-                                    i = 0; // reset counter
-                                    linecounter++;
-                                    newBlob.AppendLine(); // and a new line
                                     newBlob.Append(word);
-                                    i = j;
+                                    i += j;
                                 }
+                                else // insert a space char and count it too
+                                {
+                                    newBlob.Append(String.Format($" {word}"));
+                                    i += j + 1;
+                                }
+                            }
+                            // No room for it, fill the line with spaces and
+                            // newline
+                            else
+                            {
+                                newBlob.Append(' ', (lineWidth - i));
+                                i = 0; // reset counter
+                                linecounter++;
+                                newBlob.AppendLine(); // and a new line
+                                newBlob.Append(word);
+                                i = j;
+                            }
                             //}
                         }// End of words in this paragraph.
 
@@ -191,6 +192,137 @@ namespace sydvest_bo
             }// END if (Visible)
         }// END method: public virtual void Print(string textblob)
 
+        //public virtual void Print1WithOutStringBuilder(string textblob)
+        //{
+        //    /* Same as abow w/o StringBuilder - but til failesstill failes
+        //     * Print the inside of a regtangular frame together with some
+        //     * text content if pressent ther also will be formatet to fit it */
+
+        //    // if the frame is Visible draw it, else dont
+        //    if (Visible)
+        //    {
+        //        // Store the current condition of the cursor: location and colors
+        //        ConsoleColor _storedForegroundColor = Console.ForegroundColor;
+        //        ConsoleColor _storedBackgroundColor = Console.BackgroundColor;
+        //        int _storedCursorX = Console.CursorLeft;
+        //        int _storedCursorY = Console.CursorTop;
+
+        //        //
+        //        Console.ForegroundColor = TxtColor;
+        //        Console.BackgroundColor = BgColor;
+        //        // lineWidth defineds as how many chars there should be in a line.
+        //        // Wide of the frame W - (2_margin + _shadowLengthX + 2vertical_lines)
+        //        int lineWidth = W - ((2 * _marginX) + _sLX);
+        //        /* emptyLine, a string with length lineWidth full of spaces. Out-
+        //         * put this line whit a background color draws the frame content
+        //         * of a null string we get, when we split on \n. */
+        //        string emptyLine = "";
+        //        for (int m = 0; m < lineWidth; m++)
+        //            emptyLine += _solid;
+        //        /* break up the textblob at newline chars. This gives us the
+        //         * paragraphs of the textblob. If thise are Null we replace null
+        //         * with the emptyLine */
+        //        string[] newBlob = new string[H - ((2 * _marginY) + _sLY)];
+        //        string[] paragraphs = textblob.Split('\n');
+        //        for (int t = 0; t < paragraphs.Length; t++)
+        //        {
+        //            paragraphs[t] = paragraphs[t].Replace("\n", "").Replace("\r", "").Replace("\r\n", "");
+        //        }
+        //        /* to handle tab \t - not jet fontional */
+        //        // int tabLength = 4
+        //        //for (int t = 0; t < tabLength; t++)
+        //        //{
+        //        //    paragraphs[t] = paragraphs[t].Replace("\t", "    ");
+        //        //}
+        //        string[] words = { };
+        //        string tmpString = "";
+        //        int i, j = 0;
+        //        int linecounter = 0;
+        //        foreach (string paragraph in paragraphs)
+        //        {
+                    
+        //            if (paragraph == null) //empty line
+        //            {
+        //                newBlob[linecounter] = emptyLine;
+        //                i = 0;
+        //                linecounter++;
+        //            }
+        //            else // there is some text in this paragraph
+        //            {
+        //                i = 0; // reset counter
+        //                words = paragraph.Split(' ');
+        //                foreach (string word in words)
+        //                {
+        //                    if (!String.IsNullOrEmpty(word)) // this is something
+        //                    {
+        //                        j = word.Length;
+        //                        if (i == 0 && i + j < lineWidth) // beginning of the line, no space, ther is room for it
+        //                        {
+        //                            newBlob[linecounter] += word;
+        //                            i += j;
+        //                        }
+        //                        else if (i + j + 1 < lineWidth) // ther is room for it
+        //                        {
+        //                            newBlob[linecounter] += " " +  word;
+        //                            i += j + 1;
+        //                        }
+        //                        // No room for it, fill the line with spaces and newline
+        //                        else
+        //                        {
+        //                            tmpString = "";
+        //                            for (int tmp = 0; tmp < lineWidth - i; tmp++)
+        //                            {
+        //                                tmpString += " ";
+        //                            }
+        //                            newBlob[linecounter] += tmpString;
+        //                            // is ther e room fo a new line, add the word to a new line
+        //                            if (linecounter <= H - ((2 * _marginY) + _sLY))
+        //                            {
+        //                                i = 0; // reset counter
+        //                                linecounter++;
+        //                                newBlob[linecounter] = word;
+        //                                i = j;
+        //                            }
+        //                        }
+        //                    }
+        //                }// End of words in this paragraph.
+
+        //                if (i < lineWidth) // file this line with spaces
+        //                {
+        //                    tmpString = "";
+        //                    for (int tmp = 0; tmp < lineWidth - i; tmp++)
+        //                    {
+        //                        tmpString += " ";
+        //                    }
+        //                    newBlob[linecounter] += tmpString;
+        //                    i = 0;
+        //                    if (linecounter < (H - ((2 * _marginY) + _sLY)))
+        //                    {
+        //                        linecounter++;
+        //                    }
+        //                }
+        //            }
+        //        }// end of paragraphs
+        //         // Add extra line to fill the frame;
+        //        while (linecounter < (H - ((2 * _marginY) + _sLY)))
+        //        {
+        //            newBlob[linecounter] = emptyLine;
+        //            linecounter++;
+        //        }
+
+        //        // Print horizontal lines the size of width of the frame 
+        //        for (linecounter = 0; linecounter < (H - ((2 * _marginY) + _sLY)); linecounter++)
+        //        {
+        //            Console.SetCursorPosition(X + _marginX +1, (Y + _marginY + 1 + linecounter));
+        //            Console.Write(newBlob[linecounter]);
+        //        }
+        //        // return cursor to its posistion
+        //        Console.ForegroundColor = _storedForegroundColor;
+        //        Console.BackgroundColor = _storedBackgroundColor;
+        //        Console.CursorLeft = _storedCursorX;
+        //        Console.CursorTop = _storedCursorY;
+        //    }// END if (Visible)
+        //}// END method: public virtual void Print1WithOutStringBuilder(string textblob)
     } // public class Frame
 
     public class Window : Frame
@@ -270,18 +402,6 @@ namespace sydvest_bo
                                 Console.Write(_shadow);
                             }
                         }
-                        // Right Top corner 2, print constant for that and draw shadow
-                        //else if (x == X + W - (Margin + _sLX)& y == Y)
-                        //{
-                        //    Console.Write(_cornerX2Y1);
-                        //    // Shadow
-                        //    Console.BackgroundColor = ShadowColor;
-                        //    for (Byte ShadowDept = 1; ShadowDept <= _sLX; ShadowDept++)
-                        //    {
-                        //        Console.SetCursorPosition(x + ShadowDept, y + ShadowDept);
-                        //        Console.Write(_shadow);
-                        //    }
-                        //}
 
                         // Right Lower corner 4, print constant for that and draw shadow
                         else if (x == X + W - _sLX & y == Y + H - _sLY)
