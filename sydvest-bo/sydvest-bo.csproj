@@ -50,6 +50,7 @@
     <Compile Include="Kunde.cs" />
     <Compile Include="Kundekonsulent.cs" />
     <Compile Include="Lejekontrakt.cs" />
+    <Compile Include="LæsFraDatabaseKlasse.cs" />
     <Compile Include="Opsynsmand.cs" />
     <Compile Include="Person.cs" />
     <Compile Include="PostnrBy.cs" />

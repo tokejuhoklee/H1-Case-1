@@ -16,11 +16,13 @@ namespace sydvest_bo
         string password { get; set; }
         public StaticClassSQL()
         {
-            Console.WriteLine("Write username");
-            username = Console.ReadLine();
-            Console.WriteLine("Write password");
 
-            password = Console.ReadLine();
+                Console.WriteLine("Write username");
+                username = Console.ReadLine();
+            
+    
+                Console.WriteLine("Write password");
+                 password = Console.ReadLine();
             //  while (true)
             //  {
             //      var key = System.Console.ReadKey(true);
@@ -29,6 +31,8 @@ namespace sydvest_bo
             //      password += key.KeyChar;
             //      Console.Write("*");
             //}
+
+            
             test(username,password);
         }
         public static void test(string username,string userpass)

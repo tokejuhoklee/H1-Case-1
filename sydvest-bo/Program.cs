@@ -30,7 +30,9 @@ namespace sydvest_bo
         static void Main(string[] args)
         {
 
-            StaticClassSQL loginTest = new StaticClassSQL();
+            LæsFraDatabaseKlasse.ReadAllFromTable("test", 4, 4, "tec", "OsteFis");
+
+            // StaticClassSQL loginTest = new StaticClassSQL();
 
 
             TestProgram.Test();
