@@ -21,10 +21,10 @@ namespace H1_Case1
     {
         static void Main(string[] args)
         {
-            string datalocation = @"C:\Users\Toke\Desktop\git\H1-Case-1\Data\PostalCodes.csv";
-            insertdata.GetDataTabletFromCSVFile(datalocation);
-           // UI UserInterface = new UI();
-          //  DBConnectionTest connectTest = new DBConnectionTest();
+            //string datalocation = @"C:\Users\Toke\Desktop\git\H1-Case-1\Data\PostalCodes.csv";
+            //insertdata.GetDataTabletFromCSVFile(datalocation);
+            UI UserInterface = new UI();
+            DBConnectionTest connectTest = new DBConnectionTest();
         }
     }
 }
