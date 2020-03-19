@@ -14,9 +14,9 @@ go
 
 CREATE TABLE Adresse
 (
-  "Adresseid" int           NOT NULL IDENTITY(1,1),
-  "Adresse"   nvarchar(127) NOT NULL DEFAULT '',
-  "Postnr"    int           NOT NULL,
+  "Adresseid"     int           NOT NULL IDENTITY(1,1),
+  "Postnr"        int           NOT NULL,
+  "Adressestring" nvarchar(127) NOT NULL DEFAULT '',
   CONSTRAINT PK_Adresse PRIMARY KEY (Adresseid)
 )
 GO

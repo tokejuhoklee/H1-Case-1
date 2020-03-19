@@ -2,8 +2,8 @@
   "canvas": {
     "width": 2970,
     "height": 2100,
-    "scrollTop": 725,
-    "scrollLeft": 95,
+    "scrollTop": 520,
+    "scrollLeft": 0,
     "show": {
       "tableComment": true,
       "columnComment": true,
@@ -52,7 +52,7 @@
             }
           },
           {
-            "name": "Adresse",
+            "name": "Adressestring",
             "comment": "",
             "dataType": "nvarchar(127)",
             "default": "''",
@@ -68,7 +68,7 @@
               "pk": false,
               "fk": false,
               "pfk": false,
-              "widthName": 60,
+              "widthName": 81,
               "widthComment": 60,
               "widthDataType": 83,
               "widthDefault": 60
@@ -105,7 +105,7 @@
           "left": 377.33333333333576,
           "widthName": 60,
           "widthComment": 60,
-          "zIndex": 2615
+          "zIndex": 2630
         }
       },
       {
@@ -268,7 +268,7 @@
         ],
         "id": "4c032221-3d60-40b6-b56a-0b7f6ab76d7f",
         "ui": {
-          "active": true,
+          "active": false,
           "top": 1106.6000244140662,
           "left": 905,
           "widthName": 60,
@@ -1317,7 +1317,7 @@
             "name": "Bynavn",
             "comment": "",
             "dataType": "nvarchar(79)",
-            "default": "''''",
+            "default": "''",
             "id": "10ca7aaa-7397-4f75-87bd-f18549ccd9b1",
             "option": {
               "autoIncrement": false,
@@ -1339,12 +1339,12 @@
         ],
         "id": "23392d09-3883-4e6c-9320-085248543a8d",
         "ui": {
-          "active": false,
+          "active": true,
           "top": 636.3333333333348,
           "left": 398.33333333333076,
           "widthName": 60,
           "widthComment": 60,
-          "zIndex": 2614
+          "zIndex": 2632
         }
       },
       {
@@ -1750,15 +1750,15 @@
           "focusDefault": false,
           "focusComment": false,
           "column": {
-            "name": "Ejerid",
+            "name": "Postnr",
             "comment": "",
             "dataType": "int",
             "default": "",
-            "id": "a0c3fb7c-a814-4aa3-9edf-2c2058d0aeaf",
+            "id": "31a0a98c-1c0e-4f53-a0d5-3d15e131a1ac",
             "option": {
-              "autoIncrement": true,
+              "autoIncrement": false,
               "primaryKey": true,
-              "unique": false,
+              "unique": true,
               "notNull": true
             },
             "ui": {
@@ -1781,11 +1781,11 @@
           "focusDefault": true,
           "focusComment": false,
           "column": {
-            "name": "Ejertype",
+            "name": "Bynavn",
             "comment": "",
-            "dataType": "nvarchar(25)",
-            "default": "'Sommerhusejer'",
-            "id": "2737e977-3f82-47b1-9513-8f23941afb82",
+            "dataType": "nvarchar(79)",
+            "default": "''",
+            "id": "10ca7aaa-7397-4f75-87bd-f18549ccd9b1",
             "option": {
               "autoIncrement": false,
               "primaryKey": false,
@@ -1800,68 +1800,6 @@
               "widthName": 60,
               "widthComment": 60,
               "widthDataType": 76,
-              "widthDefault": 99
-            }
-          }
-        },
-        {
-          "selected": false,
-          "focusName": false,
-          "focusDataType": false,
-          "focusNotNull": false,
-          "focusDefault": false,
-          "focusComment": false,
-          "column": {
-            "name": "Noter",
-            "comment": "",
-            "dataType": "nvarchar",
-            "default": "'Noter'",
-            "id": "90344b32-9200-4a70-b9e0-8ad8e6a8b170",
-            "option": {
-              "autoIncrement": false,
-              "primaryKey": false,
-              "unique": false,
-              "notNull": true
-            },
-            "ui": {
-              "active": false,
-              "pk": false,
-              "fk": false,
-              "pfk": false,
-              "widthName": 60,
-              "widthComment": 60,
-              "widthDataType": 60,
-              "widthDefault": 60
-            }
-          }
-        },
-        {
-          "selected": false,
-          "focusName": false,
-          "focusDataType": false,
-          "focusNotNull": false,
-          "focusDefault": false,
-          "focusComment": false,
-          "column": {
-            "name": "Personid",
-            "comment": "",
-            "dataType": "int",
-            "default": "",
-            "id": "5ac747e8-12b6-4394-9466-b07d0fcbf59c",
-            "option": {
-              "autoIncrement": false,
-              "primaryKey": false,
-              "unique": false,
-              "notNull": true
-            },
-            "ui": {
-              "active": false,
-              "pk": false,
-              "fk": true,
-              "pfk": false,
-              "widthName": 60,
-              "widthComment": 60,
-              "widthDataType": 60,
               "widthDefault": 60
             }
           }
@@ -1869,11 +1807,11 @@
       ],
       "currentFocusTable": false,
       "currentColumn": {
-        "name": "Ejertype",
+        "name": "Bynavn",
         "comment": "",
-        "dataType": "nvarchar(25)",
-        "default": "'Sommerhusejer'",
-        "id": "2737e977-3f82-47b1-9513-8f23941afb82",
+        "dataType": "nvarchar(79)",
+        "default": "''",
+        "id": "10ca7aaa-7397-4f75-87bd-f18549ccd9b1",
         "option": {
           "autoIncrement": false,
           "primaryKey": false,
@@ -1888,23 +1826,23 @@
           "widthName": 60,
           "widthComment": 60,
           "widthDataType": 76,
-          "widthDefault": 99
+          "widthDefault": 60
         }
       },
       "table": {
-        "name": "Ejer",
+        "name": "PostnrBy",
         "comment": "",
         "columns": [
           {
-            "name": "Ejerid",
+            "name": "Postnr",
             "comment": "",
             "dataType": "int",
             "default": "",
-            "id": "a0c3fb7c-a814-4aa3-9edf-2c2058d0aeaf",
+            "id": "31a0a98c-1c0e-4f53-a0d5-3d15e131a1ac",
             "option": {
-              "autoIncrement": true,
+              "autoIncrement": false,
               "primaryKey": true,
-              "unique": false,
+              "unique": true,
               "notNull": true
             },
             "ui": {
@@ -1919,11 +1857,11 @@
             }
           },
           {
-            "name": "Ejertype",
+            "name": "Bynavn",
             "comment": "",
-            "dataType": "nvarchar(25)",
-            "default": "'Sommerhusejer'",
-            "id": "2737e977-3f82-47b1-9513-8f23941afb82",
+            "dataType": "nvarchar(79)",
+            "default": "''",
+            "id": "10ca7aaa-7397-4f75-87bd-f18549ccd9b1",
             "option": {
               "autoIncrement": false,
               "primaryKey": false,
@@ -1938,64 +1876,18 @@
               "widthName": 60,
               "widthComment": 60,
               "widthDataType": 76,
-              "widthDefault": 99
-            }
-          },
-          {
-            "name": "Noter",
-            "comment": "",
-            "dataType": "nvarchar",
-            "default": "'Noter'",
-            "id": "90344b32-9200-4a70-b9e0-8ad8e6a8b170",
-            "option": {
-              "autoIncrement": false,
-              "primaryKey": false,
-              "unique": false,
-              "notNull": true
-            },
-            "ui": {
-              "active": false,
-              "pk": false,
-              "fk": false,
-              "pfk": false,
-              "widthName": 60,
-              "widthComment": 60,
-              "widthDataType": 60,
-              "widthDefault": 60
-            }
-          },
-          {
-            "name": "Personid",
-            "comment": "",
-            "dataType": "int",
-            "default": "",
-            "id": "5ac747e8-12b6-4394-9466-b07d0fcbf59c",
-            "option": {
-              "autoIncrement": false,
-              "primaryKey": false,
-              "unique": false,
-              "notNull": true
-            },
-            "ui": {
-              "active": false,
-              "pk": false,
-              "fk": true,
-              "pfk": false,
-              "widthName": 60,
-              "widthComment": 60,
-              "widthDataType": 60,
               "widthDefault": 60
             }
           }
         ],
-        "id": "4c032221-3d60-40b6-b56a-0b7f6ab76d7f",
+        "id": "23392d09-3883-4e6c-9320-085248543a8d",
         "ui": {
           "active": true,
-          "top": 1106.6000244140662,
-          "left": 905,
+          "top": 636.3333333333348,
+          "left": 398.33333333333076,
           "widthName": 60,
           "widthComment": 60,
-          "zIndex": 2627
+          "zIndex": 2632
         }
       }
     },
@@ -2040,7 +1932,7 @@
           "columnIds": [
             "fe94e6af-512d-4dfd-81db-d60d1945a235"
           ],
-          "x": 744.3333333333358,
+          "x": 765.3333333333358,
           "y": 953.5833740234316,
           "direction": "right"
         },
@@ -2440,7 +2332,7 @@
           "columnIds": [
             "137e107e-64f2-45d0-b2c1-7d22c0923b5f"
           ],
-          "x": 560.8333333333358,
+          "x": 571.3333333333358,
           "y": 886.3333740234316,
           "direction": "top"
         }
