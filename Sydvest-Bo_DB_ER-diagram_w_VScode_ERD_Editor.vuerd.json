@@ -2,7 +2,7 @@
   "canvas": {
     "width": 2970,
     "height": 2100,
-    "scrollTop": 520,
+    "scrollTop": 1447,
     "scrollLeft": 0,
     "show": {
       "tableComment": true,
@@ -740,7 +740,7 @@
         "comment": "",
         "columns": [
           {
-            "name": "Lejekontrakid",
+            "name": "Lejekontraktid",
             "comment": "",
             "dataType": "int",
             "default": "",
@@ -756,7 +756,7 @@
               "pk": true,
               "fk": false,
               "pfk": false,
-              "widthName": 79,
+              "widthName": 83,
               "widthComment": 60,
               "widthDataType": 60,
               "widthDefault": 60
@@ -1000,7 +1000,7 @@
           "left": 2501.000000000004,
           "widthName": 73,
           "widthComment": 60,
-          "zIndex": 2619
+          "zIndex": 2635
         }
       },
       {
@@ -1339,7 +1339,7 @@
         ],
         "id": "23392d09-3883-4e6c-9320-085248543a8d",
         "ui": {
-          "active": true,
+          "active": false,
           "top": 636.3333333333348,
           "left": 398.33333333333076,
           "widthName": 60,
@@ -1734,163 +1734,11 @@
           "left": 4,
           "widthName": 109,
           "widthComment": 60,
-          "zIndex": 2441
+          "zIndex": 2657
         }
       }
     ],
-    "tableFocus": {
-      "focusName": false,
-      "focusComment": false,
-      "focusColumns": [
-        {
-          "selected": false,
-          "focusName": false,
-          "focusDataType": false,
-          "focusNotNull": false,
-          "focusDefault": false,
-          "focusComment": false,
-          "column": {
-            "name": "Postnr",
-            "comment": "",
-            "dataType": "int",
-            "default": "",
-            "id": "31a0a98c-1c0e-4f53-a0d5-3d15e131a1ac",
-            "option": {
-              "autoIncrement": false,
-              "primaryKey": true,
-              "unique": true,
-              "notNull": true
-            },
-            "ui": {
-              "active": false,
-              "pk": true,
-              "fk": false,
-              "pfk": false,
-              "widthName": 60,
-              "widthComment": 60,
-              "widthDataType": 60,
-              "widthDefault": 60
-            }
-          }
-        },
-        {
-          "selected": true,
-          "focusName": false,
-          "focusDataType": false,
-          "focusNotNull": false,
-          "focusDefault": true,
-          "focusComment": false,
-          "column": {
-            "name": "Bynavn",
-            "comment": "",
-            "dataType": "nvarchar(79)",
-            "default": "''",
-            "id": "10ca7aaa-7397-4f75-87bd-f18549ccd9b1",
-            "option": {
-              "autoIncrement": false,
-              "primaryKey": false,
-              "unique": false,
-              "notNull": true
-            },
-            "ui": {
-              "active": false,
-              "pk": false,
-              "fk": false,
-              "pfk": false,
-              "widthName": 60,
-              "widthComment": 60,
-              "widthDataType": 76,
-              "widthDefault": 60
-            }
-          }
-        }
-      ],
-      "currentFocusTable": false,
-      "currentColumn": {
-        "name": "Bynavn",
-        "comment": "",
-        "dataType": "nvarchar(79)",
-        "default": "''",
-        "id": "10ca7aaa-7397-4f75-87bd-f18549ccd9b1",
-        "option": {
-          "autoIncrement": false,
-          "primaryKey": false,
-          "unique": false,
-          "notNull": true
-        },
-        "ui": {
-          "active": false,
-          "pk": false,
-          "fk": false,
-          "pfk": false,
-          "widthName": 60,
-          "widthComment": 60,
-          "widthDataType": 76,
-          "widthDefault": 60
-        }
-      },
-      "table": {
-        "name": "PostnrBy",
-        "comment": "",
-        "columns": [
-          {
-            "name": "Postnr",
-            "comment": "",
-            "dataType": "int",
-            "default": "",
-            "id": "31a0a98c-1c0e-4f53-a0d5-3d15e131a1ac",
-            "option": {
-              "autoIncrement": false,
-              "primaryKey": true,
-              "unique": true,
-              "notNull": true
-            },
-            "ui": {
-              "active": false,
-              "pk": true,
-              "fk": false,
-              "pfk": false,
-              "widthName": 60,
-              "widthComment": 60,
-              "widthDataType": 60,
-              "widthDefault": 60
-            }
-          },
-          {
-            "name": "Bynavn",
-            "comment": "",
-            "dataType": "nvarchar(79)",
-            "default": "''",
-            "id": "10ca7aaa-7397-4f75-87bd-f18549ccd9b1",
-            "option": {
-              "autoIncrement": false,
-              "primaryKey": false,
-              "unique": false,
-              "notNull": true
-            },
-            "ui": {
-              "active": false,
-              "pk": false,
-              "fk": false,
-              "pfk": false,
-              "widthName": 60,
-              "widthComment": 60,
-              "widthDataType": 76,
-              "widthDefault": 60
-            }
-          }
-        ],
-        "id": "23392d09-3883-4e6c-9320-085248543a8d",
-        "ui": {
-          "active": true,
-          "top": 636.3333333333348,
-          "left": 398.33333333333076,
-          "widthName": 60,
-          "widthComment": 60,
-          "zIndex": 2632
-        }
-      }
-    },
+    "tableFocus": null,
     "edit": null,
     "copyColumns": [],
     "columnDraggable": null
