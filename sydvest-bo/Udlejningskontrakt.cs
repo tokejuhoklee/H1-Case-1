@@ -18,7 +18,8 @@ namespace sydvest_bo
         public string UdlejningsKontraktTekst { get; set; }
         Udlejningskontrakt(int Ferieboligid)
         {
-            StaticClassSQL.checkArea(Ferieboligid);
+           
+           // StaticClassSQL.checkArea(Ferieboligid);
             //Lejekontrakt mellem udlejer og sydvest - bo vedr.boligen[Ferieboligid].[Adresse]
             //Ansvarlig udlejningskonsulent: [Udlejningskonsulentid] string variabel = "SELECT () Udlejningskonsulentid
 

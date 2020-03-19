@@ -62,18 +62,20 @@ namespace H1_Case1
 
                 sqlReader = command2.ExecuteReader();
 
-
-                if (sqlReader.HasRows)
+                if (sqlReader.HasRows) { 
+                    while (sqlReader.HasRows)
                 {
+                    Console.WriteLine("\t{0}\t{1}", sqlReader.GetName(0),
+                        sqlReader.GetName(1));
+
                     while (sqlReader.Read())
                     {
-                        Console.WriteLine("{0}\t{1}", sqlReader.GetInt32(0),
+                        Console.WriteLine("\t{0}\t{1}", sqlReader.GetInt32(0),
                             sqlReader.GetString(1));
-                        Console.WriteLine(sqlReader.GetValue(0) + " - " + sqlReader.GetValue(1) + " - " + sqlReader.GetValue(0));
-
                     }
-                }
-                else
+                    sqlReader.NextResult();
+                    }
+                } else
                 {
                     Console.WriteLine("No rows found.");
                 }

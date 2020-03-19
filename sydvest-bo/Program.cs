@@ -29,8 +29,8 @@ namespace sydvest_bo
 
         static void Main(string[] args)
         {
-            
 
+            StaticClassSQL loginTest = new StaticClassSQL();
 
 
             TestProgram.Test();
