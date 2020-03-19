@@ -8,16 +8,18 @@ using System.Data.SqlClient;
 
 namespace sydvest_bo
 {
-   public  class StaticClassSQL
+    public class StaticClassSQL
     {
         public StaticClassSQL()
         {
+            string userName="fuck";
+            string userPass="sdjakoi";
             string connectionString = null;
             SqlConnection connect;
             connectionString = "Data Source = W2K19SQL.hq.gollomotors.dk; Initial Catalog = Sydvest-Bo; User ID = " + userName + "; Password =" + userPass;
             connect = new SqlConnection(connectionString);
             string query1;
-            Console.WriteLine("\nIndtast Sql Statement: ");
+           // Console.WriteLine("\nIndtast Sql Statement: ");
             query1 = Console.ReadLine();
             string query2 = "Select* from [Address]";
 
@@ -74,7 +76,19 @@ namespace sydvest_bo
         }
         public static void checkArea(int houseId)
         {
-           
+            string userName = "fuck";
+            string userPass = "sdjakoi";
+            string connectionString = null;
+            SqlConnection connect;
+            connectionString = "Data Source = W2K19SQL.hq.gollomotors.dk; Initial Catalog = Sydvest-Bo; User ID = " + userName + "; Password =" + userPass;
+            connect = new SqlConnection(connectionString);
+            string query1;
+            // Console.WriteLine("\nIndtast Sql Statement: ");
+            query1 = Console.ReadLine();
+            string query2 = $"Select adresseid from sommerhus where ";
+
+
+
         }
     }
-    
+}

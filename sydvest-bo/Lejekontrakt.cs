@@ -19,6 +19,23 @@ namespace sydvest_bo
         public double KundePris { get; set; }
         public string UdlejningsKontraktTekst { get; set; }
         public float ElForbrug { get; set; }
+        Lejekontrakt(int sommerhusId)
+        {
+            
+            //Lejekontrakt mellem udlejer og sydvest - bo vedr.boligen[Ferieboligid].[Adresse]
+            //Ansvarlig udlejningskonsulent: [Udlejningskonsulentid] string variabel = "SELECT () Udlejningskonsulentid
+
+            //Ejer af boligen: [Ejer]
+
+            //perioden for udlejning:KontraktDato.aar,uge [aar],[uge] + mængden af uge(eller ugenumre).
+
+            //Pris for udlejning:[Pris]
+
+
+            //pris = if statement på hvilket uger 
+
+        }
+
 
     }
 }
