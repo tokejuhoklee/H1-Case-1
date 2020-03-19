@@ -1,0 +1,12 @@
+Lejekontrakt mellem udlejer og sydvest-bo vedr. boligen [Feriebolig].[Adresse]
+Ansvarlig udlejningskonsulent: [udlejningskonsulent]
+
+
+Ejer af boligen: [Ejer]
+
+
+perioden for udlejning: [aar],[uge] + mængden af uge(eller ugenumre).
+
+Ansvarlig for veligeholdelse i forbindelse med udlejning: [Opsynsmand || [Ejer]
+
+Pris for udlejning:[Pris]
