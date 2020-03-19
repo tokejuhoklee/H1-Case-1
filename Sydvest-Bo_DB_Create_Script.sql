@@ -31,46 +31,46 @@ GO
 
 CREATE TABLE Ejer
 (
-  "Ejerid"   int          NOT NULL IDENTITY(1,1),
-  "Ejertype" nvarchar(25) NOT NULL DEFAULT 'Sommerhusejer',
-  "Noter"    nvarchar     NOT NULL DEFAULT 'Noter',
-  "Personid" int          NOT NULL,
+  "Ejerid"   int            NOT NULL IDENTITY(1,1),
+  "Personid" int            NOT NULL,
+  "Ejertype" nvarchar(25)   NOT NULL DEFAULT 'Sommerhusejer',
+  "Noter"    nvarchar(3999) NOT NULL DEFAULT 'Noter:',
   CONSTRAINT PK_Ejer PRIMARY KEY (Ejerid)
 )
 GO
 
 CREATE TABLE Feriebolig
 (
-  "Ferieboligid"  int          NOT NULL IDENTITY(1,1),
-  "Distriktid"    int          NOT NULL,
-  "Adresseid"     int          NOT NULL,
-  "Ejerid"        int          NOT NULL,
-  "Opsynsmandid"  int          NOT NULL,
-  "Stoerrelse"    int          NOT NULL DEFAULT 0,
-  "Rum"           int          NOT NULL DEFAULT 0,
-  "Senge"         int          NOT NULL DEFAULT 0,
-  "Kvalitet"      nvarchar(47) NOT NULL DEFAULT '',
-  "Pris"          money        NOT NULL DEFAULT 0.0,
-  "FeriboligType" nvarchar(31) NOT NULL DEFAULT 'Sommerhus',
-  "Noter"         nvarchar     NOT NULL DEFAULT 'Noter',
+  "Ferieboligid"  int            NOT NULL IDENTITY(1,1),
+  "Distriktid"    int            NOT NULL,
+  "Adresseid"     int            NOT NULL,
+  "Ejerid"        int            NOT NULL,
+  "Opsynsmandid"  int            NOT NULL,
+  "Stoerrelse"    int            NOT NULL DEFAULT 0,
+  "Rum"           int            NOT NULL DEFAULT 0,
+  "Senge"         int            NOT NULL DEFAULT 0,
+  "Kvalitet"      nvarchar(47)   NOT NULL DEFAULT '',
+  "Pris"          money          NOT NULL DEFAULT 0.0,
+  "FeriboligType" nvarchar(31)   NOT NULL DEFAULT 'Sommerhus',
+  "Noter"         nvarchar(3999) NOT NULL DEFAULT 'Noter:',
   CONSTRAINT PK_Feriebolig PRIMARY KEY (Ferieboligid)
 )
 GO
 
 CREATE TABLE Kunde
 (
-  "Kundeid"  int      NOT NULL IDENTITY(1,1),
-  "Personid" int      NOT NULL,
-  "noter"    nvarchar NOT NULL DEFAULT 'Noter',
+  "Kundeid"  int            NOT NULL IDENTITY(1,1),
+  "Personid" int            NOT NULL,
+  "Noter"    nvarchar(3999) NOT NULL DEFAULT 'Noter:',
   CONSTRAINT PK_Kunde PRIMARY KEY (Kundeid)
 )
 GO
 
 CREATE TABLE Kundekonsulent
 (
-  "Kundekonsulentid" int      NOT NULL IDENTITY(1,1),
-  "Personid"         int      NOT NULL,
-  "Noter"            nvarchar NOT NULL DEFAULT 'Noter',
+  "Kundekonsulentid" int            NOT NULL IDENTITY(1,1),
+  "Personid"         int            NOT NULL,
+  "Noter"            nvarchar(3999) NOT NULL DEFAULT 'Noter:',
   CONSTRAINT PK_Kundekonsulent PRIMARY KEY (Kundekonsulentid)
 )
 GO
@@ -94,10 +94,10 @@ GO
 
 CREATE TABLE Opsynsmand
 (
-  "Opsynsmandid" int      NOT NULL IDENTITY(1,1),
-  "Personid"     int      NOT NULL,
-  "Distriktid"   int      NOT NULL,
-  "Noter"        nvarchar NOT NULL DEFAULT 'Noter',
+  "Opsynsmandid" int            NOT NULL IDENTITY(1,1),
+  "Personid"     int            NOT NULL,
+  "Distriktid"   int            NOT NULL,
+  "Noter"        nvarchar(3999) NOT NULL DEFAULT 'Noter:',
   CONSTRAINT PK_Opsynsmand PRIMARY KEY (Opsynsmandid)
 )
 GO
@@ -118,7 +118,7 @@ GO
 CREATE TABLE PostnrBy
 (
   "Postnr" int          NOT NULL,
-  "Bynavn" nvarchar(79) NOT NULL DEFAULT '''',
+  "Bynavn" nvarchar(79) NOT NULL DEFAULT '',
   CONSTRAINT PK_PostnrBy PRIMARY KEY (Postnr)
 )
 GO
@@ -131,7 +131,7 @@ CREATE TABLE Saesonkategori
 (
   "Ugeid"           int  check ("Ugeid" > 0 and "Ugeid" < 53) NOT NULL,
   "Kategori"        int                                       NOT NULL,
-  "Kategroi navn"   nvarchar(20)                              NOT NULL DEFAULT 'Mellem',
+  "Kategroinavn"    nvarchar(20)                              NOT NULL DEFAULT 'Mellem',
   "Prismodifikator" money                                     NOT NULL DEFAULT 1.0,
   CONSTRAINT PK_Saesonkategori PRIMARY KEY (Ugeid)
 )

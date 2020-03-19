@@ -81,7 +81,11 @@ namespace sydvest_bo
             string password = LoginWindow2password.ReadInput(loginWindowText3password);
 
             // validat user: Get user type
-            userValidated = true;
+            if (username != "" || password != "")
+            {
+                userValidated = true;
+            }
+            
             while (userValidated)
             {
                 Window MainHead = new Window(1, 1, currentConsoleWindowWidth - 3, 4, 0, hvid, blaaM, sort, true, "Main Head");
@@ -101,7 +105,12 @@ namespace sydvest_bo
 
             }// End while (userValidated)  *********** user loged out
 
+
+
             // exit program propperly : cloes files ect.
+
+            // calling testProgram calss
+            TestProgram.Test();
 
         }//END static void Main(string[] args)
     }
