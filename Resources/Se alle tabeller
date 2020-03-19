@@ -1,0 +1,112 @@
+SELECT TOP (1000)
+    [Adresseid]
+      , [Postnr]
+      , [Adressestring]
+FROM [Sydvest-Bo].[dbo].[Adresse]
+go
+
+SELECT TOP (1000)
+    [Distriktid]
+      , [Omraade]
+FROM [Sydvest-Bo].[dbo].[Distrikt]
+go
+
+
+
+
+SELECT TOP (1000)
+    [Kundekonsulentid]
+      , [Personid]
+      , [Noter]
+FROM [Sydvest-Bo].[dbo].[Kundekonsulent]
+go
+
+
+
+SELECT TOP (1000)
+    [Udlejningskonsulentid]
+      , [Personid]
+      , [Distriktid]
+FROM [Sydvest-Bo].[dbo].[Udlejningskonsulent]
+go
+
+SELECT TOP (1000)
+    [Personid]
+      , [Adresseid]
+      , [Fornavn]
+      , [Efternavn]
+      , [Email]
+      , [Tlf]
+      , [Password]
+FROM [Sydvest-Bo].[dbo].[Person]
+go
+
+SELECT TOP (1000)
+    [Ejerid]
+      , [Personid]
+      , [Ejertype]
+      , [Noter]
+FROM [Sydvest-Bo].[dbo].[Ejer]
+go
+
+SELECT TOP (1000)
+    [Ferieboligid]
+      , [Distriktid]
+      , [Adresseid]
+      , [Ejerid]
+      , [Opsynsmandid]
+      , [Stoerrelse]
+      , [Rum]
+      , [Senge]
+      , [Kvalitet]
+      , [Pris]
+      , [FeriboligType]
+      , [Noter]
+FROM [Sydvest-Bo].[dbo].[Feriebolig]
+go
+
+
+SELECT TOP (1000)
+    [Kundeid]
+      , [Personid]
+      , [Noter]
+FROM [Sydvest-Bo].[dbo].[Kunde]
+go
+
+
+SELECT TOP (1000)
+    [Lejekontrakid]
+      , [Ferieboligid]
+      , [Kundeid]
+      , [Kundekonsulentid]
+      , [Udlejningskonsulentid]
+      , [KontraktDato]
+      , [Aar]
+      , [Uge]
+      , [KundePris]
+      , [UdlejningsKontraktTekst]
+      , [ElForbrug]
+FROM [Sydvest-Bo].[dbo].[Lejekontrakt]
+go
+
+
+SELECT TOP (1000)
+    [Opsynsmandid]
+      , [Personid]
+      , [Distriktid]
+      , [Noter]
+FROM [Sydvest-Bo].[dbo].[Opsynsmand]
+GO
+
+
+SELECT TOP (1000)
+    [Udlejningskontraktid]
+      , [Ferieboligid]
+      , [Udlejningskonsulentid]
+      , [KontraktDato]
+      , [Aar]
+      , [Uge]
+      , [PrisEjer]
+      , [UdlejningsKontraktTekst]
+FROM [Sydvest-Bo].[dbo].[Udlejningskontrakt]
+go
