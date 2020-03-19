@@ -19,5 +19,6 @@ namespace sydvest_bo
         public double KundePris { get; set; }
         public string UdlejningsKontraktTekst { get; set; }
         public float ElForbrug { get; set; }
+
     }
 }
