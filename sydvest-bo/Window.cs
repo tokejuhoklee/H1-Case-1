@@ -191,7 +191,149 @@ namespace sydvest_bo
                 Console.CursorTop = _storedCursorY;
             }// END if (Visible)
         }// END method: public virtual void Print(string textblob)
+        
+        public virtual string ReadInput(string textblob)
+        {
+            /* Print the inside of a regtangular frame together with some
+             * text content if pressent ther also will be formatet to fit it.
+             * Then Present the user with a propt to type in and return his input */
+            string _readInput = "";
+            int endOfTextblobLocationX = X + _marginX;
+            int endOfTextblobLocationY = Y + _marginY;
+            // if the frame is Visible draw it, else dont
+            if (Visible)
+            {
+                // Store the current condition of the cursor: location and colors
+                ConsoleColor _storedForegroundColor = Console.ForegroundColor;
+                ConsoleColor _storedBackgroundColor = Console.BackgroundColor;
+                int _storedCursorX = Console.CursorLeft;
+                int _storedCursorY = Console.CursorTop;
 
+                //
+                Console.ForegroundColor = TxtColor;
+                Console.BackgroundColor = BgColor;
+                
+                // lineWidth defineds as how many chars there should be in a line.
+                // Wide of the frame W - (2_margin + _shadowLengthX + 2vertical_lines)
+                int lineWidth = W - ((2 * _marginX) + _sLX);
+                /* emptyLine, a string with length lineWidth full of spaces. Out-
+                 * put this line whit a background color draws the frame content
+                 * of a null string we get, when we split on \n. */
+                string emptyLine = "";
+                for (int m = 0; m < lineWidth; m++)
+                    emptyLine += _solid;
+                /* break up the textblob at newline chars. This gives us the
+                 * paragraphs of the textblob. If thise are Null we replace null
+                 * with the emptyLine */
+                StringBuilder newBlob = new StringBuilder();
+                string[] paragraphs = textblob.Split('\n');
+                for (int t = 0; t < paragraphs.Length; t++)
+                {
+                    paragraphs[t] = paragraphs[t].Replace("\n", "").Replace("\r", "").Replace("\r\n", "");
+                }
+                /* to handle tab \t - not jet fontional */
+                //for (int t = 0; t < paragraphs.Length; t++)
+                //{
+                //    paragraphs[t] = paragraphs[t].Replace("\t", "    ");
+                //}
+                string[] words = { };
+                int i, j = 0;
+                int linecounter = 0;
+                foreach (string paragraph in paragraphs)
+                {
+
+                    if (paragraph == null) //empty line
+                    {
+                        newBlob.AppendLine(emptyLine);
+                        i = lineWidth;
+                        linecounter++;
+                    }
+                    else // there is some text in this paragraph
+                    {
+                        i = 0; // reset counter
+                        words = paragraph.Split(' ');
+                        foreach (string word in words)
+                        {
+                            //if (!String.IsNullOrEmpty(word)) // this is something
+                            //{
+                            j = word.Length;
+                            if (i + j + 1 <= lineWidth) // ther is room for it
+                            {
+                                if (i == 0) // beginning of the line, no space
+                                {
+                                    newBlob.Append(word);
+                                    i += j;
+                                }
+                                else // insert a space char and count it too
+                                {
+                                    newBlob.Append(String.Format($" {word}"));
+                                    i += j + 1;
+                                }
+                            }
+                            // No room for it, fill the line with spaces and
+                            // newline
+                            else
+                            {
+                                newBlob.Append(' ', (lineWidth - i));
+                                i = 0; // reset counter
+                                linecounter++;
+                                newBlob.AppendLine(); // and a new line
+                                newBlob.Append(word);
+                                i = j;
+                            }
+                            //}
+                        }// End of words in this paragraph.
+
+                        if (i <= lineWidth) // file this line with spaces
+                        {
+                            endOfTextblobLocationX = i;
+                            endOfTextblobLocationY = linecounter;
+                            newBlob.Append(' ', lineWidth - i);
+                            i = 0;
+                            if (linecounter < (H - ((2 * _marginY) + _sLY)))
+                            {
+                                linecounter++;
+                                newBlob.AppendLine(); // and a new line
+                            }
+                        }
+                    }
+                }// end of paragraphs
+                 // Add extra line to fill the frame;
+                while (linecounter < (H - ((2 * _marginY) + _sLY)))
+                {
+                    newBlob.AppendLine(emptyLine);
+                    linecounter++;
+                }
+                // End the StringBuilder blob w/o a newline char
+                newBlob.Append(emptyLine);
+
+                // convert the stringbuilder object to string
+                textblob = newBlob.ToString();
+
+                // convert the stringbuilder object to string
+                string[] formatedLines = textblob.Split('\n');
+
+                // Print horizontal lines the size of width of the frame 
+                for (int n = 0; n < (H - ((2 * _marginY) + _sLY)); n++)
+                {
+                    // removes extra auto implanted occurense of newlines reminisenses
+                    formatedLines[n] = formatedLines[n].Replace("\r", "").Replace("\r\n", "");
+                    Console.SetCursorPosition(X + _marginX, (Y + _marginY + n));
+                    Console.Write(formatedLines[n]);
+                }
+
+                // Read the input **************************************************
+                Console.SetCursorPosition(X + _marginX + endOfTextblobLocationX, (Y + _marginY + endOfTextblobLocationY));
+                _readInput = Console.ReadLine();
+
+                // return cursor to its posistion
+                Console.ForegroundColor = _storedForegroundColor;
+                Console.BackgroundColor = _storedBackgroundColor;
+                Console.CursorLeft = _storedCursorX;
+                Console.CursorTop = _storedCursorY;
+            }
+            return _readInput;
+        } // END public virtual string ReadInput(string textblob)
     } // public class Frame
 
     public class Window : Frame

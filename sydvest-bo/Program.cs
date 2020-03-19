@@ -32,10 +32,16 @@ namespace sydvest_bo
             // init windows size
             Console.SetWindowSize(Console.LargestWindowWidth, Console.LargestWindowHeight);
             ShowWindow(ThisConsole, MAXIMIZE);
+            // Figure out other common windows sizes
             int currentConsoleWindowWidth = Console.WindowWidth;
             int currentConsoleWindowHeight = Console.WindowHeight;
-            // Farver 
 
+            int standardWindowX = 25;
+            int standardWindowY = 25;
+            int standardWindowWidth = currentConsoleWindowWidth - (standardWindowX + 3);
+            int standardWindowHeight = currentConsoleWindowHeight - (standardWindowY + 3);
+
+            // Colors shor abravation
             ConsoleColor blaaM = ConsoleColor.DarkBlue;
             ConsoleColor blaa = ConsoleColor.Blue;
             ConsoleColor cyanM = ConsoleColor.DarkCyan;
@@ -60,26 +66,42 @@ namespace sydvest_bo
             string loginWindowText2user = String.Format($"Brugernavn :");
             string loginWindowText3password = String.Format($"Password   :");
 
-            // currentConsoleWindowWidth
-            // currentConsoleWindowHeight
-            int standardWindowX = 25;
-            int standardWindowY = 25;
-            int standardWindowWidth = currentConsoleWindowWidth - (standardWindowX + 3);
-            int standardWindowHeight = currentConsoleWindowHeight - (standardWindowY + 3);
-
-            Window LoginWindow = new Window(standardWindowX, standardWindowY, standardWindowWidth, standardWindowHeight, 0, hvid, blaaM, sort, false, "Login");
-            Frame LoginWindow1user = new Frame(standardWindowX, standardWindowY+8, standardWindowWidth, 6, 0, hvid, blaa, sort, false);
-            Frame LoginWindow2password = new Frame(standardWindowX, standardWindowY+10, standardWindowWidth, 6, 0, hvid, blaa, sort, false);
+            Window LoginWindow = new Window(standardWindowX, standardWindowY, standardWindowWidth, standardWindowHeight, 0, hvid, graaM, sort, false, "Login");
+            Frame LoginWindow1user = new Frame(standardWindowX, standardWindowY+8, standardWindowWidth, 6, 0, sort, graa, sort, false);
+            Frame LoginWindow2password = new Frame(standardWindowX, standardWindowY+10, standardWindowWidth, 6, 0, sort, graa, sort, false);
             LoginWindow.Visible = true;
             LoginWindow1user.Visible = true;
             LoginWindow2password.Visible = true;
             LoginWindow.Draw();
             LoginWindow.Print(loginWindowText1Welcome);
-            LoginWindow1user.Print(loginWindowText2user);
-            LoginWindow2password.Print(loginWindowText3password);
 
+            // LoginWindow1user.Print(loginWindowText2user);
+            bool userValidated = false;
+            string username = LoginWindow1user.ReadInput(loginWindowText2user);
+            string password = LoginWindow2password.ReadInput(loginWindowText3password);
 
-            Console.ReadKey(true);
+            // validat user: Get user type
+            userValidated = true;
+            while (userValidated)
+            {
+                Window MainHead = new Window(1, 1, currentConsoleWindowWidth - 3, 4, 0, hvid, blaaM, sort, true, "Main Head");
+                MainHead.Draw();
+                MainHead.Print("");
+
+                Window MainMenu = new Window(1, 6, 25, currentConsoleWindowHeight - 8, 0, hvid, blaaM, sort, true, "Menu");
+                MainMenu.Draw();
+                MainMenu.Print("");
+
+                Window MainWindow = new Window(standardWindowX + 27, standardWindowY + 4, standardWindowWidth - (27 + 4), standardWindowHeight - (4 + 4), 0, hvid, blaaM, sort, true, "Hoved Vindue");
+                string mainWindowText1 = String.Format($"Du er nu logget ind {username} og kan bruge programmet\n\nPisse fedt for det afsluttes nu, hvis du trykker på en tast.");
+                MainWindow.Draw();
+                MainWindow.Print(mainWindowText1);
+
+                Console.ReadKey(true);
+
+            }// End while (userValidated)  *********** user loged out
+
+            // exit program propperly : cloes files ect.
 
         }//END static void Main(string[] args)
     }
