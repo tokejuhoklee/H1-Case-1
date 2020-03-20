@@ -25,8 +25,15 @@ namespace sydvest_bo
 
             connectionString = "Data Source = W2K19SQL.hq.gollomotors.dk; Initial Catalog = Sydvest-Bo; User ID = " + userName + "; Password =" + userPass;
             connect = new SqlConnection(connectionString);
-            query = "SELECT * FROM [Person]";
+            
+            // query = "SELECT * FROM [Person]";
 
+            // Join person, adresse, postnr
+            // query = "SELECT * FROM [Person] JOIN [Adresse] ON [Person].Adresseid = [Adresse].Adresseid JOIN [PostnrBy] ON [Adresse].Postnr = [PostnrBy].Postnr";
+
+            // Kunde - udvælg og specifik data -
+            query = "SELECT Kunde.Kundeid, Person.Fornavn, Person.Efternavn, Adresse.Adressestring, PostnrBy.Postnr, PostnrBy.Bynavn, Person.Tlf, Person.Email, Kunde.Noter FROM [Kunde] JOIN [Person] ON [Kunde].Personid = [Person].Personid JOIN [Adresse] ON [Person].Adresseid = [Adresse].Adresseid JOIN [PostnrBy] ON [Adresse].Postnr = [PostnrBy].Postnr";
+            // query = "SELECT * FROM [Kunde] JOIN [Person] ON [Kunde].Personid = [Person].Personid JOIN [Adresse] ON [Person].Adresseid = [Adresse].Adresseid JOIN [PostnrBy] ON [Adresse].Postnr = [PostnrBy].Postnr";
             connect.Open();
 
             SqlCommand command = new SqlCommand(query, connect);
@@ -35,7 +42,8 @@ namespace sydvest_bo
             {
                 Console.Write(sqlReader.GetName(x) + "\t");
             }
-            Console.WriteLine();
+            Console.Clear();
+            Console.WriteLine(query + "\n");
             while (sqlReader.Read())
             {
 
@@ -45,12 +53,37 @@ namespace sydvest_bo
                 }
                 Console.WriteLine();
             }
-            Console.ReadKey();
             sqlReader.Close();
+            Console.WriteLine("- Press a Key");
+            Console.ReadKey(true);
+
+
+            // -----------------
+
+            query = "SELECT * FROM [Person] JOIN [Adresse] ON [Person].Adresseid = [Adresse].Adresseid JOIN [PostnrBy] ON [Adresse].Postnr = [PostnrBy].Postnr";
+
+            sqlReader = command.ExecuteReader();
+            for (int x = 0; x < sqlReader.FieldCount; x++)
+            {
+                Console.Write(sqlReader.GetName(x) + "\t");
+            }
+            Console.Clear();
+            Console.WriteLine(query + "\n");
+            while (sqlReader.Read())
+            {
+
+                for (int i = 0; i < sqlReader.FieldCount; i++)
+                {
+                    Console.Write(sqlReader[i] + ",\t");
+                }
+                Console.WriteLine();
+            }
+            sqlReader.Close();
+            Console.WriteLine("- Press a Key");
+            Console.ReadKey(true);
+
+            connect.Close();
         }
-           
-        
-        
         public static void SelectFrom(string selectTable,int selectRow,int selectColumns,string userName,string userPass)//testfunktion for at oprette læse metoder
         {
             var stringBuilderForMultipleColumns = new StringBuilder();
