@@ -25,64 +25,156 @@ namespace sydvest_bo
 
             connectionString = "Data Source = W2K19SQL.hq.gollomotors.dk; Initial Catalog = Sydvest-Bo; User ID = " + userName + "; Password =" + userPass;
             connect = new SqlConnection(connectionString);
-            
-            // query = "SELECT * FROM [Person]";
+            string ConsoleQueryTitle;
+            // END Connect ------------------------------------------
+            // ----------- Ny SQL forespørgsel -------------------------------------------
 
-            // Join person, adresse, postnr
-            // query = "SELECT * FROM [Person] JOIN [Adresse] ON [Person].Adresseid = [Adresse].Adresseid JOIN [PostnrBy] ON [Adresse].Postnr = [PostnrBy].Postnr";
-
-            // Kunde - udvælg og specifik data -
-            query = "SELECT Kunde.Kundeid, Person.Fornavn, Person.Efternavn, Adresse.Adressestring, PostnrBy.Postnr, PostnrBy.Bynavn, Person.Tlf, Person.Email, Kunde.Noter FROM [Kunde] JOIN [Person] ON [Kunde].Personid = [Person].Personid JOIN [Adresse] ON [Person].Adresseid = [Adresse].Adresseid JOIN [PostnrBy] ON [Adresse].Postnr = [PostnrBy].Postnr";
-            // query = "SELECT * FROM [Kunde] JOIN [Person] ON [Kunde].Personid = [Person].Personid JOIN [Adresse] ON [Person].Adresseid = [Adresse].Adresseid JOIN [PostnrBy] ON [Adresse].Postnr = [PostnrBy].Postnr";
-            connect.Open();
-
-            SqlCommand command = new SqlCommand(query, connect);
-            sqlReader = command.ExecuteReader();
-            for (int x = 0; x < sqlReader.FieldCount; x++)
+            ConsoleQueryTitle = "Sommerhusejer" +
+                "";
+            query = "SELECT Ejer.Ejerid, Ejer.Ejertype, Person.Fornavn, Person.Efternavn, " +
+                "Adresse.Adressestring, PostnrBy.Postnr, PostnrBy.Bynavn, Person.Tlf, Person.Email, Ejer.Noter " +
+                "FROM Ejer " +
+                "JOIN Person ON Ejer.Personid = Person.Personid " +
+                "JOIN Adresse ON Person.Adresseid = Adresse.Adresseid " +
+                "JOIN PostnrBy ON Adresse.Postnr = PostnrBy.Postnr " +
+                "WHERE Ejer.Ejertype = 'Sommerhusejer' " +
+                "ORDER BY Person.Fornavn";
+            try
             {
-                Console.Write(sqlReader.GetName(x) + "\t");
-            }
-            Console.Clear();
-            Console.WriteLine(query + "\n");
-            while (sqlReader.Read())
-            {
+                connect.Open();
 
-                for (int i = 0; i < sqlReader.FieldCount; i++)
+                SqlCommand command = new SqlCommand(query, connect);
+                sqlReader = command.ExecuteReader();
+                for (int x = 0; x < sqlReader.FieldCount; x++)
                 {
-                    Console.Write(sqlReader[i] + ",\t");
+                    Console.Write(sqlReader.GetName(x) + "\t");
                 }
-                Console.WriteLine();
+                Console.Clear();
+                Console.WriteLine(ConsoleQueryTitle);
+                Console.WriteLine(query + "\n");
+                while (sqlReader.Read())
+                {
+
+                    for (int i = 0; i < sqlReader.FieldCount; i++)
+                    {
+                        Console.Write(sqlReader[i] + ",\t");
+                    }
+                    Console.WriteLine();
+                }
             }
-            sqlReader.Close();
+            finally
+            {
+                // 3. close the reader
+                if (sqlReader != null)
+                {
+                    sqlReader.Close();
+                }
+
+                // close the connection
+                if (connect != null)
+                {
+                    connect.Close();
+                }
+            }
             Console.WriteLine("- Press a Key");
             Console.ReadKey(true);
 
 
-            // -----------------
 
-            query = "SELECT * FROM [Person] JOIN [Adresse] ON [Person].Adresseid = [Adresse].Adresseid JOIN [PostnrBy] ON [Adresse].Postnr = [PostnrBy].Postnr";
+            // ----------- Ny SQL forespørgsel -------------------------------------------
 
-            sqlReader = command.ExecuteReader();
-            for (int x = 0; x < sqlReader.FieldCount; x++)
+            ConsoleQueryTitle = "Kunde - udvælg og specifik data -";
+            query = "SELECT Kunde.Kundeid, Person.Fornavn, Person.Efternavn, Adresse.Adressestring, PostnrBy.Postnr, PostnrBy.Bynavn, Person.Tlf, Person.Email, Kunde.Noter " +
+                "FROM Kunde JOIN Person ON Kunde.Personid = Person.Personid " +
+                "JOIN Adresse ON Person.Adresseid = Adresse.Adresseid " +
+                "JOIN PostnrBy ON Adresse.Postnr = PostnrBy.Postnr";
+            try
             {
-                Console.Write(sqlReader.GetName(x) + "\t");
-            }
-            Console.Clear();
-            Console.WriteLine(query + "\n");
-            while (sqlReader.Read())
-            {
+                connect.Open();
 
-                for (int i = 0; i < sqlReader.FieldCount; i++)
+                SqlCommand command = new SqlCommand(query, connect);
+                sqlReader = command.ExecuteReader();
+                for (int x = 0; x < sqlReader.FieldCount; x++)
                 {
-                    Console.Write(sqlReader[i] + ",\t");
+                    Console.Write(sqlReader.GetName(x) + "\t");
                 }
-                Console.WriteLine();
+                Console.Clear();
+                Console.WriteLine(ConsoleQueryTitle);
+                Console.WriteLine(query + "\n");
+                while (sqlReader.Read())
+                {
+
+                    for (int i = 0; i < sqlReader.FieldCount; i++)
+                    {
+                        Console.Write(sqlReader[i] + ",\t");
+                    }
+                    Console.WriteLine();
+                }
             }
-            sqlReader.Close();
+            finally
+            {
+                // 3. close the reader
+                if (sqlReader != null)
+                {
+                    sqlReader.Close();
+                }
+
+                // close the connection
+                if (connect != null)
+                {
+                    connect.Close();
+                }
+            }
             Console.WriteLine("- Press a Key");
             Console.ReadKey(true);
 
-            connect.Close();
+
+
+            // ----------- Ny SQL forespørgsel -------------------------------------------
+            ConsoleQueryTitle = "Person *";
+            query = "SELECT * FROM Person " +
+                "JOIN Adresse ON Person.Adresseid = Adresse.Adresseid " +
+                "JOIN PostnrBy ON Adresse.Postnr = PostnrBy.Postnr";
+
+            try
+            {
+                connect.Open();
+
+                SqlCommand command = new SqlCommand(query, connect);
+                sqlReader = command.ExecuteReader();
+                for (int x = 0; x < sqlReader.FieldCount; x++)
+                {
+                    Console.Write(sqlReader.GetName(x) + "\t");
+                }
+                Console.Clear();
+                Console.WriteLine(ConsoleQueryTitle);
+                Console.WriteLine(query + "\n");
+                while (sqlReader.Read())
+                {
+
+                    for (int i = 0; i < sqlReader.FieldCount; i++)
+                    {
+                        Console.Write(sqlReader[i] + ",\t");
+                    }
+                    Console.WriteLine();
+                }
+            }
+            finally
+            {
+                // 3. close the reader
+                if (sqlReader != null)
+                {
+                    sqlReader.Close();
+                }
+
+                // close the connection
+                if (connect != null)
+                {
+                    connect.Close();
+                }
+            }
+            Console.WriteLine("- Press a Key");
+            Console.ReadKey(true);
         }
         public static void SelectFrom(string selectTable,int selectRow,int selectColumns,string userName,string userPass)//testfunktion for at oprette læse metoder
         {
