@@ -29,6 +29,7 @@ SELECT * FROM "Feriebolig"
   JOIN Adresse ON Feriebolig.Adresseid = Adresse.Adresseid
   JOIN PostnrBy ON Adresse.Postnr = PostnrBy.Postnr
   WHERE FeriboligType = 'Sommerhus'
+  order by Ejer.Ejerid asc;
 GO
 
 print 'Feriebolig - Ferielejlighed';
