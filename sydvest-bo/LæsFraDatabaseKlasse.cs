@@ -7,7 +7,7 @@ using System.Data.SqlClient;
 
 namespace sydvest_bo
 {
-    class LæsFraDatabaseKlasse
+    public class LæsFraDatabaseKlasse
     {
         string username{get;set;}
         string password { get; set; }
