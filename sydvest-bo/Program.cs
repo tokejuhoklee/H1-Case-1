@@ -32,7 +32,7 @@ namespace sydvest_bo
             // init windows size
             Console.SetWindowSize(Console.LargestWindowWidth, Console.LargestWindowHeight);
             ShowWindow(ThisConsole, MAXIMIZE);
-            // Figure out other common windows sizes
+            // Determine common values for windows sizes and positioning
             int currentConsoleWindowWidth = Console.WindowWidth;
             int currentConsoleWindowHeight = Console.WindowHeight;
 
@@ -41,7 +41,7 @@ namespace sydvest_bo
             int standardWindowWidth = currentConsoleWindowWidth - (standardWindowX + 3);
             int standardWindowHeight = currentConsoleWindowHeight - (standardWindowY + 3);
 
-            // Colors shor abravation
+            // Color abbreviation
             ConsoleColor blaaM = ConsoleColor.DarkBlue;
             ConsoleColor blaa = ConsoleColor.Blue;
             ConsoleColor cyanM = ConsoleColor.DarkCyan;
@@ -59,25 +59,23 @@ namespace sydvest_bo
             ConsoleColor graa = ConsoleColor.Gray;
             ConsoleColor hvid = ConsoleColor.White;
 
-            // Call test 
-            LæsFraDatabaseKlasse.ReadAllFromTable("test", 4, 4, "tec", "OsteFis");
+            // Call Test environment : TestProgram.Test()
 
+            TestProgram.Test();
             // StaticClassSQL loginTest = new StaticClassSQL();
-            Console.WriteLine("tryk på en tast for at åbne menu");
-            Console.ReadKey(true);
 
-            // Call test Return from test
+            // Return from Test environment
 
-            // testText
+            // Sample Text
             string loremIpsum = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tellus velit, aliquam quis eros vel, malesuada bibendum mi. Mauris non ultricies mauris, at accumsan tellus. Etiam tincidunt venenatis nisl in molestie.Nunc quis.";
 
             string loginWindowText1Welcome = String.Format($"Velkommen til Sydvest-Bo\n\nDu skal logge ind for at kunne bruge programmet.\n\nEt blankt password vil afslutte programmet.");
             string loginWindowText2user = String.Format($"Brugernavn :");
             string loginWindowText3password = String.Format($"Password   :");
-
-            Window LoginWindow = new Window(standardWindowX, standardWindowY, standardWindowWidth, standardWindowHeight, 0, hvid, graaM, sort, false, "Login");
-            Frame LoginWindow1user = new Frame(standardWindowX, standardWindowY + 8, standardWindowWidth, 6, 0, sort, graa, sort, false);
-            Frame LoginWindow2password = new Frame(standardWindowX, standardWindowY + 10, standardWindowWidth, 6, 0, sort, graa, sort, false);
+            
+            Window LoginWindow = new Window(standardWindowX, standardWindowY, 50, 24, 0, hvid, graaM, sort, false, "Login");
+            Frame LoginWindow1user = new Frame(standardWindowX, standardWindowY + 8, LoginWindow.W, 6, 0, sort, graa, sort, false);
+            Frame LoginWindow2password = new Frame(standardWindowX, standardWindowY + 10, LoginWindow.W, 6, 0, sort, graa, sort, false);
             LoginWindow.Visible = true;
             LoginWindow1user.Visible = true;
             LoginWindow2password.Visible = true;

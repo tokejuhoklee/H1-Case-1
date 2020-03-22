@@ -16,7 +16,8 @@ namespace sydvest_bo
         public string Tlf { get; set; }
         public string Password { get; set; }
 
-        public Person (int personid, string fornavn, string efternavn, string email, string tlf, string password, int adresseid, string adressestring, int postnr, string bynavn) : base (adresseid, adressestring, postnr, bynavn)
+        public Person (int personid, string fornavn, string efternavn, string email, string tlf, string password, int adresseid, string adressestring, int postnr, string bynavn) : 
+            base (adresseid, adressestring, postnr, bynavn)
         {
             Personid = personid;
 

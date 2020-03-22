@@ -1,16 +1,17 @@
 USE master;
 DROP DATABASE IF EXISTS "Sydvest-Bo";
+GO
 
-print char(13) + char(10) + '             *************************************************'
-print '             **  Databasen ''Sydvest-Bo'' oprettes på ny    **'
-create database "Sydvest-Bo";
-go
-print '             **                                             **'
-use "Sydvest-Bo";
-go
-print '             **  og er taget i bruge..                      **'
-print '             *************************************************' + char(13) + char(10)
-go
+PRINT char(13) + char(10) + '             *************************************************'
+PRINT '             **  Databasen ''Sydvest-Bo'' oprettes på ny    **'
+CREATE DATABASE "Sydvest-Bo";
+GO
+PRINT '             **                                             **'
+USE "Sydvest-Bo";
+GO
+PRINT '             **  og er taget i bruge..                      **'
+PRINT '             *************************************************' + char(13) + char(10)
+GO
 
 CREATE TABLE Adresse
 (
@@ -143,9 +144,10 @@ GO
 
 CREATE TABLE Udlejningskonsulent
 (
-  "Udlejningskonsulentid" int NOT NULL IDENTITY(1,1),
-  "Personid"              int NOT NULL,
-  "Distriktid"            int NOT NULL,
+  "Udlejningskonsulentid" int            NOT NULL IDENTITY(1,1),
+  "Personid"              int            NOT NULL,
+  "Distriktid"            int            NOT NULL,
+  "Noter"                 nvarchar(3999) NOT NULL DEFAULT 'Noter:',
   CONSTRAINT PK_Udlejningskonsulent PRIMARY KEY (Udlejningskonsulentid)
 )
 GO
@@ -161,6 +163,16 @@ CREATE TABLE Udlejningskontrakt
   "PrisEjer"                money    NOT NULL DEFAULT 0.0,
   "UdlejningsKontraktTekst" nvarchar NOT NULL DEFAULT '',
   CONSTRAINT PK_Udlejningskontrakt PRIMARY KEY (Udlejningskontraktid)
+)
+GO
+
+CREATE TABLE Sandbox
+(
+  "Id"      int           NOT NULL,
+  "Navn"    nvarchar(127) NOT NULL DEFAULT '',
+  "Heltal"  int           NOT NULL,
+  "Penge"   money         NOT NULL DEFAULT 0.0,
+  "Dato"    date          NOT NULL DEFAULT GETDATE()
 )
 GO
 
