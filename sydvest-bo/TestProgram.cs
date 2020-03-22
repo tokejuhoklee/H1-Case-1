@@ -219,7 +219,7 @@ namespace sydvest_bo
 
             // ----------- Ny SQL Update -------------------------------------------
 
-            ConsoleQueryTitle = " Insert into Sandbox 3";
+            ConsoleQueryTitle = " Update into Sandbox 3";
             query = $"UPDATE Sandbox SET " +
                 "Navn = 'Updateret' " +
                 "WHERE ID = 8";
@@ -228,7 +228,7 @@ namespace sydvest_bo
             result += ConsoleQueryTitle + "\n";
             result += query + "\n";
 
-            if (DB.Insert(query))
+            if (DB.Update(query))
             {
                 result += "det gik godt\n";
             }
@@ -252,7 +252,7 @@ namespace sydvest_bo
             result += ConsoleQueryTitle + "\n";
             result += query + "\n";
 
-            if (DB.Insert(query))
+            if (DB.Update(query))
             {
                 result += "det gik godt\n";
             }

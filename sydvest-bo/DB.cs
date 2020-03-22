@@ -58,7 +58,10 @@ namespace sydvest_bo
             bool status = true;
             try
             {
-                _sqlReader.Dispose();
+                if (_sqlReader != null) // close the connection
+                {
+                    _sqlReader.Dispose();
+                }
                 if (_dbConnection != null) // close the connection
                 {
                     _dbConnection.Close();

@@ -522,4 +522,57 @@ namespace sydvest_bo
         }// public void DrawTitle(string txt)
 
     }//END public class Window
+
+    public class Screen
+    {
+        private Queue<object> _windowQueue = new Queue<object>();
+
+        public bool _visible { get; set; } = true;
+        public int _elements { get; set; } = 0;
+
+        public Screen()
+        {
+            _windowQueue.Clear();
+            _visible = true;
+            _elements = 0;
+        }
+        public void AddFrame(Frame frame)
+        {
+            _windowQueue.Enqueue(frame);
+            _elements++;
+            frame.Z = _elements;
+            
+        }
+
+        public void AddWindow(Window window)
+        {
+            _windowQueue.Enqueue(window);
+            _elements++;
+            window.Z = _elements;
+        }
+
+        public void Refresh()
+        {
+            Console.Clear();
+            foreach (object screenElement in _windowQueue)
+            {
+                if (screenElement is Frame)
+                {
+                    Frame frame = (Frame)screenElement;
+                    if (frame.Visible)
+                    {
+                        frame.Print("");
+                    }
+                }
+                else if (screenElement is Window)
+                {
+                    Window window = (Window)screenElement;
+                    if (window.Visible)
+                    {
+                        window.Draw();
+                    }
+                }
+            }
+        }// End public void Refresh()
+    }// END public class Screen
 }
