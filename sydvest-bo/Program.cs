@@ -576,7 +576,7 @@ namespace sydvest_bo
         }// END public void MenuUdlejningskonsulent()
 
         
-        static public void MenuKundekonsulent(string loginType, String loginEmail, int loginPersonid)
+        static public void MenuKundekonsulent(string loginType, string loginEmail, int loginPersonid)
         {
             int currentConsoleWindowWidth = Console.WindowWidth;
             int currentConsoleWindowHeight = Console.WindowHeight;
@@ -730,29 +730,8 @@ namespace sydvest_bo
                             MainMenu.Print(MainMenuText2);
                             HovedWindow2.Draw();
                             HovedWindow2.Print(HovedWindow2Text1);
-
-                            //// List Sæsonkategori
-                            //query = "SELECT * FROM Saesonkategori ORDER BY ";
-
-                            //selection = DB.Select(query);
-                            //OutputWindow2Text = "||| ";
-                            //foreach (List<object> tupel in selection)
-                            //{
-                            //    foreach (object item in tupel)
-                            //    {
-                            //        OutputWindow2Text += ($"{item}, ");
-                            //    }
-                            //    OutputWindow2Text += (" ||| ");
-                            //}
-
-                            //OutputWindow2.Visible = true;
-                            //OutputWindow2.Title = "Sæsonkategori Liste";
-                            //OutputWindow2.Draw();
-                            //OutputWindow2.Print("");
-                            //OutputWindow2.Print(OutputWindow2Text);
                             OutputWindow2.Draw();
                             OutputWindow2.Print("");
-                            //OutputWindow2.Print(OutputWindow2Text);
                             // List Sæsonkategori
                             saesonkalender.DrawKalender(OutputWindow2.X, OutputWindow2.Y, OutputWindow2.W, OutputWindow2.H, OutputWindow2.TxtColor, OutputWindow2.BgColor, OutputWindow2.ShadowColor);
                             break;
@@ -781,22 +760,26 @@ namespace sydvest_bo
                             //temp3 = EditFrame3.ReadInput(EditFrame3Text);
                             //temp4 = EditFrame4.ReadInput(EditFrame4Text);
 
-                            // List specifik uge
-                            query = "SELECT * FROM Saesonkategori " +
-                                $"WHERE Ugeid = {temp1};";
+                            // Highlight specifik uge
 
-                            selection = DB.Select(query);
-                            OutputWindow2Text = "";
-                            foreach (List<object> tupel in selection)
-                            {
-                                foreach (object item in tupel)
-                                {
-                                    OutputWindow2Text += ($"{item}\n");
-                                }
-                                //OutputWindow2Text += ("\n");
-                            }
+                            t = Int32.Parse(temp1);
+                            saesonkalender.DrawKalenderSelectUge(t, OutputWindow2.X, OutputWindow2.Y, OutputWindow2.W, OutputWindow2.H, OutputWindow2.TxtColor, blaa, OutputWindow2.ShadowColor);
+                            
+                            //query = "SELECT * FROM Saesonkategori " +
+                            //    $"WHERE Ugeid = {temp1};";
 
-                            OutputWindow2.Print(OutputWindow2Text);
+                            //selection = DB.Select(query);
+                            //OutputWindow2Text = "";
+                            //foreach (List<object> tupel in selection)
+                            //{
+                            //    foreach (object item in tupel)
+                            //    {
+                            //        OutputWindow2Text += ($"{item}\n");
+                            //    }
+                            //    //OutputWindow2Text += ("\n");
+                            //}
+
+                            //OutputWindow2.Print(OutputWindow2Text);
 
                             HovedWindow2Text1 = $"Anfør nu ændringerne i samme rækkefølge: Kategori[1-4], Kategroinavn[Lav, Mellem, Høj, Super], Prismodifikator[1.0 betyder ingen forandreing]\n Ugenr = {temp1}";
                             HovedWindow2.Visible = true;

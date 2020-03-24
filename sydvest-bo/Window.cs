@@ -442,8 +442,9 @@ namespace sydvest_bo
                         else if (y == Y)
                         {
                             // print a mark on the window frame near top right corner
-                            if (x == X + W - ( 3 + _sLX))
-                                Console.Write(_linjeXminus2);
+                            if (x == X + W - ( 1 + _sLX))
+                                Console.Write(_linjeX);
+                            // Console.Write(_linjeXminus2);
                             else // draw horizontal line
                                 Console.Write(_linjeX);
                             // Margin
@@ -524,7 +525,8 @@ namespace sydvest_bo
                 Console.ForegroundColor = TxtColor;
                 Console.BackgroundColor = BgColor;
                 _txt = "- " + _txt + " -";
-                Console.SetCursorPosition(X + ((((W) / 2) - _sLX) - ((_txt.Length / 2) + (_txt.Length % 2))), Y);
+                //Console.SetCursorPosition(X + ((((W) / 2) - _sLX) - ((_txt.Length / 2) + (_txt.Length % 2))), Y);
+                Console.SetCursorPosition(X + ((((W) / 2) - _sLX) - ((_txt.Length / 2) + (_txt.Length % 2))) + 2, Y);
                 Console.Write(_txt);
                 Console.ForegroundColor = _storedForegroundColor;
                 Console.BackgroundColor = _storedBackgroundColor;
