@@ -105,6 +105,7 @@ namespace sydvest_bo
             // Sample Text
             string loremIpsum = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tellus velit, aliquam quis eros vel, malesuada bibendum mi. Mauris non ultricies mauris, at accumsan tellus. Etiam tincidunt venenatis nisl in molestie.Nunc quis.";
 
+            // Window contentTak Jan
             string loginWindowText1Welcome = String.Format($"Velkommen til Sydvest-Bo\n\nDu skal logge ind for at kunne bruge programmet.\n\nEt blankt password vil afslutte programmet.");
             string loginWindowText2user =     String.Format($"E-mail  : ");
             string loginWindowText3password = String.Format($"Password: ");
@@ -114,7 +115,6 @@ namespace sydvest_bo
             Frame LoginWindow1user = new Frame(standardWindowX, standardWindowY + 8, LoginWindow.W, 6, 0, sort, graa, sort, false);
             Frame LoginWindow2password = new Frame(standardWindowX, standardWindowY + 10, LoginWindow.W, 6, 0, sort, graa, sort, false);
             Window HelpWindow = new Window(standardWindowX, 3, 60, 8, 0, hvid, graaM, sort, false, "Help");
-            string HovedWindow1startText1;
 
             while (loginAttemptsLeft > 0 & !userValidated)
             {
@@ -354,9 +354,9 @@ namespace sydvest_bo
             int standardWindowWidth = currentConsoleWindowWidth - (standardWindowX + 3);
             int standardWindowHeight = currentConsoleWindowHeight - (standardWindowY + 3);
 
-            String HovedWindow1startText1;
-            String HovedWindow2Text1 = "";
-            String OutputWindow2Text = "";
+            string HovedWindow1startText1;
+            string HovedWindow2Text1 = "";
+            string OutputWindow2Text = "";
             string query;
             List<object> selection = new List<object>();
 
@@ -606,7 +606,7 @@ namespace sydvest_bo
 
             Window MainMenu = new Window(1, currentConsoleWindowHeight - 24, 44, 20, 0, hvid, blaaM, sort, true, "Menu");
             Window HovedWindow1start = new Window(standardWindowX + standardWindowWidth - 60, standardWindowY + standardWindowHeight - 15, 60, 15, 0, hvid, blaaM, sort, true, "Start Info");
-            Window HovedWindow2 = new Window(standardWindowX + 26, standardWindowY + standardWindowHeight - 20, standardWindowWidth - 30, standardWindowHeight - 18, 0, hvid, blaaM, sort, false, "");
+            Window HovedWindow2 = new Window(standardWindowX + 26, MainMenu.Y, standardWindowWidth - 30, standardWindowHeight - 18, 0, hvid, blaaM, sort, false, "");
             Window OutputWindow2 = new Window(1, 6, currentConsoleWindowWidth - 3, currentConsoleWindowHeight - (6 + 24 + 2), 0, hvid, blaaM, sort, false, "");
 
             string EditFrame1Text = String.Format($"Uge nr  : ");
@@ -618,7 +618,11 @@ namespace sydvest_bo
             Frame EditFrame2 = new Frame(HovedWindow2.X, HovedWindow2.Y +  6, HovedWindow2.W, 6, 0, sort, graa, sort, false);
             Frame EditFrame3 = new Frame(HovedWindow2.X, HovedWindow2.Y +  8, HovedWindow2.W, 6, 0, sort, graa, sort, false);
             Frame EditFrame4 = new Frame(HovedWindow2.X, HovedWindow2.Y + 10, HovedWindow2.W, 6, 0, sort, graa, sort, false);
-            
+
+            // Initialize Data Objects
+            // 
+            SaesonkategoriList saesonkalender = new SaesonkategoriList();
+
             // open main menues
             bool EndOfMenu = false;
             while (!EndOfMenu)
@@ -635,7 +639,9 @@ namespace sydvest_bo
                 HovedWindow1start.Draw();
                 HovedWindow1start.Print(HovedWindow1startText1);
 
-
+                OutputWindow2.Visible = true;
+                OutputWindow2.Draw();
+                OutputWindow2.Print("");
 
                 // ReadKey Switch/Case -      Window 5 - From Dec, Bin, Hex
                 Boolean EndProgramKeyPressed = false;
@@ -724,25 +730,31 @@ namespace sydvest_bo
                             MainMenu.Print(MainMenuText2);
                             HovedWindow2.Draw();
                             HovedWindow2.Print(HovedWindow2Text1);
-                            // List Opsynsmænd
-                            query = "SELECT * FROM Saesonkategori";
 
-                            selection = DB.Select(query);
-                            OutputWindow2Text = "||| ";
-                            foreach (List<object> tupel in selection)
-                            {
-                                foreach (object item in tupel)
-                                {
-                                    OutputWindow2Text += ($"{item}, ");
-                                }
-                                OutputWindow2Text += (" ||| ");
-                            }
+                            //// List Sæsonkategori
+                            //query = "SELECT * FROM Saesonkategori ORDER BY ";
 
-                            OutputWindow2.Visible = true;
-                            OutputWindow2.Title = "Sæsonkategori Liste";
+                            //selection = DB.Select(query);
+                            //OutputWindow2Text = "||| ";
+                            //foreach (List<object> tupel in selection)
+                            //{
+                            //    foreach (object item in tupel)
+                            //    {
+                            //        OutputWindow2Text += ($"{item}, ");
+                            //    }
+                            //    OutputWindow2Text += (" ||| ");
+                            //}
+
+                            //OutputWindow2.Visible = true;
+                            //OutputWindow2.Title = "Sæsonkategori Liste";
+                            //OutputWindow2.Draw();
+                            //OutputWindow2.Print("");
+                            //OutputWindow2.Print(OutputWindow2Text);
                             OutputWindow2.Draw();
                             OutputWindow2.Print("");
-                            OutputWindow2.Print(OutputWindow2Text);
+                            //OutputWindow2.Print(OutputWindow2Text);
+                            // List Sæsonkategori
+                            saesonkalender.DrawKalender(OutputWindow2.X, OutputWindow2.Y, OutputWindow2.W, OutputWindow2.H, OutputWindow2.TxtColor, OutputWindow2.BgColor, OutputWindow2.ShadowColor);
                             break;
 
                         case ConsoleKey.D6: //
@@ -753,24 +765,13 @@ namespace sydvest_bo
                             MainMenu.Print(MainMenuText2);
                             HovedWindow2.Draw();
                             HovedWindow2.Print(HovedWindow2Text1);
-                            // List Opsynsmænd
-                            query = "SELECT * FROM Saesonkategori";
-
-                            selection = DB.Select(query);
-                            OutputWindow2Text = "||| ";
-                            foreach (List<object> tupel in selection)
-                            {
-                                foreach (object item in tupel)
-                                {
-                                    OutputWindow2Text += ($"{item}, ");
-                                }
-                                OutputWindow2Text += (" ||| ");
-                            }
                             OutputWindow2.Visible = true;
-                            OutputWindow2.Title = "Sæsonkategori Lister";
+                            OutputWindow2.Title = "Sæsonkategori uge for uge";
                             OutputWindow2.Draw();
-                            //OutputWindow2.Print("");
+                            OutputWindow2.Print("");
                             OutputWindow2.Print(OutputWindow2Text);
+                            // List Sæsonkategori
+                            saesonkalender.DrawKalender(OutputWindow2.X, OutputWindow2.Y, OutputWindow2.W, OutputWindow2.H, OutputWindow2.TxtColor, OutputWindow2.BgColor, OutputWindow2.ShadowColor);
                             EditFrame1.Visible = true;
                             EditFrame2.Visible = true;
                             EditFrame3.Visible = true;
@@ -882,9 +883,9 @@ namespace sydvest_bo
             int standardWindowWidth = currentConsoleWindowWidth - (standardWindowX + 3);
             int standardWindowHeight = currentConsoleWindowHeight - (standardWindowY + 3);
 
-            String HovedWindow1startText1;
-            String HovedWindow2Text1 = "";
-            String OutputWindow2Text = "";
+            string HovedWindow1startText1;
+            string HovedWindow2Text1 = "";
+            string OutputWindow2Text = "";
 
             string query;
             List<object> LoginSelection = new List<object>();
@@ -964,9 +965,9 @@ namespace sydvest_bo
             int standardWindowWidth = currentConsoleWindowWidth - (standardWindowX + 3);
             int standardWindowHeight = currentConsoleWindowHeight - (standardWindowY + 3);
 
-            String HovedWindow1startText1;
-            String HovedWindow2Text1 = "";
-            String OutputWindow2Text = "";
+            string HovedWindow1startText1;
+            string HovedWindow2Text1 = "";
+            string OutputWindow2Text = "";
 
             string query;
             List<object> selection = new List<object>();
@@ -1067,9 +1068,9 @@ namespace sydvest_bo
             int standardWindowWidth = currentConsoleWindowWidth - (standardWindowX + 3);
             int standardWindowHeight = currentConsoleWindowHeight - (standardWindowY + 3);
 
-            String HovedWindow1startText1;
-            String HovedWindow2Text1 = "";
-            String OutputWindow2Text = "";
+            string HovedWindow1startText1;
+            string HovedWindow2Text1 = "";
+            string OutputWindow2Text = "";
 
             string query;
             List<object> Selection = new List<object>();
@@ -1170,9 +1171,9 @@ namespace sydvest_bo
             int standardWindowWidth = currentConsoleWindowWidth - (standardWindowX + 3);
             int standardWindowHeight = currentConsoleWindowHeight - (standardWindowY + 3);
 
-            String HovedWindow1startText1;
-            String HovedWindow2Text1 = "";
-            String OutputWindow2Text = "";
+            string HovedWindow1startText1;
+            string HovedWindow2Text1 = "";
+            string OutputWindow2Text = "";
 
             string query;
             List<object> Selection = new List<object>();

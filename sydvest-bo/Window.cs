@@ -29,6 +29,18 @@ namespace sydvest_bo
             }
         }
 
+        public int MarginX
+        {
+            get { return _marginX; }
+            set { _marginX = value; }
+        }
+
+        public int MarginY
+        {
+            get { return _marginY; }
+            set { _marginY = value; }
+        }
+
         //public int _marginY { get; set; } = 1; // margin default
         //public int _marginX { get; set; } = 2; // margin default
         public ConsoleColor TxtColor { get; set; }
@@ -152,7 +164,7 @@ namespace sydvest_bo
                         {
                             newBlob.Append(' ', lineWidth - i);
                             i = 0;
-                            if (linecounter < (H - ((2 * _marginY) + _sLY)))
+                            if (linecounter <= (H - ((2 * _marginY) + _sLY))) // changed < to <= w/o realy checking it
                             {
                                 linecounter++;
                                 newBlob.AppendLine(); // and a new line
@@ -161,7 +173,7 @@ namespace sydvest_bo
                     }
                 }// end of paragraphs
                  // Add extra line to fill the frame;
-                while (linecounter < (H - ((2 * _marginY) + _sLY)))
+                while (linecounter <= (H - ((2 * _marginY) + _sLY))) // changed < to <= w/o realy checking it
                 {
                     newBlob.AppendLine(emptyLine);
                     linecounter++;
@@ -176,7 +188,7 @@ namespace sydvest_bo
                 string[] formatedLines = textblob.Split('\n');
 
                 // Print horizontal lines the size of width of the frame 
-                for (int n = 0; n < (H - ((2 * _marginY) + _sLY)); n++)
+                for (int n = 0; n <= (H - ((2 * _marginY) + _sLY)); n++) // changed < to <= w/o realy checking it
                 {
                     // removes extra auto implanted occurense of newlines reminisenses
                     formatedLines[n] = formatedLines[n].Replace("\r", "").Replace("\r\n", "");
