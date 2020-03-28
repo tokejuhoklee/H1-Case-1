@@ -21,6 +21,32 @@ namespace sydvest_bo
             Distriktid = distriktid;
             Noter = noter;
         }
-        
+
+        public bool dbSelectUdlejningskonsulent()
+        {
+            bool result = false;
+            return result;
+        }
+
+        public bool dbInsertUdlejningskonsulent()
+        {
+            bool result = false;
+            result = dbInsertPerson();
+            return result;
+        }
+
+        public bool dbUpdateUdlejningskonsulent()
+        {
+            bool result = false;
+            result = dbUpdatePerson();
+            return result;
+        }
+
+        public bool dbDeleteUdlejningskonsulent()
+        {
+            bool result = false;
+            result = dbDeletePerson();
+            return result;
+        }
     }//END public class Udlejningskonsulent : Person
 }

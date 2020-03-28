@@ -28,5 +28,33 @@ namespace sydvest_bo
             Tlf = tlf;
             Password = password;
         }
+
+        public bool dbSelectPerson()
+        {
+            bool result = false;
+            return result;
+        }
+
+        public bool dbInsertPerson()
+        {
+            bool result = false;
+            result = dbInsertAdresse();
+
+            return result;
+        }
+
+        public bool dbUpdatePerson()
+        {
+            bool result = false;
+            result = dbUpdateAdresse();
+            return result;
+        }
+
+        public bool dbDeletePerson()
+        {
+            bool result = false;
+            result = dbDeleteAdresse();
+            return result;
+        }
     }// ENd public class Person : Adresse
 }

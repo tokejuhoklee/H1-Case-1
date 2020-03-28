@@ -44,6 +44,31 @@ namespace sydvest_bo
                 i++;
             }
         }
+
+        public void UpdateUge(List<object> tupel)
+        {
+            int i = 0;
+            foreach (object item in tupel)
+            {
+                switch (i)
+                {
+                    case 0:
+                        Ugeid = (int)item;
+                        break;
+                    case 1:
+                        Kategori = (int)item;
+                        break;
+                    case 2:
+                        KategroiNavn = (string)item;
+                        break;
+                    case 3:
+                        Prismodifikator = (decimal)item;
+                        break;
+                }
+                i++;
+            }
+        }
+
         public string Print()
         {
             string result = "";
@@ -62,14 +87,79 @@ namespace sydvest_bo
             result[3] = $"% {Prismodifikator.ToString("0.##")}\n";
             return result;
         }
+
+        public bool dbSelectKategori()
+        {
+            bool result = false;
+            return result;
+        }
+
+        public bool dbInsertKategori()
+        {
+            bool result = false;
+            return result;
+        }
+
+        public bool dbUpdateKategori()
+        {
+            bool result = false;
+            return result;
+        }
+
+        public bool dbDeleteKategori()
+        {
+            bool result = false;
+            return result;
+        }
+
+
+
+        public bool dbSelectUge()
+        {
+            bool result = false;
+            return result;
+        }
+
+        public bool dbInsertUge()
+        {
+            bool result = false;
+            return result;
+        }
+
+        public bool dbUpdateUge()
+        {
+            bool result = false;
+            return result;
+        }
+
+        public bool dbDeleteUge()
+        {
+            bool result = false;
+            return result;
+        }
+
+
     }// END public class Saesonkategori
+
     public class SaesonkategoriList
     {
         public Saesonkategori[] Uge { get; set; } = new Saesonkategori[52];
 
+        public Window[] Kalender = new Window[52];
+
+        public int SelectUge { get; set; } = 0;
+        // SelectUge = 0 ( Nothing selected )
+        // SelectUge = [1-52] ( A weeke is selected, this way only one kan be selected at the time )
+
+        public ConsoleColor TxtColor { get; set; } = ConsoleColor.White;
+        public ConsoleColor BgColor { get; set; } = ConsoleColor.DarkBlue;
+        public ConsoleColor ShadowColor { get; set; } = ConsoleColor.Black;
+        public ConsoleColor HighlightedColor{ get; set; } = ConsoleColor.Blue;
+
+
         public SaesonkategoriList()
         {
-            int i = 0;
+            SelectUge = 0;
             string query;
             List<object> selection = new List<object>();
             query = "SELECT * FROM Saesonkategori " +
@@ -78,10 +168,86 @@ namespace sydvest_bo
             selection = DB.Select(query);
             foreach (List<object> tupel in selection)
             {
-                Uge[i] = new Saesonkategori(tupel);
-                i++;
+                Uge[SelectUge] = new Saesonkategori(tupel);
+                SelectUge++;
             }
+            SelectUge = 0;
         }
+
+        public SaesonkategoriList(int Xr, int Yr, int Wr, int Hr, ConsoleColor txtColor, ConsoleColor bgColor, ConsoleColor shadowColor, ConsoleColor highlightedColor)
+        {
+            // Initialize Uge[] from database
+            SelectUge = 0;
+            string query;
+            List<object> selection = new List<object>();
+            query = "SELECT * FROM Saesonkategori " +
+                "ORDER BY Ugeid;";
+
+            selection = DB.Select(query);
+            foreach (List<object> tupel in selection)
+            {
+                Uge[SelectUge] = new Saesonkategori(tupel);
+                SelectUge++;
+            }
+            SelectUge = 0;
+            // Initialize Kalender Winduer
+
+            TxtColor = txtColor;
+            BgColor = bgColor;
+            ShadowColor = shadowColor;
+            HighlightedColor = highlightedColor;
+
+            // Windows positioning
+            // 52 uger = 13 Collumns * 4 rows.
+            //  Dirtribute 13 new windowes within Wrange
+            int Wn = (Wr - 2) / 13;
+            int Hn = (Hr - 2) / 4;
+            int spaceLeftX = (Wr - 2) % 13;
+            int spaceLeftY = (Hr - 2) % 4;
+            //  Initial start (Xrange, Yrange) + (2,2)
+            int Xn = Xr + 2 + (spaceLeftX / 2);
+            int Yn = Yr + 2 + (spaceLeftY / 2);
+            int x = Xn;
+            int y = Yn;
+            for (SelectUge = 1; SelectUge < 53; SelectUge++)
+            {
+                // Check if there is a row shift"
+                if (SelectUge > 1 && (SelectUge - 1) % 13 == 0)
+                {
+                    x = Xn;
+                    y += Hn;
+                }
+                // Make and out put a new window;
+                Kalender[SelectUge - 1] = new Window(
+                    x,
+                    y,
+                    Wn - 2,
+                    4,// Hn - 2, 
+                    0,
+                    TxtColor,
+                    BgColor,
+                    ShadowColor,
+                    false,
+                    $"Uge {String.Format("{0,2}", Uge[SelectUge - 1].Ugeid.ToString())}"
+                );
+                Kalender[SelectUge - 1].MarginX = 1;
+                Kalender[SelectUge - 1].MarginY = 1;
+                // incriment windowd distance
+                x += Wn;
+            }
+            SelectUge = 0;
+        }
+
+        //public void UpdateKalender()
+        //{
+        //    // 
+        //    if (SelectUge != 0)
+        //    {
+
+        //    }
+
+        //    SelectUge = 0;
+        //}
 
         public string FetchUge(int index, int windowRangeX, int windowRangeY, int windowRangeW, int windowRangeH)
         {
@@ -93,119 +259,75 @@ namespace sydvest_bo
             return result;
         }
 
-        public void DrawKalender(int Xr, int Yr, int Wr, int Hr, ConsoleColor TxtColor, ConsoleColor BgColor, ConsoleColor ShadowColor)
+        public void DrawKalender()
         {
-            // 52 uger = 13 Collumns * 4 rows.
-            //  Dirtribute 13 new windowes within Wrange
-            int Wn = (Wr - 2) / 13;
-            int Hn = (Hr - 2) / 4;
-            int spaceLeft = (Wr - 2) % 13;
-            //  Initial start (Xrange, Yrange) + (2,2)
-            int Xn = Xr + 2 + (spaceLeft / 2);
-            int Yn = Yr + 2;
-            Window[] kalender = new Window[52];
-            int x = Xn;
-            int y = Yn;
-            int temp = 0;
-            string tempString = "";
+            string temp;
+            int tmp;
             for (int i = 1; i < 53; i++)
             {
-                // Fetch window content
-                // Check if there is a row shift"
-                if (i >1 && (i-1) % 13 == 0)
+                tmp = 0;
+                temp = "";
+                Kalender[i - 1].Visible = true;
+                Kalender[i - 1].Draw();
+                tmp += Uge[i - 1].KategroiNavn.ToString().Length + String.Format($"{Uge[i - 1].Kategori.ToString()}").Length;
+                for (int n = 0; n < Kalender[i - 1].W - (tmp + (Kalender[i - 1].MarginX * 2) + 4); n++)
                 {
-                    x = Xn;
-                    y += Hn;
+                    temp += " ";
                 }
-                // Make and out put a new window;
-                tempString = "";
-                kalender[i - 1] = new Window(
-                    x,
-                    y,
-                    Wn - 2,
-                    4,// Hn - 2, 
-                    0,
-                    TxtColor,
-                    BgColor,
-                    ShadowColor,
-                    true,
-                    $"Uge {Uge[i - 1].Ugeid.ToString("#0")}"
-                );
-                kalender[i - 1].MarginX = 1;
-                kalender[i - 1].MarginY = 1;
-                kalender[i - 1].Draw();
-                temp = Uge[i - 1].KategroiNavn.ToString().Length + String.Format($"{Uge[i - 1].Kategori.ToString()}").Length;
-                for (int n = 0; n < Wn - (temp + (kalender[i - 1].MarginX * 2) + 4); n++)
-                {
-                    tempString += " ";
-                }
-                kalender[i - 1].Print(
-                    Uge[i - 1].KategroiNavn.ToString() + tempString +
+                Kalender[i - 1].Print(
+                    Uge[i - 1].KategroiNavn.ToString() + temp +
                     $"{Uge[i - 1].Kategori.ToString()}" + " " +
                     Uge[i - 1].Prismodifikator.ToString("0.##") + "%");
-                // incriment windowd distance
-                x += Wn;
             }
-        }//END public void DrawKalender(int Xr, int Yr, int Wr, int Hr, ConsoleColor TxtColor, ConsoleColor BgColor, ConsoleColor ShadowColor)
+        }//END public void DrawKalender()
 
-        public void DrawKalenderSelectUge(int uge, int Xr, int Yr, int Wr, int Hr, ConsoleColor TxtColor, ConsoleColor BgColor, ConsoleColor ShadowColor)
+        public void DrawKalenderSelectUge(int uge)
         {
-            // 52 uger = 13 Collumns * 4 rows.
-            //  Dirtribute 13 new windowes within Wrange
-            int Wn = (Wr - 2) / 13;
-            int Hn = (Hr - 2) / 4;
-            int spaceLeft = (Wr - 2) % 13;
-            //  Initial start (Xrange, Yrange) + (2,2)
-            int Xn = Xr + 2 + (spaceLeft / 2);
-            int Yn = Yr + 2;
-            Window[] kalender = new Window[52];
-            int x = Xn;
-            int y = Yn;
-            int temp = 0;
-            string tempString = "";
-            for (int i = 1; i < 53; i++)
+            string temp;
+            int tmp;
+            SelectUge = uge;
+
+            Kalender[SelectUge - 1].BgColor = HighlightedColor;
+
+            tmp = 0;
+            temp = "";
+            Kalender[SelectUge - 1].Visible = true;
+            Kalender[SelectUge - 1].Draw();
+            tmp += Uge[SelectUge - 1].KategroiNavn.ToString().Length + String.Format($"{Uge[SelectUge - 1].Kategori.ToString()}").Length;
+            for (int n = 0; n < Kalender[SelectUge - 1].W - (tmp + (Kalender[SelectUge - 1].MarginX * 2) + 4); n++)
             {
-                // Fetch window content
-                // Check if there is a row shift"
-                if (i > 1 && (i - 1) % 13 == 0)
-                {
-                    x = Xn;
-                    y += Hn;
-                }
-                // Make and out put a new window;
-                if (uge == i)
-                { 
-                    tempString = "";
-                    kalender[i - 1] = new Window(
-                        x,
-                        y,
-                        Wn - 2,
-                        4,// Hn - 2, 
-                        0,
-                        TxtColor,
-                        BgColor,
-                        ShadowColor,
-                        true,
-                        $"Uge {Uge[i - 1].Ugeid.ToString("#0")}"
-                    );
-                    kalender[i - 1].MarginX = 1;
-                    kalender[i - 1].MarginY = 1;
-                
-                    kalender[i - 1].Draw();
-                    temp = Uge[i - 1].KategroiNavn.ToString().Length + String.Format($"{Uge[i - 1].Kategori.ToString()}").Length;
-                    for (int n = 0; n < Wn - (temp + (kalender[i - 1].MarginX * 2) + 4); n++)
-                    {
-                        tempString += " ";
-                    }
-                    kalender[i - 1].Print(
-                        Uge[i - 1].KategroiNavn.ToString() + tempString +
-                        $"{Uge[i - 1].Kategori.ToString()}" + " " +
-                        Uge[i - 1].Prismodifikator.ToString("0.##") + "%");
-                    // incriment windowd distance
-                    x += Wn;
-                }
+                temp += " ";
             }
-        }//END public void DrawKalender(int Xr, int Yr, int Wr, int Hr, ConsoleColor TxtColor, ConsoleColor BgColor, ConsoleColor ShadowColor)
+            Kalender[SelectUge - 1].Print(
+                Uge[SelectUge - 1].KategroiNavn.ToString() + temp +
+                $"{Uge[SelectUge - 1].Kategori.ToString()}" + " " +
+                Uge[SelectUge - 1].Prismodifikator.ToString("0.##") + "%");
+            SelectUge = uge;
+        }//END public void DrawKalenderSelectUge(int uge)
+
+        public void DrawKalenderDeselectUge(int uge)
+        {
+            string temp;
+            int tmp;
+            SelectUge = uge;
+
+            Kalender[SelectUge - 1].BgColor = BgColor;
+
+            tmp = 0;
+            temp = "";
+            Kalender[SelectUge - 1].Visible = true;
+            Kalender[SelectUge - 1].Draw();
+            tmp += Uge[SelectUge - 1].KategroiNavn.ToString().Length + String.Format($"{Uge[SelectUge - 1].Kategori.ToString()}").Length;
+            for (int n = 0; n < Kalender[SelectUge - 1].W - (tmp + (Kalender[SelectUge - 1].MarginX * 2) + 4); n++)
+            {
+                temp += " ";
+            }
+            Kalender[SelectUge - 1].Print(
+                Uge[SelectUge - 1].KategroiNavn.ToString() + temp +
+                $"{Uge[SelectUge - 1].Kategori.ToString()}" + " " +
+                Uge[SelectUge - 1].Prismodifikator.ToString("0.##") + "%");
+            SelectUge = 0;
+        }// public void DrawKalenderDeselectUge(int uge)
     }// End public class SaesonkategoriList
 
 }//END namespace

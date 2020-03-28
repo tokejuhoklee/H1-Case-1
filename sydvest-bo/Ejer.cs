@@ -20,5 +20,31 @@ namespace sydvest_bo
             Noter = noter;
             // Personid = personid;
         }
+        public bool dbSelectEjer()
+        {
+            bool result = false;
+            return result;
+        }
+
+        public bool dbInsertEjer()
+        {
+            bool result = false;
+            result = dbInsertPerson();
+            return result;
+        }
+
+        public bool dbUpdateEjer()
+        {
+            bool result = false;
+            result = dbUpdatePerson();
+            return result;
+        }
+
+        public bool dbDeleteEjer()
+        {
+            bool result = false;
+            result = dbDeletePerson();
+            return result;
+        }
     }
 }

@@ -16,5 +16,32 @@ namespace sydvest_bo
             Adresseid = adresseid;
             Adressestring = adressestring;
         }
+
+        public bool dbSelectAdresse()
+        {
+            bool result = false;
+            return result;
+        }
+
+        public bool dbInsertAdresse()
+        {
+            bool result = false;
+            result = dbInsertPostnrBy();
+            return result;
+        }
+
+        public bool dbUpdateAdresse()
+        {
+            bool result = false;
+            //result = dbUpdatePostnrBy();
+            return result;
+        }
+
+        public bool dbDeleteAdresse()
+        {
+            bool result = false;
+            //result = dbDeletePostnrBy();
+            return result;
+        }
     }// END public class Adresse : PostnrBy
 }

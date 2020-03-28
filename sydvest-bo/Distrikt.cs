@@ -10,5 +10,31 @@ namespace sydvest_bo
     {
         public int Distriktid { get; set; }
         public string Omraade { get; set; }
+
+
+        public bool dbSelectDistrikt()
+        {
+            bool result = false;
+            return result;
+        }
+
+        public bool dbInsertDistrikt()
+        {
+            bool result = false;
+            return result;
+        }
+
+        public bool dbUpdateDistrikt()
+        {
+            bool result = false;
+            return result;
+        }
+
+        public bool dbDeleteDistrikt()
+        {
+            bool result = false;
+            return result;
+        }
+
     }
 }

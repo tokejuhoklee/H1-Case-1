@@ -19,5 +19,29 @@ namespace sydvest_bo
                 Bynavn = bynavn;
             //}
         }
+
+        public bool dbSelectPostnrBy()
+        {
+            bool result = false;
+            return result;
+        }
+
+        public bool dbInsertPostnrBy()
+        {
+            bool result = false;
+            return result;
+        }
+
+        public bool dbUpdatePostnrBy()
+        {
+            bool result = false;
+            return result;
+        }
+
+        public bool dbDeletePostnrBy()
+        {
+            bool result = false;
+            return result;
+        }
     }// END public class PostnrBy
 }

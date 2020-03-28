@@ -21,5 +21,33 @@ namespace sydvest_bo
             Distriktid = distriktid;
             Noter = noter;
         }
+
+        public bool dbSelectOpsynsmand()
+        {
+            bool result = false;
+            return result;
+        }
+
+        public bool dbInsertOpsynsmand()
+        {
+            bool result = false;
+            result = dbInsertPerson();
+            return result;
+        }
+
+        public bool dbUpdateOpsynsmand()
+        {
+            bool result = false;
+            result = dbUpdatePerson();
+            return result;
+        }
+
+        public bool dbDeleteOpsynsmand()
+        {
+            bool result = false;
+            result = dbDeletePerson();
+            return result;
+        }
+
     }// END public class Opsynsmand : Person
 }

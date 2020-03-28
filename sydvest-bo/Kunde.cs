@@ -20,5 +20,32 @@ namespace sydvest_bo
             Noter = noter;
         }
 
+        public bool dbSelectKunde()
+        {
+            bool result = false;
+            return result;
+        }
+
+        public bool dbInsertKunde()
+        {
+            bool result = false;
+            result = dbInsertPerson();
+            return result;
+        }
+
+        public bool dbUpdateKunde()
+        {
+            bool result = false;
+            result = dbUpdatePerson();
+            return result;
+        }
+
+        public bool dbDeleteKunde()
+        {
+            bool result = false;
+            result = dbDeletePerson();
+            return result;
+        }
+
     }
 }

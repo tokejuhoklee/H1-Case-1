@@ -19,5 +19,32 @@ namespace sydvest_bo
             // Personid = personid;
             Noter = noter;
         }
+
+        public bool dbSelectKundekonsulent()
+        {
+            bool result = false;
+            return result;
+        }
+
+        public bool dbInsertKundekonsulent()
+        {
+            bool result = false;
+            result = dbInsertPerson();
+            return result;
+        }
+
+        public bool dbUpdateKundekonsulent()
+        {
+            bool result = false;
+            result = dbUpdatePerson();
+            return result;
+        }
+
+        public bool dbDeleteKundekonsulent()
+        {
+            bool result = false;
+            result = dbDeletePerson();
+            return result;
+        }
     }
 }
